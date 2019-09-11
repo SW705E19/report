@@ -1,5 +1,5 @@
 pipeline:
   build:
-    image: raabf/latex-versions
+    image: tianon/latex
     commands:
-      - dockertex --tag texlive2019 pdftex master.tex
+      - pdflatex master.tex
