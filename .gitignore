@@ -246,3 +246,5 @@ master.pdf
 .vscode/settings.json
 
 .vscode/spellright.dict
+
+*.pdf
