@@ -242,3 +242,7 @@ TSWLatexianTemp*
 *.spl
 
 master.pdf
+
+.vscode/settings.json
+
+.vscode/spellright.dict
