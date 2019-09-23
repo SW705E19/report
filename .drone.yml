@@ -1,5 +1,10 @@
-pipeline:
-  build:
-    image: raabf/latex-versions
-    commands:
-      - dockertex --tag texlive2019 pdftex master.tex
+---
+kind: pipeline
+type: docker
+name: dockertex
+
+steps:
+- name: dockertex
+  image: raabf/latex-versions
+  commands: 
+    - dockertex --tag texlive2019 pdftex master.tex
