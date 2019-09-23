@@ -5,6 +5,6 @@ name: dockertex
 
 steps:
 - name: dockertex
-  image: raabf/latex-versions -- tag texlive2019
+  image: raabf/latex-versions
   commands:
     - pdftex master.tex
