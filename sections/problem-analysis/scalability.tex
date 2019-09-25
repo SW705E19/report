@@ -1,0 +1,39 @@
+\section{Scalability}
+In this section, we will look at what scalability in software is and how to design a system to be scalable. 
+
+\subsection{What is scalability}
+There are different types of scalability related to software design \cite{ScalabilityDesignPrinciples}.
+\begin{itemize}
+    \item \textbf{Scalability in performance} The system should be able to maintain high performance even if there are many users. This can be facilitated by adding more capacity to the system's components to allow more parallel computing. 
+    However, performance does not scale linearly as there is a limit to how much speedup that can be achieved by using multiple processors according to \textit{Amdahl's Law}. 
+    \item \textbf{Scalability in availability} According to the \textit{CAP theorem}, consistency, availability, and partition tolerance cannot all be guaranteed in a distributed system. 
+    Usually, in web applications that need to be scalable, availability and partition tolerance are favored over consistency. 
+    The system will instead make use of \textit{eventual consistency}, meaning that all the users will, at some point, be able to read the most recent updates but not at the same time. 
+    This way of scalability will decrease synchronism in the application but allows the system to be available to all users, even during a network partition.
+The results in a situation where the users may not read the most recently updated data, but it will still be available to them during a network failure. As the network partition becomes resolved, consistency will be restored.
+    \item \textbf{Scalability in maintenance} The software that is written must be continuously maintained and updated even after deployment of the system to make sure that the different components of the system are up to date and will continue running. 
+    Different kinds of platforms and tools can be used to facilitate this by monitoring the application and ensuring that the system is operating correctly. 
+    \item \textbf{Scalability in expenditure} This relates to managing the total cost of developing, maintaining, and operating the system. 
+    It is crucial to not only think of the costs of developing different components versus reusing existing ones, but also look at what the costs of maintaining these components will be in the future. 
+    Another thing to consider is using industry-standard technologies, as it will most likely also be it easier to hire experts on these in the future.
+\end{itemize}
+
+\subsection{Designing a system for scalability}
+When designing systems to be scalable, some principles should be followed \cite{ScalabilityDesignPrinciples}.
+\begin{itemize}
+    \item Always design for having at least two of everything to avoid a single point of failure. 
+    This allows for more availability and performance, thus making the system easier to scale, but adds to the operational cost.
+    \item Scale the system horizontally instead of vertically.
+    Add new servers to the system instead of buying a new server with a larger capacity each time to replace the old one when more capacity is needed. 
+    In theory, this should also be cheaper since the old servers will still be in use. However, for a system with multiple servers to work, some load balancing is required.
+    \item Build the API first to avoid tailoring it to a specific type of frontend. 
+    The API should work as a service so that it can be used for any application such as a smartphone application or a web site. 
+    \item Caching the data that is being accessed can have significant performance benefits since the system will not have to recompute the results that are being requested often. 
+    \item As mentioned in scalability in availability, the application does not need to provide the newest data available at all times if the users do not need to know. 
+    Relying on eventual consistency will lead to better availability, especially if the system has a large userbase.
+    \item The system should be designed to make maintenance and automation easy so that after the software has been released, it can be monitored and the different parts can be updated when needed.
+    \item Write code to be able to run asynchronously rather than synchronously to allow tasks to be executed on different threads. This will increase the availability of the system.
+    \item Avoid storing information about a component's state in the application servers. 
+    State information should only be kept in the components made for it, and in general, it should be stored in as few places as possible. 
+    By doing it this way, no components and servers are dependent on each other, and any server can handle any client request. 
+\end{itemize}
