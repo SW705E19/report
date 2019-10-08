@@ -1,12 +1,12 @@
 \section{Database choice}
-The system being developed during this project is heavily focused on scalability, it is therefore important that a database system that can handle a lot of data and which makes scalability easier is chosen.
+The system being developed during this project is heavily focused on scalability. It is therefore important to choose a database system capable of handling a lot of data and which makes scalability easier.
 \\
-Furthermore our application is going to handle a variety of data forms. It will store both structured data in the form of user profiles as well as unstructured data such as pictures and videos.
+Furthermore, the system is going to handle a variety of data forms. It will store both structured data in the form of user profiles as well as unstructured data such as pictures and videos.
 \\
 This means that both a relational and non-relational database system could work, making the choice more difficult.
-We considered going with a non-relational database, as such database system is often used with our frontend framework React, but since the team has more experience working with relational databases it was decided to go with this kind of database system.
+We considered going with a non-relational database, as such a database system is often used with the chosen frontend framework React, but since the team has more experience working with relational databases it was decided that this kind of database system would be used.
 \\
-The following databases were looked into:
+The following databases were considered for use:
 \begin{itemize}
     \item Postgres
     \item MySQL
@@ -14,12 +14,12 @@ The following databases were looked into:
     \item MariaDB
     \item Microsoft SQL Server
 \end{itemize}
-Postgres is the most advanced opensource relational database \cite{Postgres}.
+Postgres is the most advanced open source relational database \cite{Postgres}.
 It is free and is one of the most popular databases being used\cite{databasePopularity}.
-It has great documentation and a large active user base.
-Furthermore it is not only a relational database but an object-relational database which gives it support for user-defined objects, functions, operators and more.
-It also allows storing of Json objects and can therefore be used almost akin to a non-relational database.
-Postgres is also ACID compliant, meaning that a database transaction is ensured to be completed even in the event of errors or even power failures.
+It has great documentation and a large, active user base.
+Furthermore, it is not only a relational database but an object-relational database which gives it support for user-defined objects, functions, operators and more.
+It also allows storing of JSON objects and can therefore be used almost akin to a non-relational database.
+Postgres is also ACID compliant, meaning that a database transaction is ensured to be completed even in the event of errors or possibly even power failures.
 \\
 \\
 MySQL is the most popular database used today\cite{databasePopularity}.
@@ -29,19 +29,19 @@ MySQL is not ACID compliant.
 \\
 \\
 Oracle is a commercial database and is quite expensive to obtain\cite{oracle}.
-Furthermore you have to pay for extra features.
-For these reasons it was decided against using this database.
+Furthermore, you have to pay for extra features.
+For these reasons it was decided that this database would not be used.
 \\
 \\
-MariaDB is also an opensource relational-database\cite{MariaDB}.
-Just like Postgres it is ACID compliant, can store Json objects and has good documentation.
+MariaDB is also an opensource relational database\cite{MariaDB}.
+Just like Postgres it is ACID compliant, can store JSON objects and has good documentation.
 \\
 \\
 Microsoft SQL Server is a commercial database system\cite{MSSQLSERVER}.
-Just like Oracle it means you will have to pay to have access to the full system.
+Just like Oracle, that means you will have to pay for access to the full system.
 \\
 \\
-It was decided to use Postgres as the database system.
-This was because Postgres also incorporates the ability to handle unstructured data in much the same way a non-relational databases does it, giving us the means to explore that aspect of database design if needed.
+It was decided that Postgres would be used as the database system.
+This was chosen because Postgres also incorporates the ability to handle unstructured data in much the same way a non-relational database does, giving us the means to explore that aspect of database design if needed.
 The ACID compliance was also deemed important which removed MySQL from the selection process. 
-The group also has some experience working with Postgres from an earlier database course which was the last reason to pick it over MariaDB.
+The group also has some experience working with Postgres from an earlier database course which was the final reason to pick it over MariaDB.
