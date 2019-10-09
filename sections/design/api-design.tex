@@ -1,0 +1,42 @@
+\section{API design}
+When designing an application with scalability in mind, the API must be able to handle both a small and large amount of requests and give a response that can be used across platforms, in case the system needs to be scaled to other platforms such as a desktop application or a mobile application.\\
+Before going into the specifics of how the API should be designed, let us have a closer look at how APIs work.
+
+% Define block styles
+\tikzstyle{block} = [rectangle, draw, fill=blue!20,
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[node distance = 3cm, auto]
+    % Place nodes
+    \node [block] (appcli) {Application / client};
+    \node [block, right of=appcli] (request) {API requests};
+    \node [block, below of=request] (serverdata) {Server / data source};
+    \node [block, left of=serverdata] (response) {API response};
+    % Draw edges
+    \path [line] (appcli) -- (request);
+    \path [line] (request) -- (serverdata);
+    \path [line] (serverdata) -- (response);
+    \path [line] (response) -- (appcli);
+\end{tikzpicture}
+\caption{Workflow of an API} \label{fig:api-workflow}
+\end{figure}
+
+The flow of using the API starts with the application or client, which will be responsible for sending a request to the API for the information it needs to finish its computations.
+This request will inform the API about what data it needs in the request.
+To simplify this, we present an example:\\
+The client wants to render a page with information about a course; to do this, it would need all data associated with this course.\\
+This information will generally be exchanged by sending a request to the API that could look something like \texttt{api/course/2}, where 2 is the unique ID of the course.
+\\
+The API will now be responsible for fetching this information from the database layer or another data source. Once that has been completed, the response will be returned to the client, so that it can finish rendering the page with the newly received data.
+\\
+This process is illustrated on~\autoref{fig:api-workflow}.
+
+\subsection{Language}
+One of the first decisions that must be made when developing the API is which programming language to use.\\
+For this project, it was decided to use the React JavaScript library for the frontend design.
+To keep the codebase as consistent as possible in terms of code structure, it was deemed suitable to use the same language for the API.\\
+In addition to keeping the codebase uniform, Node.js offers an extensive package manager, which allows for easy inclusion of existing Node.js modules by other developers.
+One of those modules is \texttt{Express}, which is a web application framework for Node.js, that includes a series of utilities related to creating web applications and APIs.
