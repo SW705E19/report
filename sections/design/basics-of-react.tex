@@ -1,0 +1,61 @@
+\section{Introduction to React}
+React is a framework for JavaScript that we will be using to build the frontend of the system. 
+In this section we will look at the different building blocks and concepts of React.
+React will often be used with a syntax extension to JavaScript called JSX which makes it possible to do a special kind of variable declaration
+
+\begin{center}
+    \texttt{const element = <h1>Hello, world!</h1>;}
+\end{center}
+This variable declaration is can be called a React element which can then be rendered to the DOM
+Other variables can be declared and used inside JSX by wrapping it in brackets.
+
+\begin{lstlisting}
+const name = 'Josh Perez';
+const element = <h1>Hello, {name}</h1>;
+
+ReactDOM.render(
+  element,
+  document.getElementById('root')
+);
+\end{lstlisting}
+The variable that is embedded in the JSX can contain any valid JavaScript expression.
+\\\\
+In React we use components, which is a single file that holds all of the logic, html and styling that we need.
+
+\begin{lstlisting}
+import React from "react";
+    
+function App() {
+    return (
+        <div>
+            <h1>Hello React</h1>
+        </div>
+    );
+}
+
+export default App
+\end{lstlisting}
+In this example we create the component \texttt{App} and export it. By exporting it we can use the \texttt{App} component elsewhere and render it. 
+In the function we return JSX which React will then compile to html.
+The idea is to build the UI from components by exporting them and then importing them into other larger components to contain them. 
+\begin{lstlisting}
+import React from "react";
+        
+function Button() {
+    return (
+        <div>
+            <button onClick={console.log('Hello')}>Hello React</button>
+        </div>
+    );
+}
+    
+export default Button
+\end{lstlisting}
+As an example we can create a button component with an on click event embedded into it. 
+Here we use brackets to enable us to embed JavaScript which will be run when the button is clicked.
+We can now export this button and it can be imported by other components. 
+% Skriv om stateful og stateless components
+stateful components are also container components so they contain smaller components
+
+
+% https://www.youtube.com/watch?v=dGcsHMXbSOA
