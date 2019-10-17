@@ -1,10 +1,30 @@
 \section{Database choice}
-The system being developed during this project is heavily focused on scalability. It is therefore important to choose a database system capable of handling a lot of data and which makes scalability easier.
+The system being developed during this project is heavily focused on scalability.
+It is therefore important to choose a database system capable of handling a lot of data and which makes scalability easier.
 \\
 Furthermore, the system is going to handle a variety of data forms. It will store both structured data in the form of user profiles as well as unstructured data such as pictures and videos.
 \\
 This means that both a relational and non-relational database system could work, making the choice more difficult.
-We considered going with a non-relational database, as such a database system is often used with the chosen frontend framework React, but since the team has more experience working with relational databases it was decided that this kind of database system would be used.
+\\\\
+The main factor to consider when making the choice between a relational or non-relational database is the structure of the data to be used \cite{sqlvsnosql}.
+If the system primarily uses structured data, a relational database would be preferable.
+On the other hand, when the system deals with unclear data requirements or unstructured data, a non-relation dalatabase would be preferable. 
+When ACID compliance is important, a relational database should be considered.
+Being ACID compliant means upholding the following principles\cite{sqlvsnosql}:
+\begin{itemize}
+    \item Atomicity - transactions either succeed completely or get rolled back
+    \item Consistency - data written to a database must be valid according to the defined rules
+    \item Isolation - when transactions are run concurrently they act as if being run sequentially
+    \item Durability - committed transactions are permanent 
+\end{itemize}
+In terms of scalability, there are also some distinct differences between the two options. 
+Relational databases scale vertically, meaning the capacity of a single server will generally have to be increased, whereas non-relational databases scale horizontally, allowing for easier addition of more servers.
+Since data in non-relational databases requires less structure, they can be viewed as self-contained objects meaning they can easily be stored on multiple servers.
+We considered going with a non-relational database, as such a database system is often used with the chosen frontend framework React, as well as the focus of scalability in the project.
+However, ACID compliance is an important factor for the system.
+Transactions will happen between students and tutors, and as such we need to ensure they either succeed fully or get rolled by as defined by the atomicity principle.
+The data used for this system will also be structured, and the team has more experience working with relational databases.
+As such, it was decided that a relational database system would be the best choice.
 \\
 The following databases were considered for use:
 \begin{itemize}
@@ -14,7 +34,7 @@ The following databases were considered for use:
     \item MariaDB
     \item Microsoft SQL Server
 \end{itemize}
-Postgres is the most advanced open source relational database \cite{Postgres}.
+Postgres is an open source relational database \cite{Postgres}.
 It is free and is one of the most popular databases being used\cite{databasePopularity}.
 It has great documentation and a large, active user base.
 Furthermore, it is not only a relational database but an object-relational database which gives it support for user-defined objects, functions, operators and more.
@@ -43,5 +63,5 @@ Just like Oracle, that means you will have to pay for access to the full system.
 \\
 It was decided that Postgres would be used as the database system.
 This was chosen because Postgres also incorporates the ability to handle unstructured data in much the same way a non-relational database does, giving us the means to explore that aspect of database design if needed.
-The ACID compliance was also deemed important which removed MySQL from the selection process. 
-The group also has some experience working with Postgres from an earlier database course which was the final reason to pick it over MariaDB.
+Since ACID compliance was also deemed important MySQL was removed from the selection process. 
+The group also has some experience working with Postgres from an earlier database course which was the final reason to pick it over MariaDB along with its popularity.

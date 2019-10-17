@@ -3,7 +3,8 @@ In this section, the functional and general requirements for this project will b
 This serves as a way to ensure that the project delivered can be qualified as a minimum viable product.
 
 \subsubsection{Functional requirements}
-The functional requirements define some code related requirements. These requirements should be presented in a binary manner, such that it is trivial to evaluate whether the requirement has been fulfilled or not.
+The functional requirements define requirements that explain the functionality of the system. 
+These requirements should be presented in a binary manner, such that it is trivial to evaluate whether the requirement has been fulfilled or not.
 
 \begin{itemize}
     \item Users are able to contact tutors about courses that the tutor provides
@@ -39,6 +40,8 @@ The reasoning behind this is that these requirements may need to be evaluated th
     \item Reliability:
     \begin{itemize}
         \item If an error happens, the user should be notified of the error in a way that they can understand
+        \item If an error happens, it should be logged for debugging purposes
+        \item If one component fails, it should be replaceable and the other components should keep working
     \end{itemize}
     \item Scalability:
     \begin{itemize}
