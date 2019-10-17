@@ -35,7 +35,6 @@ When designing systems to be scalable, some principles should be followed \cite{
     Relying on eventual consistency will lead to better availability, especially if the system has a large userbase.
     \item The system should be designed to make maintenance and automation easy so that after the software has been released, it can be monitored and the different parts can be updated when needed.
     \item Write code to be able to run asynchronously rather than synchronously to allow tasks to be executed on different threads. This will increase the availability of the system.
-    This will increase the availability of the system.
     \item Avoid storing information about a component's state in the system servers. 
     State information should only be kept in the components made for it, and in general, it should be stored in as few places as possible. 
     By doing it this way, no components and servers are dependent on each other, and any server can handle any client request. 
