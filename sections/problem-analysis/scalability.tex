@@ -6,11 +6,12 @@ There are different types of scalability related to software design \cite{Scalab
 \begin{itemize}
     \item \textbf{Scalability in performance} The system should be able to maintain high performance even if there are many users. This can be facilitated by adding more capacity to the system's components to allow more parallel computing. 
     However, performance does not scale linearly as there is a limit to how much speedup that can be achieved by using multiple processors according to \textit{Amdahl's Law}. 
-    \item \textbf{Scalability in availability} According to the \textit{CAP theorem}, consistency, availability, and partition tolerance cannot all be guaranteed in a distributed system. 
-    Usually, in web applications that need to be scalable, availability and partition tolerance are favored over consistency. 
+    \item \textbf{Scalability in availability} According to the \textit{CAP theorem}, consistency and availability cannot be guaranteed in a distributed system. 
+    Usually, in web applications that need to be scalable, availability is favored over consistency. 
     The system will instead make use of \textit{eventual consistency}, meaning that all the users will, at some point, be able to read the most recent updates but not at the same time. 
-    This way of scalability will decrease synchronism but allows the system to be available to all users, even during a network partition.
-    This results in a situation where the users may not read the most recently updated data, but it will still be available to them during a network failure. As the network partition becomes resolved, consistency will be restored.
+    This way of scalability will decrease synchronism but allows the system to be available to all users.
+    This results in a situation where the users may not read the most recently updated data, but it will still be available to them during a network failure.
+    As the network failure becomes resolved, consistency will be restored.
     \item \textbf{Scalability in maintenance} The software that is written must be continuously maintained and updated even after deployment of the system to make sure that the different components of the system are up to date and will continue running. 
     Different kinds of platforms and tools can be used to facilitate this by monitoring the system and ensuring that it is operating correctly. 
     \item \textbf{Scalability in expenditure} This relates to managing the total cost of developing, maintaining, and operating the system. 
@@ -25,10 +26,11 @@ When designing systems to be scalable, some principles should be followed \cite{
     This allows for more availability and performance, thus making the system easier to scale, but adds to the operational cost.
     \item Scale the system horizontally instead of vertically.
     Add new servers to the system instead of buying a new server with a larger capacity each time to replace the old one when more capacity is needed. 
-    In theory, this should also be cheaper since the old servers will still be in use. However, for a system with multiple servers to work, some load balancing is required.
+    In theory, this should also be cheaper since the old servers will still be in use. 
+    However, distributing network traffic properly is required for a system with multiple servers to work.
     \item Build the API first to avoid tailoring it to a specific type of frontend. 
-    The API should work as a service so that it can be used for any system such as a smartphone application or a web site. 
-    \item Caching the data that is being accessed can have significant performance benefits since the system will not have to recompute the results that are being requested often. 
+    The API should work as a service such that it can be used for any system such as a smartphone application or a web site. 
+    \item Caching the data that is being accessed can have significant performance benefits since the system will not have to recompute the results that are often requested. 
     \item As mentioned in scalability in availability, the system does not need to provide the newest data available at all times if the users do not need to know. 
     Relying on eventual consistency will lead to better availability, especially if the system has a large userbase.
     \item The system should be designed to make maintenance and automation easy so that after the software has been released, it can be monitored and the different parts can be updated when needed.
