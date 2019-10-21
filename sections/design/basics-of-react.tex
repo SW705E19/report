@@ -66,7 +66,8 @@ If a component is used in another component, we can use \texttt{props} to pass d
 \\\\
 In general, \texttt{props} should be read-only, which means a component should not try to change its values. 
 To allow the UI elements to change over time we instead make use of \textit{State}, which allows the components to change their output over time when handling user inputs or network responses. 
-\textit{State}  is similar to \texttt{props} but is instead private and only the specific component can make changes to it. To make use of \textit{State} we need to initialize the component as a class instead of a function
+\textit{State} is similar to \texttt{props} but is instead private and only the specific component can make changes to it.
+To make use of \textit{State} we need to initialize the component as a class instead of a function.
 \begin{lstlisting}
     function Button() {
         return (
