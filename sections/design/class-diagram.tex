@@ -16,8 +16,8 @@ A role is a generalization of either the tutor or administrator classes.
 The role class ensures that the user can have both of the different roles, only one role or neither role, and that it can be dynamically changed.
 If a user does not have a role, the user is simply regarded as a user of the system - a person seeking a tutor. 
 Reports are used to ensure that the system is trustworthy and prevent the same problems recurring in interactions between students and tutors.
-A tutor is associated with reports through an association relation.
-A tutor will be associated with 0 or more reports, depending on how many times students have reported the tutor in question.
+A user is associated with reports through an association relation.
+A user will be associated with 0 or more reports, depending on how many times the student has reported reported a tutor.
 A tutor is also associated with 0 or more reviews in the same way. 
 Students can rate their interactions with a tutor through the review.
 
@@ -25,13 +25,27 @@ Students can rate their interactions with a tutor through the review.
 The calendar is the part of the system through which students and tutors establish dates on which to meet. 
 One calendar is associated with one user.
 A calendar aggregates 0 or more calendar events. 
-The calendar does not need an event, it can simply show the overall view of the month.
+The calendar does not need an event, it can simply show the overall view of the month without any scheduled appointments.
+
+\subsection{Messages}
+Users can send messages through the system. 
+Ass such, users are associated with an inbox.
+This inbox aggregates 0 or more of the user's messages.
+
+\subsection{Reviews}
+Reviews are made by students and are used to review the services of a tutor.
+As such, a user is associated with 0 or more reviews.
+The user could have reviewed multiple services, or none at all.
+Reviews are also associated services.
+A service will be associated with 0 or more reviews, depending on whether or not any students have left any reviews for the service in question.
 
 \subsection{Services}
 A service is what the tutors provide through the system. 
 A user is associated with a service.
 The user can be associated with 0 or more services, meaning that if the user is not a tutor they do not need to provide a service, and if they are a tutor they can provide more than one. 
-The service itself is associated with one or more users, meaning that if the service exists, it is attributed to at least one tutor.
+In the same way, if the user is a student, they do not have to be associated with a service.
+The service itself is associated with one or more users.
+If the service exists, it may not necessarily be associated with any students, but it is always attributed to at least one tutor.
 If the service only consists of material and is based around self studies, it could have multiple tutors authoring it, meaning it would be necessary to attribute the service to both.
 A service aggregates 0 or more materials. 
 The tutor can choose to provide material for their service, as long as it is relevant. 
