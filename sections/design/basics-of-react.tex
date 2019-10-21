@@ -65,7 +65,6 @@ A component is conceptually a JavaScript function, which means that they can acc
 \\\\
 In general, \texttt{props} should be read-only, which means a component should try to change it's values. 
 To allow the UI elements to change over time we instead make use of \textit{State} which allows the components to change their output over time when handling user inputs or network responses. 
-% Skriv om stateful og stateless components
 \textit{State}  is similar to \texttt{props} but is instead private and only the specific component can make changes to it. To make use of \textit{State} we need to initialize the component as a class instead of a function
 \begin{lstlisting}
     function Button() {
