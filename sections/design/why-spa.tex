@@ -19,16 +19,14 @@ The pages can then still be shown to the user even with connectivity issues and 
 A disadvantage of an SPA is the poor optimization for search engines.
 Most of the pages will not be available to scan because of the way an SPA works. 
 Some users will also have JavaScript disabled in their browsers, and since the SPA is reliant on JavaScript to load new page content all the time, the pages will not be able to load correctly.
-Generally SPAs have less security but with use of the modern frameworks mentioned the security of the page is significantly improved.
-SPAs also can not take advantage of browser history since the back button will not go to the previous page since there is only one page. 
-There are, however, solutions that can be used for this issue such as using a history API \cite{SPAvsMPAMerehead}.
+Generally SPAs have less security but with use of the modern frameworks mentioned the security of the page is significantly improved \cite{SPAvsMPAMerehead}.
 
 \subsection{MPAs}
 MPAs are different to SPAs in that they have a more standard architecture.
 When a new page is loaded it will send a request to the server and all the data will be updated even if it is just a small amount.
 A MPA will therefore spend a bit more time loading a new page because it has to update everything.
-Actions can be taken to increase the loading speed, however. 
-Libraries such as jQuery can be used.
+However, actions can be taken to increase the loading speed such as using libraries like jQuery.
+
 Another popular thing to do to reduce load times is use filters for searching through a list of items as filters do not require a reload of the page.
 MPAs are generally used for web applications with a number of pages that have static information such as text, images and links to other pages.
 The content of an MPA will be split into many pages with many links to other pages to allow for greater performance.
