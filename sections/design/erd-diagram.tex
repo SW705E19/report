@@ -15,14 +15,14 @@ With these two cardinalities, the following mappings can be used:
 A one-to-one relationship means that an entity in an entity set A is associated with at most one entity in an entity set B, and an entity in B is associated with at most one entity in A.
 A one-to-many relationship means that an entity in A is associated with any number of entities in B, and an entity in B can be associated with at most one entity in A.
 For many-to-many relationships, an entity in A is associated with any number of entities in B, and an entity in B is associated with any number of entities in A\cite{DBConcepts}.
-The following figure illustrates the physical design of the database for this system:
-
-\begin{figure}[H]
-    \includegraphics[width=\linewidth]{}
-     \caption{The ER diagram that illustrates the design of the database.}
-     \label{fig:er-diagram}
- \end{figure}
-
+\autoref{fig:er-diagram} illustrates the physical design of the database for this system:
+\begin{sidewaysfigure}[]
+    \centering
+    \includegraphics[width=\linewidth]{/s7erd.png}
+    \caption{The ER diagram that illustrates the design of the database.}
+    \label{fig:er-diagram}
+\end{sidewaysfigure}
+\\\\
 In \autoref{fig:er-diagram}, entities are represented by the rectangular boxes.
 The name of the entity set is in the header of the box, and the list of attributes is below the name, along with the type of each particular attribute.
 \textit{User} is an example of an entity set.
@@ -44,12 +44,12 @@ The relationship between \textit{service} and \textit{category} is a many-to-man
 To model this, a separate entity set is created.
 This entity set is named after the two participating sets, and has both primary keys as its attributes.
 This ensures that for a particular entity in the set \textit{service}, it can be related to multiple entities of the set \textit{category}.
-In the database, this would be achieved through multiple entities of the \textit{service_category} being present with the same \textit{ServiceID} attributes, but each instance is linked to a different \textit{CategoryID} attribute.
+In the database, this would be achieved through multiple entities of the \textit{service\_category} being present with the same \textit{ServiceID} attributes, but each instance is linked to a different \textit{CategoryID} attribute.
 Another example of a many-to-many relation is users and messages.
 A message is associated with a sender, and at least one receiver.
 \\\\
 A particularly interesting entity set is the \textit{user} set. 
-As defined in the \autoref{REF TIL CLASS DIAGRAM}, the admin and tutor properties are viewed as specializations through roles.
+As defined in the \autoref{fig:class-diagram}, the admin and tutor properties are viewed as specializations through roles.
 This is achieved in the ER diagram by modelling them as subtypes, defining an \textit{ISA} relationship.
 This is what the arrow from both \textit{tutor} and \textit{admin} represent.
 They show that a tutor is a user, and in the same way, an admin is a user.
@@ -60,6 +60,6 @@ Many users can be associated to a service - the only limit is how many students 
 A service is however associated with one tutor.
 As such we chose to model it through two relationships - one that is one-to-many for the tutor as a tutor can have multiple services, but each service is associated with one tutor, and a many-to-many for students.
 A report is made by a student targeting a tutor. 
-as such, we model it through two relations to the user entity set, in order to get a foreign key for both the reporting student and the tutor being reported.
+As such, we model it through two relations to the user entity set, in order to get a foreign key for both the reporting student and the tutor being reported.
 
 
