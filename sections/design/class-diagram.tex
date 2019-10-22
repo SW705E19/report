@@ -11,15 +11,13 @@ It illustrates structural relations between classes and objects\cite{OOAD}.
 
 \subsection{Users}
 Users are defined through the \texttt{users} cluster.
-A user aggregates 0 or more roles.
-A role is a generalization of either the tutor or administrator classes.
+A user aggregates 0 or more roles, which is a generalization of either the tutor or administrator classes.
 The role class ensures that the user can have both of the different roles, only one role or neither role, and that it can be dynamically changed.
 If a user does not have a role, the user is simply regarded as a user of the system - a person seeking a tutor.
 Reports are used to ensure that the system is trustworthy and prevent the same problems recurring in interactions between students and tutors.
 A user is associated with reports through an association relation.
-A user will be associated with 0 or more reports, depending on how many times the student has reported reported a tutor.
-A tutor is also associated with 0 or more reviews in the same way.
-Students can rate their interactions with a tutor through the review.
+They will be associated with 0 or more reports, depending on how many times the student has reported reported a tutor.
+Tutors are associated with 0 or more reviews in the same way, as students can rate their interactions with a tutor through a review.
 
 \subsection{Calendar}
 The calendar is the part of the system through which students and tutors establish dates on which to meet.
@@ -29,15 +27,14 @@ The calendar does not need an event, it can simply show the overall view of the 
 
 \subsection{Messages}
 Users can send messages through the system.
-As such, users are associated with an inbox.
+To facilitate this, users are associated with an inbox.
 This inbox aggregates 0 or more of the user's messages.
 
 \subsection{Reviews}
 Reviews are made by students and are used to review the services of a tutor.
-As such, a user is associated with 0 or more reviews.
+Since users make the reviews, they are associated with 0 or more reviews.
 The user could have reviewed multiple services, or none at all.
-Reviews are also associated services.
-A service will be associated with 0 or more reviews, depending on whether or not any students have left any reviews for the service in question.
+The reviews are made for a particular service, meaning a service will be associated with 0 or more reviews, depending on whether or not any students have left any reviews for the service in question.
 
 \subsection{Services}
 A service is what the tutors provide through the system.
@@ -49,8 +46,8 @@ If the service exists, it may not necessarily be associated with any students, b
 If the service only consists of material and is based around self studies, it could have multiple tutors authoring it, meaning it would be necessary to attribute the service to both.
 A service aggregates 0 or more materials.
 The tutor can choose to provide material for their service, as long as it is relevant.
-However, a service could also simply be the tutor teaching the student in person, without material through the system.
-A service is associated with one or more categories.
+However, a service could also simply be the tutor teaching the student in person, without material provided through the system.
+Categories define the subject matter of a service, meaning a service is associated with one or more categories.
 If a service is provided, it is based around a subject that defines its category.
 However, the service might be related to more than just that one category.
 The category assigned could be more specific to provide more information for the student, such as trigonometry rather than mathematics.
