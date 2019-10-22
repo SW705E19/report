@@ -1,0 +1,104 @@
+\section{Introduction to React}
+React is a library for JavaScript that we will be using to build the frontend of the system.
+In this section we will look at the different building blocks and concepts of React.
+React will often be used with a syntax extension to JavaScript called JSX which makes it possible to do a special kind of variable declaration.
+
+\begin{center}
+    \texttt{const element = <h1>Hello, world!</h1>;}
+\end{center}
+This variable declaration can be called a React element which can then be rendered to the DOM (the Document Object Model of the web page).
+Other variables can be declared and used inside JSX by wrapping them in brackets.
+\begin{center}
+    \texttt{ReactDOM.render(element, document.getElementById('root'));}
+\end{center}
+With React, it is possible to render the element to the DOM by using \texttt{ReactDom.render()}.
+The element is passed to this function as well as the DOM node we would like it to be rendered to.
+In this case we are rendering the React element \texttt{element} to the DOM node \texttt{root}.
+\begin{lstlisting}
+const name = 'Josh Perez';
+const element = <h1>Hello, {name}</h1>;
+
+ReactDOM.render(
+  element,
+  document.getElementById('root')
+);
+\end{lstlisting}
+The variable that is embedded in the JSX can contain any valid JavaScript expression.
+\\\\
+In React we use components, which are files that hold all of the logic, html and styling that we need.
+
+\begin{lstlisting}
+import React from "react";
+
+function App() {
+    return (
+        <div>
+            <h1>Hello React</h1>
+        </div>
+    );
+}
+
+export default App
+\end{lstlisting}
+In this example we create the component \texttt{App} and export it.
+By exporting it we can use the \texttt{App} component elsewhere and render it.
+In the function we return JSX which React will then compile to HTML.
+The idea is to build the UI from components by exporting them and then importing them into other larger components to contain them.
+This means that the components act as the building blocks of the UI because we can reuse them in other components.
+\begin{lstlisting}
+import React from "react";
+
+function Button() {
+    return (
+        <div>
+            <button onClick={console.log('Hello')}>Hello React</button>
+        </div>
+    );
+}
+
+export default Button
+\end{lstlisting}
+As an example we can create a button component with an on-click event embedded into it.
+Here we use brackets to enable us to embed JavaScript in the JSX which will be run when the button is clicked.
+We can now export this button and it can be imported by other components.
+A component is conceptually a JavaScript function, which means that they can accept inputs called \texttt{props} which can contain data that can be used in the React elements.
+If a component is used in another component, we can use \texttt{props} to pass data to the child component.
+\\\\
+In general, \texttt{props} should be read-only, which means a component should not try to change its values.
+To allow the UI elements to change over time we instead make use of \textit{State}, which allows the components to change their output over time when handling user inputs or network responses.
+\textit{State} is similar to \texttt{props} but is instead private and only the specific component can make changes to it.
+To make use of \textit{State} we need to initialize the component as a class instead of a function.
+\begin{lstlisting}
+    function Button() {
+        return (
+            <div>
+                <button onClick={console.log('Hello')}>Hello React</button>
+            </div>
+        );
+    }
+\end{lstlisting}
+We can convert this into a class like this:
+\begin{lstlisting}
+    class Button extends React.Component {
+        render() {
+            return (
+                <div>
+                    <button onClick={console.log('Hello')}>Hello React</button>
+                </div>
+            );
+        }
+    }
+\end{lstlisting}
+This is useful since the render method is called every time the local \textit{State} is changed.
+We can set the initial state of a component by assigning to \texttt{this.state}
+\begin{center}
+    \texttt{this.state = \{date = new Date();\};}
+\end{center}
+The state can then be changed by reassigning to the \texttt{date} variable.
+This is done by using the \texttt{this.setState()} function.
+\begin{center}
+    \texttt{this.setState(\{date = new Date();\});}
+\end{center}
+When a component has a state set it is considered to be a stateful component.
+Parent or child components should not care if a certain component is stateful or stateless since the state is local and not accessible by other components.
+A component can however pass its state through \texttt{props} to a child component, which means that information about a state can only be passed in a \textit{top-down} approach \cite{ReactJS}.
