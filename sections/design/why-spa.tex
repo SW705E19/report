@@ -4,20 +4,19 @@ One is a \textit{Single Page Application} (SPA), the other is a \textit{Multi Pa
 In this section we will be looking into the two types of architectures and explore the advantages and disadvantages that they have.
 
 \subsection{SPAs}
-What a SPA allows you to do is build an application that simulates that of a desktop application. 
-When a new page is loaded only the necessary content of the previous page is updated.
+What a SPA allows you to do is build an application consisting of only a single page, in a way that when the content of the page is changed the necessary content is updated, rather than directing to an entirely new page.
 JavaScript is often used when developing SPAs but it is often used with some library or framework like React to make the development easier.
-There are also other frameworks such as Angular or Vue which allow for development of dynamic web applications just as React does. 
+There are also other frameworks such as Angular or VueJS which allow for development of dynamic web applications just as React does.
 \\\\
 The main advantage of an SPA is the high speed that comes with the unnecessity of having to load all elements with each new page.
-You only need to load the changed elements. 
-The frameworks used also make fast development possible because of the powerful tools that are provided. 
+You only need to load the changed elements.
+The frameworks used also make fast development possible because of the powerful tools that are provided.
 It is also easy to create a mobile app based on the finished code of an SPA \cite{SPAvsMPAMerehead}.
-SPAs also have great caching possibilities and the local data can be used offline when the user has problems with their connection. 
+SPAs also have great caching possibilities and the local data can be used offline when the user has problems with their connection.
 The pages can then still be shown to the user even with connectivity issues and the local data will be synchronized once the connection is established again \cite{SPAvsMPARuby}.
 \\\\
 A disadvantage of an SPA is the poor optimization for search engines.
-Most of the pages will not be available to scan because of the way an SPA works. 
+Most of the pages will not be available to crawl due to the way an SPA works.
 Some users will also have JavaScript disabled in their browsers, and since the SPA is reliant on JavaScript to load new page content all the time, the pages will not be able to load correctly.
 Generally SPAs have less security but with use of the modern frameworks mentioned the security of the page is significantly improved \cite{SPAvsMPAMerehead}.
 
@@ -35,16 +34,14 @@ Advantages of MPAs are their ability to optimize their pages for search engines 
 They are also easy to develop on since the larger technologies, such as the frameworks mentioned for SPAs, are typically not needed \cite{SPAvsMPAMerehead}.
 MPAs have unlimited scalability since new content can be placed on new pages with no limitations whereas SPAs are more limited by the amount of content that can be placed on a single page without having it affect performance \cite{SPAvsMPARuby}.
 \\\\
-Disadvantages of MPAs are the slower performance that comes with having to load all the content every time a page is loaded.
-It will generally also take more time to develop an MPA since it is difficult to separate the frontend and backend as they are closely knit together.
-Maintenance of an MPA can also take significantly longer than for an SPA since it will only take more time to update every time a new page is added \cite{SPAvsMPARuby}. 
+The main disadvantage of MPAs is the slower performance that comes with having to load all the content every time a page is loaded \cite{SPAvsMPARuby}.
 
 \subsection{Why SPA}
 For this project we have chosen to build the frontend of the system using the React framework. 
 With React it is most common to build SPAs, but it is also possible to build MPAs. 
 For this project we will be building an SPA.
 The system will not have that many pages with a lot of static information so this is not a needed feature for the system.
-We want the UI of the system to be very responsive to the user's input and also have a great response time when updating elements of the page which is inline with the choice of an SPA.
+We want the UI of the system to be very responsive to the user's input and have a quick response time when updating elements of the page which is inline with the choice of an SPA.
 The possibility to cache data and then making use of that for cases where a user has a poor connection is also inline with some of the things discussed in \autoref{sec:scalability}.
 We also do not need our system to be optimized for search engines since most parts of the system will only be available to users that are logged in.
 Accessibility of the system from mobile devices is also desired and with an SPA it is much easier to make this available. 
