@@ -17,7 +17,9 @@ If a user does not have a role, the user is simply regarded as a user of the sys
 Reports are used to ensure that the system is trustworthy and prevent the same problems recurring in interactions between students and tutors.
 A user is associated with reports through an association relation.
 They will be associated with 0 or more reports, depending on how many times the student has reported reported a tutor.
-Tutors are associated with 0 or more reviews in the same way, as students can rate their interactions with a tutor through a review.
+A report is associated with exactly 2 users, one being the student creating the report, and the other being the tutor to which the report is targeted.
+Users are associated with 0 or more reviews in the same way, as students can rate their interactions with a tutor through a review.
+If a review is created, it is associated with exactly 2 users as well, since both the tutor being reviewed and the student doing the review are necessary.
 
 \subsection{Calendar}
 The calendar is the part of the system through which students and tutors establish dates on which to meet.
@@ -52,3 +54,4 @@ If a service is provided, it is based around a subject that defines its category
 However, the service might be related to more than just that one category.
 The category assigned could be more specific to provide more information for the student, such as trigonometry rather than mathematics.
 In such cases it would likely also be valuable to be able to assign multiple categories.
+A category should also be able to exist without being associated to a service, meaning its multiplicity should be 0 to many.
