@@ -1,5 +1,9 @@
-pipeline:
-  build:
+kind: pipeline
+type: docker
+name: latex
+
+steps:
+  - name: compile
     image: tianon/latex
     commands:
       - pdflatex master.tex
