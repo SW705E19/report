@@ -1,0 +1,16 @@
+\section{Introduction to testing}
+Testing a system is a major part of software development and is a way to ensure that the system works as intended \cite{SoftwareTesting}.
+In this chapter, we will take a look at what it means to test a system, different ways of doing it and why you should the system in the first place.
+
+Testing can be split into two categories: Black-box testing and white-box testing. Both of these categories can be further split into static and dynamic testing.
+When talking about black-box testing, it refers to testing the product without having access to the code itself as opposed to white-box where the tester knows the details of how the software works \cite{SoftwareTesting}.
+The other terms used, static and dynamic testing refer to whether the tests are done while executing the code or not.
+Static testing refers to testing something that is not running. For black-box testing this is usually related to reviewing the specifications, conducting tests where the testers pretend to be the customer, research standards for how to develop the system or compare it to similar software.
+On a lower level, it also includes checking if the requirements specified for the project are possible to evaluate \cite{ToVSlides1}.
+An example could be to check if the requirements contain sentences like "the system must be fast and cheap", which is not a directly measurable requirement.
+Dynamic black-box testing on the other hand is the act of testing the executed system without looking at the code itself. This refers to manually testing the system by using it. It is usually done by intentionally trying to break the system by thinking like either a dumb user or a hacker \cite{SoftwareTesting}.
+
+For white-box testing, static testing refers to testing in the form of pair programming, code reviews, walkthroughs.
+All of those are ways of evaluating and testing at the code without running it.
+Dynamic white-box testing on the other hand is related to testing the code where you know how it works. With this knowledge, it is possible for the tester to see some possible ways to break the system, that may not have been obvious otherwise, such as being able to see that given a specific input, the system will throw a divide by zero exception and crash the system \cite{ToVSlides1}.
+Other parts of dynamic white-box testing include unit testing and looking at coverage measures, which we will dive further into in this chapter.
