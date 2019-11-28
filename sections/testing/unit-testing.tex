@@ -72,5 +72,26 @@ static getByEmail = async (email: string): Promise<User> => {
 };
 \end{lstlisting}
 
+As seen on \autoref{lst:unitTestStubbing} lines 3 to 13, we also made use of mocking for defining the request and response parameters used for requests to the controller.
+This allows us to check whether the correct status code is returned from the controller by overriding the status function.
+Normally, the function would set the headers that are returned to the client requesting the API.
+However, for this test we are only interested in seeing which parameter the status function is called with to ensure that it matches our expectations.
+This way it is now possible to check if the \texttt{statusCode} property on the response is set to what we expect, as seen on line 17.
+
+Finally, the stub is restored to make sure that it only behaves in this limited way in the scope of the unit test.
+
 \subsection{Metrics of good testing}
-Code coverage
+There are multiple ways of measuring whether the created unit tests are sufficient.
+Our primary metric for our automated tests are code coverage, which measures how much of the code base is covered by unit tests.
+This is split into four categories: Statement coverage, branch coverage, function coverage and line coverage.
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{/test.png}
+     \caption{The output of the code coverage reporter NYC}
+     \label{fig:testResults}
+ \end{figure}
+
+We used a configuration to report files with 0-50\% coverage as red, 50-75\% as yellow and 75-100\% as green.
+While this is a good indicator about how much of the code has been tested, it does not ensure that the tests are useful and correct.
+
+To ensure this, we make use of formal reviews of both the code and tests.
