@@ -1,5 +1,5 @@
 \section{Unit testing}
-Unit testing is our primary type of testing for the system, and belongs to the dynamic white-box testing category.
+Unit testing is our primary way of testing our system, and belongs in the dynamic white-box testing category.
 The purpose of unit testing is to see if an isolated subset of the system works as expected, given some pre-defined input \cite{TestDrivenDevelopment}.
 For this project, unit tests are utilized for both the React frontend and the API, to ensure that the system works as intended.
 
@@ -39,7 +39,7 @@ However, after doing more research we realized that instead of connecting to a r
 This principle is called stubbing \cite{SoftwareTesting}.
 The idea is that instead of calling a given function, we create a stub function that is called instead.
 An example of this can be seen in the unit test in \autoref{lst:unitTestStubbing}, where we stub the function call to \texttt{getByEmail} in the \texttt{userService}.
-In the real code, the code seen on \autoref{lst:getByEmail} would be called as a part of the call to the login function on line 16, which connects to the database, but instead of doing we use the Sinon library to stub the function, and tell it to instead throw an exception, so we can see how the controller handles this case.
+In the real code, the code seen on \autoref{lst:getByEmail} would be called as a part of the call to the login function on line 16, which connects to the database, but instead of doing so we use the Sinon library to stub the function, and tell it to instead throw an exception, so we can see how the controller handles this case.
 
 \begin{lstlisting}[caption={Unit test with stubbing},label={lst:unitTestStubbing}]
 ...
