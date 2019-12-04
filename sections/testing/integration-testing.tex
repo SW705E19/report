@@ -1,1 +1,11 @@
 \section{Integration testing}\label{sec:integrationTesting}
+While unit testing is great for testing if a given module works in isolation, it is just as important to test if module A and B can work together as intended.
+This is where integration testing comes in. 
+Integration testing is an incremental process where an increasing amount of modules are put together and every time this happens the new and larger group is tested.
+Integration testing is similar to unit testing, but it is a higher level of testing where we do not worry about the isolated functionality of the modules.
+It is also common to use external libraries or module that are not necessarily developed by ourselves and it is therefor important to perform integration tests to make sure that the introduction of external module did not introduce any new bugs, or unexpected behavior. 
+
+In this project, integration testing was been done in the API to verify that the external libraries added via the node package manager work as intended.
+An example of an external library that was tested with integration testing is the \texttt{class-validator} package, where we give it a model that is intentionally wrong to see if it returns the data in the way we expect.
+We can then continue on testing the controller where the validator is called, to see if it behaves as expected in case the class validator works.
+This kind of testing can also be used for regression testing, as we will be made aware if the behavior of the validator changes due to the test failing.
