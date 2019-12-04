@@ -23,7 +23,7 @@ After two reviewers had accepted the PR it could be merged to the develop branch
 \\\\
 To further ensure that the quality of the code that is pushed to develop is of acceptable quality we use continuous integration (CI).
 The CI ensures that the project is able to build without any errors, and that the unit tests succeed. 
-That way we can be sure that the develop branch is never a broken build.
+That way we can be sure that the develop branch is never a broken build, since it will try to run both the original branch, and the develop branch with the new changes merged in.
 Additionally, we use a linter that is configured to test that the code follows our internally defined rules and coding standards. 
 In addition to this, the CI runs the linter, and if the code does not follow the standards set it will report an error.
 \begin{figure}[H]
