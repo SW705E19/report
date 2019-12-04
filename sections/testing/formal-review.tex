@@ -25,7 +25,7 @@ To further ensure that the quality of the code that is pushed to develop is of a
 The CI ensures that the project is able to build without any errors, and that the unit tests succeed. 
 That way we can be sure that the develop branch is never a broken build.
 Additionally, we use a linter that is configured to test that the code follows our internally defined rules and coding standards. 
-We also make the CI run the linter, and if the code does not follow the standards set it will fail to built.
+In addition to this, the CI runs the linter, and if the code does not follow the standards set it will report an error.
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{/ci.JPG}
     \caption{The CI has to be able to build for a PR to be merged}
