@@ -23,7 +23,7 @@ Instead of hardcoding the text on every page, we wrap the export of the componen
     export default withTranslation()(withStyles(styles)(UserForm))
 \end{lstlisting}
 \noindent
-In \autoref{withTranslationsUserForm} is the translation for the header on the register page.
+\autoref{withTranslationsUserForm} shows the translation for the header on the register page.
 The \texttt{withTranslation()} function injects the function t into the props of the component. When called the function t will look up the passed key in the translation files to find the correct translation for "registerasauser". 
 A screenshot of the files can be seen on \autoref{fig:translationfiles}.
 \begin{figure}
