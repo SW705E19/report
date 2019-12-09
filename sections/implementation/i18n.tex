@@ -1,22 +1,30 @@
 \section{Translations}
 To have a scalable application it is necessary to easily be able to translate the text to different languages.
-For this purpose we have used i18next, which is an internationalization framework for React and React native \cite{react-i18next}.
+For this purpose we have used i18next, which is an internationalization framework for JavaScript.
+It is supported for many different frameworks like React, React Native, .net, Angular and many more \cite{react-i18next}.
 Instead of hardcoding the text on every page, we use the component withTranslations and gets the function t.  
-An example can be seen in \autoref{withTranslationsExample}. 
 
-\begin{lstlisting}[caption={Example of withTranslation in use}, captionpos=b, label={withTranslationsExample}]
+\begin{lstlisting}[caption={Translated header when registering as a user.}, captionpos=b, label={withTranslationsUserForm}]
     import { withTranslation } from "react-i18next";
 
-    function Example(){
-        return(
-            <h1> {t(firstname)} <h1/>
+    function UserForm(props){
+        const { t, classes } = props;
+
+        return (
+            <Container maxWidth="sm">
+               <div className={classes.paper}>
+                  <Typography align="center" variant="h4">
+                      {t('registerasauser')}
+                  </Typography>
+               ...
         );
     }
 
-    export default withTranslation()(Example)
+    export default withTranslation()(withStyles(styles)(UserForm))
 \end{lstlisting}
 \noindent
-The \texttt{withTranslation()} component will then look in the translation files to find the correct translation for "firstname". 
+In \autoref{withTranslationsUserForm} is the translation for the header on the register page.
+The \texttt{withTranslation()} component will then look in the translation files to find the correct translation for "registerasauser". 
 A screenshot of the files can be seen on \autoref{fig:translationfiles}.
 \begin{figure}
     \centering
