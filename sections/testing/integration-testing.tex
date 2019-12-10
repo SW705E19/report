@@ -9,3 +9,5 @@ In this project, integration testing was done in the API to verify that the exte
 An example of an external library that was tested with integration testing is the \texttt{class-validator} package, where we give it a model that is intentionally wrong to see if it returns the data in the way we expect.
 We can then continue by testing the controller where the validator is called, to see if it behaves as expected in case the class validator works.
 This kind of testing can also be used for regression testing, as we will be made aware if the behavior of the validator changes due to the test failing.
+
+However, since integration testing has not been a primary focus for this project, the coverage of this is not measured or considered essential.
