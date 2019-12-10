@@ -248,3 +248,11 @@ master.pdf
 .vscode/spellright.dict
 
 *.pdf
+
+.vs/ProjectSettings.json
+
+.vs/report/v16/.suo
+
+.vs/slnx.sqlite
+
+.vs/VSWorkspaceState.json
