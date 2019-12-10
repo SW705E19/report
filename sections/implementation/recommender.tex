@@ -79,7 +79,21 @@ A matrix of ratings can then be constructed, as shown in \autoref{tbl:collaborat
     \caption{This figure shows an example of a ratings matrix, with ratings from 1 to 5. An empty entry indicates that the user has not rated the item.}
     \label{tbl:collaborative-example}
 \end{table}
+Domains with certain properties lend themselves to collaborative filtering. 
+These are \textit{data distribution}, \textit{underlying meaning} and \textit{data persistence} \cite{CollaborativeFiltering}.
+Data distribution encompasses domains in which there are many items, many ratings per item, more users rating that items to be recommended and users rate multiple items.
+Underlying meaning encompasses domains in which users can have tastes in common, evaluation of an item cannot be done objectively and items are homogenous.
+Data persistence encompasses domains in which items persist and taste persists, meaning the tastes of the users do not change rapidly.
+Collaborative filtering usually makes use of \texttt{k nearest neighbor} algorithms based on users or items, or latent factor models to create predictions.
+The user-based nearest neighbor approach is focuses on finding users with similar tastes from which to predict a given user's rating, whereas the item-based approach focuses on finding items similar to a given item, and then taking the user's ratings for those similar items to predict a rating for an unrated item.
+The latent factor approach focuses on splitting the rating matrix into separate matrices through matrix factorization to simulate communities, and creating predictions from these.
 
 
 \subsection{Pros and cons}
 Pros and cons of content vs collaborative
+
+\subsection{Description of collaborative filtering through matrix factorization more in depth}
+
+\subsection{Our implementation}
+
+discussion - cold start, taste persisting as an assumption.
