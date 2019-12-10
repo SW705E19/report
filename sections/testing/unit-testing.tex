@@ -7,7 +7,8 @@ For this project, unit tests are utilized for both the React frontend and the AP
 One of the first decisions when creating unit tests, is the choice of test runner.
 Since the React library is shipped with Jest \cite{ReactRunningTests}, and since both parts of the system are JavaScript based, it seemed like the optimal solution to use the same test runner.
 However, after using Jest for testing the API for a while, several issues surfaced when trying to implement mock functions related to our ORM and some TypeScript functionality in general.
-To simplify the creation of unit testing on the API, the test driver for this was changed to Mocha.
+These problems were related to the type security provided by TypeScript that TypeORM utilizies, meaning that TypeORM had a security feature where it would ensure that it was only called with real objects and not stubs created by Jest.
+To simplify the creation of unit testing on the API, the test driver for this was changed to Mocha, since it uses another approach to creating stub objects, which worked out of the box.
 
 One of the main differences between Jest and Mocha is that Jest is a complete suite that supports running the tests, asserting results, stubbing, test coverage and much more.
 Mocha, on the other hand, is just a test runner and requires additional libraries for asserting, stubbing and generating code coverage results \cite{Mocha}.
@@ -27,6 +28,7 @@ This now leads to test cases like is the info rendered if:
 \end{itemize}
 
 In addition to the conditional rendering, any business logic located on the frontend should be tested to ensure both that it works as intended, but also that any future updates to the code will not break it, which is referred to as regression testing.
+This security is done by enforcing that all unit tests must run before the feature can be merged into the development branch of the system.
 
 For the API, some functionality like the ORM is handled by external packages.
 Since this is not code we are writing ourselves, we have chosen to assume that the developers of the packages have tested the software and thus we will not have to.
@@ -95,4 +97,4 @@ This is split into four categories: statement coverage, branch coverage, functio
 We used a configuration to report files with 0-50\% coverage as red, 50-75\% as yellow and 75-100\% as green.
 While this is a good indicator of how much of the code has been tested, it does not ensure that the tests are useful and correct.
 
-To ensure this, we make use of formal reviews of both the code and tests.
+To ensure this, we make use of formal reviews of all changes made to the code and tests.
