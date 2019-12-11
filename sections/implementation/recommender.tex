@@ -119,6 +119,35 @@ As such, the better choice would be collaborative filtering, as the domain lends
 In terms of which approach to collaborative filtering to use, the added scalability of a latent factor model provides it an edge for this system as it focuses on scalability.
 
 \subsection{Collaborative filtering through a latent factor model}
+The latent factor model approach to collaborative filtering is an approach that tries to explain the ratings by characterizing both items and users on a number of factors.
+This number of factors is usually 20-100 \cite{MatrixFactorization}. 
+The factors are thought of as measures that measure dimensions.
+For example, for a movies, the factors could be thought of as measuring obvious dimensions such as amount of action, less well-defined dimensions such as character development or uninterpretable dimensions \cite{MatrixFactorization}.
+\autoref{fig:latent-factor} shows an example of a latent factor approach with two dimensions.
+It shows an example of how users and movies could be characterized based on the dimensions.
+A user's predicted rating for a movie would then be equal to the dot product of the user's and movie's location on the graph, for example, user 5 would be expected to like movie 1, think movie 4 is average and dislike movie 2.
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{/recommender/latentfactor.JPG}
+     \caption{A simplified illustration of a latent factor approach.}
+     \label{fig:latent-factor}
+ \end{figure}
+ \noindent
+A popular method of approaching a latent factor model is through matrix factorization.
+Matrix factorization aims to characterize items and users by vectors of factors, and a recommendation would be found by a similarity between these.
 
-
+\subsubsection{Matrix facorization}
+MAtrix factorization map users and items to a latent factor space of dimensionality \textit{t}. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[]{/recommender/minimizesquarederror.png}
+     \caption{A simplified illustration of a latent factor approach.}
+     \label{fig:minimizesquarederror}
+ \end{figure}
+ \noindent\begin{figure}[H]
+    \centering
+    \includegraphics[]{/recommender/predictrating.png}
+     \caption{A simplified illustration of a latent factor approach.}
+     \label{fig:predictrating}
+ \end{figure}
+ \noindent
 \subsection{Our implementation}
