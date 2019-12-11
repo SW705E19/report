@@ -1,3 +1,100 @@
-\section{Recommender system}
+\section{Recommender system}\label{Recommender-system}
+It would be beneficial to provide a way for users to see relevant, interesting services for their preferences, in order to make the system more usable.
+To accomplish this, a recommender system can be used.
+The following section will detail different ways of implementing such a system, which one we chose and why, and finally our implementation of a recommender system.
 
-Stuff about how we made the recommender system for recommending services.
+\subsection{The purpose of a recommender system}
+When searching for something new, information overload can occur.
+Many different sources can provide information that might not be relevant.
+If a new user interacts with this system, seeking to find a new subject in which to attain knowledge, this user could potentially be presented with an overwhelming amount of services, depending on how many tutors have made these available.
+Another issue that might arise is that not all of the services will be relevant for the new user, serving only to clog the list of services. 
+This leads to information overload, where the retrieved information in the form of services is not what the user needs, and not enough of the correctly relevant information is returned.
+Recommender systems are used to remedy these issues.
+They help match users with relevant items, in this case services, to ease the information overload.
+This generates value for both the user and the tutor, in that users are matched with what they have a predilection for, and tutors can reach more prospective students.
+We discuss two methods of creating a recommender, \textit{content-based filtering} and \textit{collaborative filtering}.
+
+\subsection{Content-based filtering}\label{content-based-filtering}
+Content-based recommender systems recommend an item to a user based upon a description of the item and a profile of the user's interests \cite{ContentBasedFiltering}.
+A common scenario for web applications is that they present a list of items to a user, and the user then selects among these to receive more details. 
+An item in such a scenario would have a representation dependent on the implementation, which could be used to analyze items of particular interest for a user.
+Items are often stored in databases, creating structured data with each entry having the same set of attributes. 
+This lends itself well to learning a user profile through different machine learning algorithms.
+Examples of a basic representation of items and users are shown in Figures \ref{tbl:content-item} and \ref{tbl:content-user}.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Title                                         & Genre    & Author        & Price & Type      \\ \hline
+    Blue Moon                                     & Thriller & Lee Child     & 10    & Hardcover \\ \hline
+    Norse Mythology                               & Fantasy  & Neil Gaiman   & 6     & Paperback \\ \hline
+    Normandy ‘44: D-Day and the Battle for France & History  & James Holland & 14    & Hardcover \\ \hline
+    \end{tabular}
+    \caption{This figure shows a possible representation of a few items for content-based filtering.}
+    \label{tbl:content-item}
+    \end{table}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    Title                                         & Genre    & Author        & Price & Type      \\ \hline
+    ... & Fantasy  & George R. R. Martin, J.K. Rowling & 5    & Paperback \\\hline
+    \end{tabular}
+    \caption{This figure shows a possible representation of a user.}
+    \label{tbl:content-user}
+\end{table}
+\noindent
+The basic idea for content-based filtering is then to compute the similarity of an unseen item with the user profile, and suggest the most similar items.
+Unstructured data, such as text fields with no restriction, create complications when creating a user profile, as relationships between the values on an attribute for different items for a specific user can be found, but an unrestricted text will generally be unique \cite{ContentBasedFiltering}. 
+If a user liked different restaurants based on the same cuisine, it could be indicated that this user would be likely to like other restaurants focused in the same cuisine as well, but a text review would not necessarily give this information.
+Many domains can be represented by semi-structured data where issues such as text fields are converted to a structured representation \cite{ContentBasedFiltering}.
+A user profile shows the preferences of the user, and consists mainly of two types of information:
+\begin{itemize}
+    \item A description of the types of items that interest the user
+    \item A history of the user's interactions with the recommender system, such as storing the items that a user has viewed and information related to the interaction, such as if the user purchased the item.
+\end{itemize}
+Historical data of interactions can be used to filter out already purchased items, display recently visited items or as training data.
+Creating a model of a user's preferences is then done through a form of classification learning, in which training data is divided into categories, an example being the binary categories \textit{Items the user likes} and \textit{items the user dislikes} \cite{ContentBasedFiltering}.
+These algorithms learn a function that model's a users interests, and given a new item and the user model, this function predicts whether or not the user is interested in the item through a probability or a numeric value by analyzing the item representation and user profile.
+Popular learning approaches for content-based filtering are \textit{naïve Bayes}, \textit{nearest neighbor methods} or \textit{linear classifiers}.
+
+\subsection{Collaborative filtering}
+Collaborative filtering differs from content-based filtering in that it focuses on matching users and items through the opinions of other people.
+Collaborative filtering is based on word-of-mouth recommendations.
+A person might have friends that recommend different things, and will eventually learn which of these friends has tastes that most align with their own, and thus which recommendation to value the most.
+Collaborative filtering extends this concept \cite{CollaborativeFiltering}.
+Collaborative filtering makes use of ratings.
+These could be ratings between 1-5 or 1-10, for example, or simply binary ratings.
+A rating is an association of two things, a user and a value.
+A matrix of ratings can then be constructed, as shown in \autoref{tbl:collaborative-example}.
+The empty entries indicate that the user has not rated the item, and are what the system should be able to predict.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+           & Item1 & Item2 & Item3 & Item4 \\ \hline
+    Peter  & 3     &       & 5     &       \\ \hline
+    Amy    & 4     & 2     &       & 3     \\ \hline
+    Lars   &       & 5     & 3     & 2     \\ \hline
+    Martin & 1     &       & 2     & 4     \\ \hline
+    \end{tabular}
+    \caption{This figure shows an example of a ratings matrix, with ratings from 1 to 5. An empty entry indicates that the user has not rated the item.}
+    \label{tbl:collaborative-example}
+\end{table}
+\noindent
+Domains with certain properties lend themselves to collaborative filtering. 
+These are \textit{data distribution}, \textit{underlying meaning} and \textit{data persistence} \cite{CollaborativeFiltering}.
+Data distribution encompasses domains in which there are many items, many ratings per item, more users rating that items to be recommended and users rate multiple items.
+Underlying meaning encompasses domains in which users can have tastes in common, evaluation of an item cannot be done objectively and items are homogenous.
+Data persistence encompasses domains in which items persist and taste persists, meaning the tastes of the users do not change rapidly.
+Collaborative filtering usually makes use of \texttt{k nearest neighbor} algorithms based on users or items, or latent factor models to create predictions.
+The user-based nearest neighbor approach focuses on finding users with similar tastes from which to predict a given user's rating, whereas the item-based approach focuses on finding items similar to a given item, and then taking the user's ratings for those similar items to predict a rating for an unrated item.
+The latent factor approach focuses on splitting the rating matrix into separate matrices through matrix factorization to simulate communities, and creating predictions from these.
+
+
+\subsection{Pros and cons}
+
+
+\subsection{Description of collaborative filtering through matrix factorization more in depth}
+
+\subsection{Our implementation}
