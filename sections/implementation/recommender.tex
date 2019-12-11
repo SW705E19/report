@@ -93,8 +93,32 @@ The latent factor approach focuses on splitting the rating matrix into separate 
 
 
 \subsection{Pros and cons}
+Content-based filtering and collaborative filtering use different underlying assumptions \cite{CollaborativeFiltering}.
+Content-based filtering assumes that items with similar objective features will be rated similarly, whereas collaborative filtering assumes that people with similar tastes rate things similarly, and that customers who had similar tastes in the past will have similar tastes in the future.
+The assumption that collaborative filtering employs, that users will have similar taste in the future, is quite strong and cannot be guaranteed, as tastes are likely to change over time.
+Content-based filtering can predict relevance for items without without ratings by looking at similar items, whereas collaborative filtering requires ratings for an item to create predictions.
+This means content-based filtering is especially useful for items that change a lot, but it needs content to analyze.
+For domains where content is scarce, such as for a system in which users rate movies since a small amount of users will actually leave a rating, collaborative filtering has an edge since it does not require content.
+Content-based techniques can have problems with new users, as there is a ramp-up phase when learning a model of the user's interests.
+To do so, it needs explicit or implicit feedback, and there is no guarantee that the user leaves explicit feedback such as a rating, and implicit feedback from a user's behavior can be imprecise.
+Since collaborative filtering requires ratings for an item to create predictions it has issues with cold starts.
+If a new item is added, it will not have any initial ratings from users, which means creating a prediction becomes different as it has nothing from which to base the prediction.
+Collaborative filtering methods making use of \texttt{k nearest neighbor} methods can have scalability issues, as the rating matrix can grow to be very large as more users join the service or more items are added.
+This is a problem that latent factor models alleviate, as they reduce the size of the rating matrix through splits.
+Content-based and collaborative filtering are not mutually exclusive, and both can be used in a complementary fashion to avoid some of the issues that arise when using just one.
 
+\subsection{Our choice}
+Ideally, a combination of both collaborative and content-based filtering is ideal.
+However, for this project implementing such a combination was not feasible, and we had to focus on one type of recommender system.
+The system has a simple rating system in which users rate a service on a numerical scale of one to five.
+It is assumed that services will be rated by a small subset of users, since not all users will participate in all services, and not all who participate in a given service will leave a rating of it.
+This means the domain will have content that is scarce.
+It is also assumed that services will not change a lot.
+If a service is based around swimming, we do not expect that it will quickly be changed to feature another subject matter, but rather a new service be added by the same tutor with the new subject matter.
+As such, the better choice would be collaborative filtering, as the domain lends itself more to this type of system.
+In terms of which approach to collaborative filtering to use, the added scalability of a latent factor model provides it an edge for this system as it focuses on scalability.
 
-\subsection{Description of collaborative filtering through matrix factorization more in depth}
+\subsection{Collaborative filtering through a latent factor model}
+
 
 \subsection{Our implementation}
