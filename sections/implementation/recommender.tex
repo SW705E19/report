@@ -98,3 +98,93 @@ The latent factor approach focuses on splitting the rating matrix into separate 
 \subsection{Description of collaborative filtering through matrix factorization more in depth}
 
 \subsection{Our implementation}
+In \autoref{lst:recomstart} we initially make use of our other services to get the required data to predict ratings.
+To perform the calculations we need all users, all services and all ratings currently in the database.
+We then initialize the necessary matrices by making all their entries 0, and for the ratings matrix we call a function to populate it.
+This is done by traversing the matrix, and for each rating in the \texttt{allRatings} variable, we search the ratings matrix for ids corresponding to the service and user ids of that rating.
+If found, we insert the rating value into that entry.
+\begin{lstlisting}[caption={The start of the recommender}, captionpos=b, label={lst:recomstart}]
+    export default class Recommender {
+        static async calculateRecommendations(): Promise<number[][]> {
+            const allUsers = await UserService.getAll();
+            const allServices = await ServiceService.getAll();
+            const allRatings = await RatingService.getAll();
+    
+            let userServiceMatrix: number[][] = [];
+            let predictedRatings: number[][] = [];
+            let userFactorMatrix: number[][] = [];
+            let serviceFactorMatrix: number[][] = [];
+    
+            //Makes users x service matrix. Initializes all entries to 0.
+            userServiceMatrix = initUserServiceMatrix(numberOfRows, numberOfCols, allUsers, allServices, userServiceMatrix);
+
+            //Finds the ratings in the database and inserts into the matrix.
+		    userServiceMatrix = populateUserServiceMatrix(allRatings, numberOfRows, numberOfCols, userServiceMatrix);
+            \dots
+\end{lstlisting}
+When we initialize both the matrix for users and factors as well as the matrix for services and factors we initialize all entries with random values between 0 and 1.
+This is done to ensure we can calculate a predicted rating.
+The actual value is arbitrary, but a small value is chosen, as this should make the algorithm arrive at a model faster, compared to initializing with a greater value.
+\begin{lstlisting}[caption={Initializing the user and factor matrix}, captionpos=b, label={lst:initUserFactor}]
+    function initUserFactorMatrix(numberOfRows: number, numberOfFactors: number, userFactorMatrix: number[][]): number[][] {
+        for (let i = 0; i < numberOfRows; i++) {
+            userFactorMatrix[i] = []; // Initialize inner array
+            for (let j = 0; j < numberOfFactors; j++) {
+                userFactorMatrix[i][j] = Math.random() * 1;
+            }
+        }
+    
+        return userFactorMatrix;
+    }
+\end{lstlisting}
+
+\begin{lstlisting}[caption={}, captionpos=b, label={}]
+    for (let i = 0; i < maxIterations; i++) {
+        predictedRatings = dotMatrices(
+            numberOfRows,
+            numberOfCols,
+            numberOfFactors,
+            userFactorMatrix,
+            serviceFactorMatrix,
+        );
+
+        const alphaValue = 0.001;
+        const betaValue = 0.001;
+        for (let i = 0; i < numberOfRows; i++) {
+            for (let j = 0; j < numberOfCols; j++) {
+                if (userServiceMatrix[i + 1][j + 1] > 0) {
+                    const error = userServiceMatrix[i + 1][j + 1] - predictedRatings[i][j];
+                    for (let k = 0; k < numberOfFactors; k++) {
+                        userFactorMatrix[i][k] =
+                            userFactorMatrix[i][k] +
+                            alphaValue * (error * serviceFactorMatrix[k][j] - betaValue * userFactorMatrix[i][k]);
+                        serviceFactorMatrix[k][j] =
+                            serviceFactorMatrix[k][j] +
+                            alphaValue * (error * userFactorMatrix[i][k] - betaValue * serviceFactorMatrix[k][j]);
+                    }
+                }
+            }
+        }
+        \dots
+\end{lstlisting}
+\begin{lstlisting}[caption={}, captionpos=b, label={}]
+
+\end{lstlisting}
+\begin{lstlisting}[caption={}, captionpos=b, label={}]
+
+\end{lstlisting}
+\begin{lstlisting}[caption={}, captionpos=b, label={}]
+
+\end{lstlisting}
+\begin{lstlisting}[caption={}, captionpos=b, label={}]
+
+\end{lstlisting}
+\begin{lstlisting}[caption={}, captionpos=b, label={}]
+
+\end{lstlisting}
+\begin{lstlisting}[caption={}, captionpos=b, label={}]
+
+\end{lstlisting}
+\begin{lstlisting}[caption={}, captionpos=b, label={}]
+
+\end{lstlisting}
