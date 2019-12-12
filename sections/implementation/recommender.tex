@@ -147,44 +147,60 @@ The actual value is arbitrary, but a small value is chosen, as this should make 
             userFactorMatrix,
             serviceFactorMatrix,
         );
+        \dots
+\end{lstlisting}
 
-        const alphaValue = 0.001;
-        const betaValue = 0.001;
-        for (let i = 0; i < numberOfRows; i++) {
-            for (let j = 0; j < numberOfCols; j++) {
-                if (userServiceMatrix[i + 1][j + 1] > 0) {
-                    const error = userServiceMatrix[i + 1][j + 1] - predictedRatings[i][j];
-                    for (let k = 0; k < numberOfFactors; k++) {
-                        userFactorMatrix[i][k] =
-                            userFactorMatrix[i][k] +
-                            alphaValue * (error * serviceFactorMatrix[k][j] - betaValue * userFactorMatrix[i][k]);
-                        serviceFactorMatrix[k][j] =
-                            serviceFactorMatrix[k][j] +
-                            alphaValue * (error * userFactorMatrix[i][k] - betaValue * serviceFactorMatrix[k][j]);
-                    }
+\begin{lstlisting}[caption={}, captionpos=b, label={}]
+    const alphaValue = 0.001;
+    const betaValue = 0.001;
+    for (let i = 0; i < numberOfRows; i++) {
+        for (let j = 0; j < numberOfCols; j++) {
+            if (userServiceMatrix[i + 1][j + 1] > 0) {
+                const error = userServiceMatrix[i + 1][j + 1] - predictedRatings[i][j];
+                for (let k = 0; k < numberOfFactors; k++) {
+                    userFactorMatrix[i][k] =
+                        userFactorMatrix[i][k] +
+                        alphaValue * (error * serviceFactorMatrix[k][j] - betaValue * userFactorMatrix[i][k]);
+                    serviceFactorMatrix[k][j] =
+                        serviceFactorMatrix[k][j] +
+                        alphaValue * (error * userFactorMatrix[i][k] - betaValue * serviceFactorMatrix[k][j]);
                 }
             }
         }
-        \dots
+    }
+    \dots
 \end{lstlisting}
-\begin{lstlisting}[caption={}, captionpos=b, label={}]
 
+\begin{lstlisting}[caption={}, captionpos=b, label={}]
+    let squareError = 0;
+    for (let i = 0; i < numberOfRows; i++) {
+        for (let j = 0; j < numberOfCols; j++) {
+            if (userServiceMatrix[i + 1][j + 1] > 0) {
+                squareError =
+                    squareError + Math.pow(userServiceMatrix[i + 1][j + 1] - predictedRatings[i][j], 2);
+                for (let k = 0; k < numberOfFactors; k++) {
+                    squareError =
+                        squareError +
+                        betaValue *
+                            (Math.pow(userFactorMatrix[i][k], 2) + Math.pow(serviceFactorMatrix[k][j], 2));
+                }
+            }
+        }
+    }
+    \dots
 \end{lstlisting}
-\begin{lstlisting}[caption={}, captionpos=b, label={}]
 
-\end{lstlisting}
 \begin{lstlisting}[caption={}, captionpos=b, label={}]
-
-\end{lstlisting}
-\begin{lstlisting}[caption={}, captionpos=b, label={}]
-
-\end{lstlisting}
-\begin{lstlisting}[caption={}, captionpos=b, label={}]
-
-\end{lstlisting}
-\begin{lstlisting}[caption={}, captionpos=b, label={}]
-
-\end{lstlisting}
-\begin{lstlisting}[caption={}, captionpos=b, label={}]
-
+    // Now we put the predicted ratings into the user service matrix.
+    for (let i = 0; i < numberOfRows; i++) {
+        for (let j = 0; j < numberOfCols; j++) {
+            if (userServiceMatrix[i + 1][j + 1] == 0) {
+                userServiceMatrix[i + 1][j + 1] = predictedRatings[i][j];
+            } else {
+                // Set to 0 since the user has already rated the service and the recommendation is not interesting
+                userServiceMatrix[i + 1][j + 1] = 0;
+            }
+        }
+    }
+    \dots
 \end{lstlisting}
