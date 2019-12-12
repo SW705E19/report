@@ -170,7 +170,7 @@ To learn the factor vectors $p_{u}$ and $q_{i}$, the recommender system minimize
  \noindent
  $K$ is the set of $(u, i)$ pairs for which the rating $r_{ui}$ is known.
  The system learns by fitting previously observed data, but to avoid overfitting when predicting future ratings, it regularizes the learned parameters.
- This regularization is the second term of the equation, where \lambda is an arbitrary constant that controls the extent of the regularization.
+ This regularization is the second term of the equation, where $\lambda$ is an arbitrary constant that controls the extent of the regularization.
  Stochastic gradient descent is one approach of minimizing the above equation.
  The algorithm will, in this approach, loop through all data in the training set, which is the known ratings.
  For each case, the system predicts a rating, and then computes the prediction error with the following equation:
@@ -197,6 +197,6 @@ To learn the factor vectors $p_{u}$ and $q_{i}$, the recommender system minimize
      \label{fig:updatingp}
  \end{figure}
  \noindent
- For the update rules, \gamma is the magnitude to which the parameters are modified, and is arbitrary.
+ For the update rules, $\gamma$ is the magnitude to which the parameters are modified, and is arbitrary.
  
 \subsection{Our implementation}
