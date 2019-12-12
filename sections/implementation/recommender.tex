@@ -139,10 +139,10 @@ Matrix factorization aims to characterize items and users by vectors of factors,
 Matrix factorization map users and items to a latent factor space of dimensionality \textit{f}. 
 This is achieved by taking the ratings matrix and splitting it into two matrices of the following dimensions, where $N_{i}$ is the number of items, $N_{u}$ is the number of users and $f$ is the number of factors:
 \begin{equation}
-    N_{i} x f
+    N_{i} \times f
 \end{equation} 
 \begin{equation}
-    f x N_{u}
+    f \times N_{u}
 \end{equation}
 This results in each item \textit{i} and each user \textit{u} being associated with vectors: 
 \begin{equation}
@@ -160,7 +160,7 @@ The dot product of these two vectors then describes the user's overall interest 
      \label{fig:predictrating}
  \end{figure}
  \noindent
-To learn the factor vectors $p_{u}$ and $q_{i}$, the recommender system minimizes the squared error of the set of known ratings, that is, the entries in the ratings matrix that have a value:
+To learn the factor vectors $p_{u}$ and $q_{i}$ used for the equation in \autoref{fig:predictrating}, the recommender system minimizes the squared error of the set of known ratings, that is, the entries in the ratings matrix that have a value:
  \begin{figure}[H]
     \centering
     \includegraphics{/recommender/minimizesquarederror.png}
@@ -168,12 +168,12 @@ To learn the factor vectors $p_{u}$ and $q_{i}$, the recommender system minimize
      \label{fig:minimizesquarederror}
  \end{figure}
  \noindent
- $K$ is the set of $(u, i)$ pairs for which the rating $r_{ui}$ is known.
+ In \autoref{fig:minimizesquatederror}, $K$ is the set of $(u, i)$ pairs for which the rating $r_{ui}$ is known.
  The system learns by fitting previously observed data, but to avoid overfitting when predicting future ratings, it regularizes the learned parameters.
  This regularization is the second term of the equation, where $\lambda$ is an arbitrary constant that controls the extent of the regularization.
  Stochastic gradient descent is one approach of minimizing the above equation.
  The algorithm will, in this approach, loop through all data in the training set, which is the known ratings.
- For each case, the system predicts a rating, and then computes the prediction error with the following equation:
+ For each case, the system predicts a rating, and then computes the prediction error with the equation defined in \autoref{fig:calculatingerror}:
  \begin{figure}[H]
     \centering
     \includegraphics[]{/recommender/calculatingerror.png}
@@ -181,7 +181,7 @@ To learn the factor vectors $p_{u}$ and $q_{i}$, the recommender system minimize
      \label{fig:calculatingerror}
  \end{figure}
  \noindent
- After the error has been calculated, the algorithm modifies the parameters through the following update rules:
+ After the error has been calculated, the algorithm modifies the parameters through the updates rules shown in Figures \ref{fig:updatingq} and \ref{fig:updatingp}:
  \begin{figure}[H]
     \centering
     \includegraphics[]{/recommender/updatingq.png}
@@ -198,5 +198,6 @@ To learn the factor vectors $p_{u}$ and $q_{i}$, the recommender system minimize
  \end{figure}
  \noindent
  For the update rules, $\gamma$ is the magnitude to which the parameters are modified, and is arbitrary.
+ The calculations are performed until the squared error reaches a sufficiently small value, or a max number of iterations has been performed by the algorithm.
  
 \subsection{Our implementation}
