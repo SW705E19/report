@@ -32,7 +32,7 @@ Examples of a basic representation of items and users are shown in Figures \ref{
     \end{tabular}
     \caption{This figure shows a possible representation of a few items for content-based filtering.}
     \label{tbl:content-item}
-    \end{table}
+\end{table}
 \begin{table}[H]
     \centering
     \begin{tabular}{|l|l|l|l|l|}
@@ -135,19 +135,45 @@ A user's predicted rating for a movie would then be equal to the dot product of 
 A popular method of approaching a latent factor model is through matrix factorization.
 Matrix factorization aims to characterize items and users by vectors of factors, and a recommendation would be found by a similarity between these.
 
-\subsubsection{Matrix facorization}
-MAtrix factorization map users and items to a latent factor space of dimensionality \textit{t}. 
+\subsubsection{Matrix factorization}
+Matrix factorization map users and items to a latent factor space of dimensionality \textit{t}. 
 \begin{figure}[H]
     \centering
-    \includegraphics[]{/recommender/minimizesquarederror.png}
+    \includegraphics{/recommender/minimizesquarederror.png}
      \caption{A simplified illustration of a latent factor approach.}
      \label{fig:minimizesquarederror}
  \end{figure}
- \noindent\begin{figure}[H]
+ \noindent
+
+ \begin{figure}[H]
     \centering
     \includegraphics[]{/recommender/predictrating.png}
      \caption{A simplified illustration of a latent factor approach.}
      \label{fig:predictrating}
+ \end{figure}
+ \noindent
+ 
+ \begin{figure}[H]
+    \centering
+    \includegraphics[]{/recommender/calculatingerror.png}
+     \caption{A simplified illustration of a latent factor approach.}
+     \label{fig:calculatingerror}
+ \end{figure}
+ \noindent
+ 
+ \begin{figure}[H]
+    \centering
+    \includegraphics[]{/recommender/updatingq.png}
+     \caption{A simplified illustration of a latent factor approach.}
+     \label{fig:updatingq}
+ \end{figure}
+ \noindent
+ 
+ \begin{figure}[H]
+    \centering
+    \includegraphics[]{/recommender/updatingp.png}
+     \caption{A simplified illustration of a latent factor approach.}
+     \label{fig:updatingp}
  \end{figure}
  \noindent
 \subsection{Our implementation}
