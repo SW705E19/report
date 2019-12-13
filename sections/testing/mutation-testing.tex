@@ -2,7 +2,7 @@
 Even with a code coverage of 100\%, the traditional test coverage measures only how much of the code is executed by the tests, and not whether the tests are able to detect faults in the code \cite{pitest}.
 This means that it is possible to get a full line, statement, and branch coverage by simply executing the code without any useful assertions in the test suite.
 One way to combat this problem is with the use of mutation testing.
-The idea behind mutation testing is run some automated software (the mutation testing system), which will generate mutants by modifying minor parts of the system such as replacing a less than check with a greater than check.
+The idea behind mutation testing is to run some automated software (the mutation testing system), which will generate mutants by modifying minor parts of the system such as replacing a less than check with a greater than check.
 The objective is to have a test suite that \textit{kills} the mutants by revealing that the mutant behavior differs from the original program \cite{mutationtesting}.
 
 Mutation testing can be split into two categories: strong and weak mutations.
