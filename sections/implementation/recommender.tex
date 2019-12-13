@@ -135,7 +135,7 @@ The actual value is arbitrary, but a small value is chosen, as this should make 
         return userFactorMatrix;
     }
 \end{lstlisting}
-After initializing the different matrices, we start out first calculation of predictions.
+After initializing the matrices, we start out first calculation of predictions.
 To do so, we call a function to calculate the dot products of the user by factor and factor by service matrices.
 It simply iterates over a row from one matrix and a column for the other, multiplying the corresponding entries of each matrix, and adding them together.
 The sum is then inserted into the predictedRatings matrix.
