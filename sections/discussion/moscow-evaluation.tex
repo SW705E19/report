@@ -1,0 +1,72 @@
+\section{MoSCoW evaluation}
+Our MoSCoW analysis was previously described in \autoref{sec:moscow}.
+This section is an evaluation of the requirements we have in our MoSCoW analysis.
+
+\subsection{Must have:}
+Almost all \textit{must have} features have been completed.
+These were considered absolutely essential to have a minimum viable product. 
+The only \textit{must have} feature that we did not fully complete was testing for each component of the system to ensure quality.
+We choose to focus tests on the critical parts the API with most of the business logic. 
+Some parts of the front end have been tested, but the front end had lower priority than the API, and therefore some parts of the front end were not tested. 
+The different tests and test methods have previously been described in \autoref{chap:testing-the-system}.
+\begin{table}[h]
+    \begin{tabularx}{\textwidth}{|X|l|}
+    \underline{Must have features:}                                                                   & \underline{Status} \\
+    It must be possible to create, read, update, and delete profiles as a tutor and user              & Completed \\
+    See information about tutors                                                                      & Completed \\
+    Change a user to a tutor                                                                          & Completed \\
+    See all services                                                                                  & Completed \\
+    See information about services                                                                    & Completed \\
+    Support of multiple languages                                                                     & Completed \\
+    A tutor must have information so a user can contact him                                           & Completed \\
+    There must be ratings for a service                                                                 & Completed \\
+    A user must able to search for courses or tutors                                                  & Completed \\
+    Testing for each component of the system to ensure quality                                        & Partly completed \\
+    An intuitive user experience that has been systematically evaluated                               & Completed \\
+    \end{tabularx}
+\end{table}
+
+\subsection{Should have:}
+The \textit{should have} features improve the user experience a lot, but are not considered essential for the program.
+All the \textit{should have} features have been completed.
+
+\todo{Check efter om A user should only be able to rate a service once. Er det fixet eller ej?}
+\begin{table}[h]
+    \begin{tabularx}{\textwidth}{|X|l|}
+    \underline{Should have features:}                                                                 & \underline{Status} \\
+    A landing page that gives the user clear information about the purpose of the site                & Completed \\
+    The site should work on both mobile and web                                                       & Completed \\
+    Generate recommendations for users                                                                & Completed \\
+    A user should only be able to rate a service once                                                 & Completed \\
+    Each service should belong to one or more categories                                              & Completed \\
+   \end{tabularx}
+\end{table}
+
+\subsubsection{Could have:}
+None of the requirements in \textit{could have} have been fully completed.
+We have made an administration dashboard to create new categories, but administrators are still unable to ban users ban tutors.
+
+\begin{table}[h]
+    \begin{tabularx}{\textwidth}{|X|l|}
+    \underline{Could have features:}                                                                                  & \underline{Status} \\
+    There could be an administration dashboard for administrators to create new categories and ban users and tutors   & Partly completed \\
+    The possibility for a user to write a review of a tutor                                                           & Incomplete \\
+    A calendar page for a tutor to show available timeslots and booked times                                          & Incomplete \\
+    A user can book a tutor                                                                                           & Incomplete \\
+    On-site payment service                                                                                           & Incomplete \\
+    Tutors and users can communicate through a messaging system                                                       & Incomplete \\
+    A tutor could be able to upload material and grant access to materials to certain users                           & Incomplete \\
+    It should be possible to view materials                                                                           & Incomplete \\
+    A user could be able to see courses that he has participated in before                                            & Incomplete \\
+\end{tabularx}
+\end{table}
+
+\subsubsection{Won't have:}
+We only had one feature in our \textit{won't have}. 
+We did not consider GDPR compliance due to this being a semester project, and we do not plan on releasing the application.
+\begin{table}[h]
+    \begin{tabularx}{\textwidth}{|X|l|}
+    \underline{Won't have features:}                    & \underline{Status} \\
+    GDPR compliance                                     & Incomplete \\
+   \end{tabularx}
+\end{table}
