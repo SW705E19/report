@@ -190,7 +190,7 @@ We define the $\gamma$ value from the equation as the \texttt{alphaValue}, the $
 After updating the values, we calculate the dot product of the two factor matrices again, and use the new predictions to calculate the squared error.
 The squared error is calculated with the equation defined in \autoref{fig:minimizesquarederror}.
 We initially look at the matrix containing our actual ratings.
-We traverse it, and when the value of an entry is greater than 0, we know there is a rating.
+We traverse it, and when the value of an entry is greater than 0 it means that there is a rating.
 We subtract the prediction from the actual rating and square it, and then for the number of factors we add the regularization by squaring the values from both factor matrices, and multiplying it with the $\lambda$ value.
 \begin{lstlisting}[caption={}, captionpos=b, label={}]
     let squareError = 0;
