@@ -210,7 +210,7 @@ We subtract the prediction from the actual rating and square it, and then for th
     }
     \dots
 \end{lstlisting}
-Once the maximum number of iterations has been performed, we need to make our data persist.
+Once the algorithm completes, we need to make our data persist.
 To do this, we keep a separate ratings table in the database consisting of predicted ratings.
 To send the calculated ratings, we add them to the user by service matrix.
 Since we want to avoid possibly recommending a service the user has already rated, whenever we encounter an entry that is not 0, we remove that rating and assign it to be 0 instead.
