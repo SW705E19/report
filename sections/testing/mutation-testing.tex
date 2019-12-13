@@ -1,2 +1,15 @@
-Testing the test set
 \section{Mutation testing}
+Even with a code coverage of 100\%, the traditional test coverage measures only how much of the code is executed by the tests, and not whether the tests are able to detect faults in the code \cite{pitest}.
+This means that it is possible to get a full line, statement and branch coverage by simply executing the code without any useful assertions in the test suite.
+One way to combat this problem is with the use of mutation testing.
+The idea behind mutation testing is run some automated software (the mutation testing system), which will generate mutants by modifying minor parts of the system such as replacing a less than check with a greater than check.
+The objective is to have a test suite that \textit{kills} the mutants by revealing that the mutant behavior differs from the original program \cite{mutationtesting}.
+
+Mutation testing can be split into two categories: strong and weak mutations.
+In strong mutation, we are only interested in the external observation of the code, meaning that the produced output of a given function is different when the mutation is introduced \cite{mutationtesting}.
+These mutants can be hard to kill, since the effect of the mutant can be lost before the program terminates.
+To be able to do a deeper check, we introduce weak mutation, where we define a mutant as killed if it leads to different results after \textit{some} execution, rather than after all code has finished executing.
+Weak mutation testing is usually preferable to strong mutation testing in safety-critical systems, since it will be able to find more potential bugs, but with the tradeoff that execution of the mutation analysis will increase.
+
+After running the mutation test, the framework will generate a mutation score based on the percentage of mutants killed.
+This can now be used to improve the test suite, by creating new test cases until all mutants can be killed.
