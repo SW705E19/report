@@ -100,131 +100,133 @@ The latent factor approach focuses on splitting the rating matrix into separate 
 \subsection{Our implementation}
 In \autoref{lst:recomstart} we initially make use of our other services to get the required data to predict ratings.
 To perform the calculations we need all users, all services and all ratings currently in the database.
-We then initialize the necessary matrices by making all their entries 0, and for the ratings matrix we call a function to populate it.
+We then initialize the necessary matrices.
+These are matrices with dimensions of respectively $users \times servcices$, $users \times factors$, $factors \times services$. 
+For the ratings matrix which is $users \times services$ we call a function to populate it.
 This is done by traversing the matrix, and for each rating in the \texttt{allRatings} variable, we search the ratings matrix for ids corresponding to the service and user ids of that rating.
 If found, we insert the rating value into that entry.
 \begin{lstlisting}[caption={The start of the recommender}, captionpos=b, label={lst:recomstart}]
-    export default class Recommender {
-        static async calculateRecommendations(): Promise<number[][]> {
-            const allUsers = await UserService.getAll();
-            const allServices = await ServiceService.getAll();
-            const allRatings = await RatingService.getAll();
+export default class Recommender {
+    static async calculateRecommendations(): Promise<number[][]> {
+        const allUsers = await UserService.getAll();
+        const allServices = await ServiceService.getAll();
+        const allRatings = await RatingService.getAll();
     
-            let userServiceMatrix: number[][] = [];
-            let predictedRatings: number[][] = [];
-            let userFactorMatrix: number[][] = [];
-            let serviceFactorMatrix: number[][] = [];
+        let userServiceMatrix: number[][] = [];
+        let predictedRatings: number[][] = [];
+        let userFactorMatrix: number[][] = [];
+        let serviceFactorMatrix: number[][] = [];
 
-            userServiceMatrix = initUserServiceMatrix(numberOfRows, numberOfCols, allUsers, allServices, userServiceMatrix);
+        userServiceMatrix = initUserServiceMatrix(numberOfRows, numberOfCols, allUsers, allServices, userServiceMatrix);
 
-		    userServiceMatrix = populateUserServiceMatrix(allRatings, numberOfRows, numberOfCols, userServiceMatrix);
-            \dots
+		userServiceMatrix = populateUserServiceMatrix(allRatings, numberOfRows, numberOfCols, userServiceMatrix);
+    \dots
 \end{lstlisting}
 When we initialize both the matrix for users and factors as well as the matrix for services and factors we initialize all entries with random values between 0 and 1.
 This is done to ensure we can calculate a predicted rating.
-The actual value is arbitrary, but a small value is chosen, as this should make the algorithm arrive at a model faster, compared to initializing with a greater value.
+The actual value is arbitrary, but a small value is chosen, as this should make the algorithm arrive at a model faster, compared to initializing with a greater value \cite{FunkMatrixFactorization}.
 \begin{lstlisting}[caption={Initializing the user and factor matrix}, captionpos=b, label={lst:initUserFactor}]
-    function initUserFactorMatrix(numberOfRows: number, numberOfFactors: number, userFactorMatrix: number[][]): number[][] {
-        for (let i = 0; i < numberOfRows; i++) {
-            userFactorMatrix[i] = []; // Initialize inner array
-            for (let j = 0; j < numberOfFactors; j++) {
-                userFactorMatrix[i][j] = Math.random() * 1;
-            }
+function initUserFactorMatrix(numberOfRows: number, numberOfFactors: number, userFactorMatrix: number[][]): number[][] {
+    for (let i = 0; i < numberOfRows; i++) {
+        userFactorMatrix[i] = []; // Initialize inner array
+        for (let j = 0; j < numberOfFactors; j++) {
+            userFactorMatrix[i][j] = Math.random() * 1;
         }
-    
-        return userFactorMatrix;
-    }
+    }   
+    return userFactorMatrix;
+}
 \end{lstlisting}
 After initializing the matrices, we start out first calculation of predictions.
-To do so, we call a function to calculate the dot products of the user by factor and factor by service matrices.
+To do so, we call the function in \autoref{lst:dotmatrices} to calculate the dot products of the user by factor and factor by service matrices.
 It simply iterates over a row from one matrix and a column for the other, multiplying the corresponding entries of each matrix, and adding them together.
 The sum is then inserted into the predictedRatings matrix.
-\begin{lstlisting}[caption={}, captionpos=b, label={}]
-    function dotMatrices(
-        numberOfRows: number,
-        numberOfCols: number,
-        numberOfFactors: number,
-        userFactorMatrix: number[][],
-        serviceFactorMatrix: number[][],
-    ): number[][] {
-        const predictedRatings: number[][] = [];
-        let sum = 0;
-        for (let i = 0; i < numberOfRows; i++) {
-            predictedRatings[i] = [];
-            for (let j = 0; j < numberOfCols; j++) {
-                for (let k = 0; k < numberOfFactors; k++) {
-                    sum = sum + userFactorMatrix[i][k] * serviceFactorMatrix[k][j];
-                }
-                predictedRatings[i][j] = sum;
-                sum = 0;
+\begin{lstlisting}[caption={Calculating the dot predict of a matrix}, captionpos=b, label={lst:dotmatrices}]
+function dotMatrices(
+    numberOfRows: number,
+    numberOfCols: number,
+    numberOfFactors: number,
+    userFactorMatrix: number[][],
+    serviceFactorMatrix: number[][],
+): number[][] {
+    const predictedRatings: number[][] = [];
+    let sum = 0;
+    for (let i = 0; i < numberOfRows; i++) {
+        predictedRatings[i] = [];
+        for (let j = 0; j < numberOfCols; j++) {
+            for (let k = 0; k < numberOfFactors; k++) {
+                sum = sum + userFactorMatrix[i][k] * serviceFactorMatrix[k][j];
             }
-        } 
-        return predictedRatings;
-    }
+            predictedRatings[i][j] = sum;
+            sum = 0;
+        }
+    } 
+    return predictedRatings;
+}
 \end{lstlisting}
 After calculating the predicted ratings, we need to determine the error and update the values of the factor matrices.
+We do this with the code snippet in listing \autoref{lst:errorandupdates}.
 To calculate the error, we use the equation defined in \autoref{fig:calculatingerror}, which simply subtracts the predicted value from the actual value.
 We then use the updating rules defined in the equations in Figures \ref{fig:updatingq} and \ref{fig:updatingp} to update the values of the matrices.
 We define the $\gamma$ value from the equation as the \texttt{alphaValue}, the $\lambda$ value as \texttt{0.001} and assign them to be 0.001, based on testing and recommended values.
 
-\begin{lstlisting}[caption={}, captionpos=b, label={}]
-    const alphaValue = 0.001;
-    const betaValue = 0.001;
-    for (let i = 0; i < numberOfRows; i++) {
-        for (let j = 0; j < numberOfCols; j++) {
-            if (userServiceMatrix[i + 1][j + 1] > 0) {
-                const error = userServiceMatrix[i + 1][j + 1] - predictedRatings[i][j];
-                for (let k = 0; k < numberOfFactors; k++) {
-                    userFactorMatrix[i][k] =
-                        userFactorMatrix[i][k] +
-                        alphaValue * (error * serviceFactorMatrix[k][j] - betaValue * userFactorMatrix[i][k]);
-                    serviceFactorMatrix[k][j] =
-                        serviceFactorMatrix[k][j] +
-                        alphaValue * (error * userFactorMatrix[i][k] - betaValue * serviceFactorMatrix[k][j]);
-                }
+\begin{lstlisting}[caption={Calculating error and updating values}, captionpos=b, label={lst:errorandupdates}]
+const alphaValue = 0.001;
+const betaValue = 0.001;
+for (let i = 0; i < numberOfRows; i++) {
+    for (let j = 0; j < numberOfCols; j++) {
+        if (userServiceMatrix[i + 1][j + 1] > 0) {
+            const error = userServiceMatrix[i + 1][j + 1] - predictedRatings[i][j];
+            for (let k = 0; k < numberOfFactors; k++) {
+                userFactorMatrix[i][k] =
+                    userFactorMatrix[i][k] +
+                    alphaValue * (error * serviceFactorMatrix[k][j] - betaValue * userFactorMatrix[i][k]);
+                serviceFactorMatrix[k][j] =
+                    serviceFactorMatrix[k][j] +
+                    alphaValue * (error * userFactorMatrix[i][k] - betaValue * serviceFactorMatrix[k][j]);
             }
         }
     }
-    \dots
+}
+\dots
 \end{lstlisting}
-After updating the values, we calculate the dot product of the two factor matrices again, and use the new predictions to calculate the squared error.
+After updating the values, we calculate the dot product of the two factor matrices again, and use the new predictions to calculate the squared error through the code in \autoref{lst:squarederror}.
 The squared error is calculated with the equation defined in \autoref{fig:minimizesquarederror}.
 We initially look at the matrix containing our actual ratings.
 We traverse it, and when the value of an entry is greater than 0 it means that there is a rating.
 We subtract the prediction from the actual rating and square it, and then for the number of factors we add the regularization by squaring the values from both factor matrices, and multiplying it with the $\lambda$ value.
-\begin{lstlisting}[caption={}, captionpos=b, label={}]
-    let squareError = 0;
-    for (let i = 0; i < numberOfRows; i++) {
-        for (let j = 0; j < numberOfCols; j++) {
-            if (userServiceMatrix[i + 1][j + 1] > 0) {
+\begin{lstlisting}[caption={Calculating the overall squared error}, captionpos=b, label={lst:squarederror}]
+let squareError = 0;
+for (let i = 0; i < numberOfRows; i++) {
+    for (let j = 0; j < numberOfCols; j++) {
+        if (userServiceMatrix[i + 1][j + 1] > 0) {
+            squareError =
+                squareError + Math.pow(userServiceMatrix[i + 1][j + 1] - predictedRatings[i][j], 2);
+            for (let k = 0; k < numberOfFactors; k++) {
                 squareError =
-                    squareError + Math.pow(userServiceMatrix[i + 1][j + 1] - predictedRatings[i][j], 2);
-                for (let k = 0; k < numberOfFactors; k++) {
-                    squareError =
-                        squareError +
-                        betaValue *
-                            (Math.pow(userFactorMatrix[i][k], 2) + Math.pow(serviceFactorMatrix[k][j], 2));
-                }
+                    squareError +
+                    betaValue *
+                    (Math.pow(userFactorMatrix[i][k], 2) + Math.pow(serviceFactorMatrix[k][j], 2));
             }
         }
     }
-    \dots
+}
+\dots
 \end{lstlisting}
 Once the algorithm completes, we need to make our data persist.
 To do this, we keep a separate ratings table in the database consisting of predicted ratings.
-To send the calculated ratings, we add them to the user by service matrix.
+To send the calculated ratings, we add them to the user by service matrix with the code in \autoref{lst:predictratingsmatrix}.
 Since we want to avoid possibly recommending a service the user has already rated, whenever we encounter an entry that is not 0, we remove that rating and assign it to be 0 instead.
 This means that, even if a user rated a service with the maximum value, they will not get it as a recommendation since it will now rank in the bottom with a rating of 0.
 The user by service matrix is then ready to be inserted into the database.
-\begin{lstlisting}[caption={}, captionpos=b, label={}]
-    for (let i = 0; i < numberOfRows; i++) {
-        for (let j = 0; j < numberOfCols; j++) {
-            if (userServiceMatrix[i + 1][j + 1] == 0) {
-                userServiceMatrix[i + 1][j + 1] = predictedRatings[i][j];
-            } else {
-                userServiceMatrix[i + 1][j + 1] = 0;
-            }
+\begin{lstlisting}[caption={Adding the predictions to the ratings matrix}, captionpos=b, label={lst:predictratingsmatrix}]
+for (let i = 0; i < numberOfRows; i++) {
+    for (let j = 0; j < numberOfCols; j++) {
+        if (userServiceMatrix[i + 1][j + 1] == 0) {
+            userServiceMatrix[i + 1][j + 1] = predictedRatings[i][j];
+        } else {
+            userServiceMatrix[i + 1][j + 1] = 0;
         }
     }
-    \dots
+}
+\dots
 \end{lstlisting}
