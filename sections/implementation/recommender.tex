@@ -106,6 +106,18 @@ If a new item is added, it will not have any initial ratings from users, which m
 Collaborative filtering methods making use of \texttt{k nearest neighbor} methods can have scalability issues, as the rating matrix can grow to be very large as more users join the service or more items are added.
 This is a problem that latent factor models alleviate, as they reduce the size of the rating matrix through splits.
 Content-based and collaborative filtering are not mutually exclusive, and both can be used in a complementary fashion to avoid some of the issues that arise when using just one.
+\begin{table}[]
+    \begin{tabular}{|p{.2\textwidth}|p{.4\textwidth}|p{.4\textwidth}|}
+    \hline
+                    & Content-based                                              & Collaborative                                                             \\ \hline
+    Assumptions     & Items with similar features are rated similarly            & People with similar taste rate items similarly, taste will not change     \\ \hline
+    Requirements    & Does not need ratings, but content to analyze              & Needs ratings but not content                                             \\ \hline
+    Item changes    & Deals well with changing items by looking at similar items & Does not deal well with new items, as it needs initial ratings on an item \\ \hline
+    Start-up issues & New users can have large ramp-up                           & Cold starts with new items                                                \\ \hline
+    \end{tabular}
+    \caption{A comparison of the pros and cons}
+    \label{tab:recprosandcons}
+    \end{table}
 
 \subsection{Our choice}
 Ideally, a combination of both collaborative and content-based filtering is ideal.
@@ -156,7 +168,7 @@ The dot product of these two vectors then describes the user's overall interest 
 \begin{figure}[H]
     \centering
     \includegraphics[]{/recommender/predictrating.png}
-     \caption{A simplified illustration of a latent factor approach.}
+     \caption{How a prediction for a rating is calculated}
      \label{fig:predictrating}
  \end{figure}
  \noindent
@@ -164,20 +176,20 @@ To learn the factor vectors $p_{u}$ and $q_{i}$ used for the equation in \autore
  \begin{figure}[H]
     \centering
     \includegraphics{/recommender/minimizesquarederror.png}
-     \caption{A simplified illustration of a latent factor approach.}
+     \caption{How to calculate the squared error once predictions have been made}
      \label{fig:minimizesquarederror}
  \end{figure}
  \noindent
- In \autoref{fig:minimizesquatederror}, $K$ is the set of $(u, i)$ pairs for which the rating $r_{ui}$ is known.
+ In \autoref{fig:minimizesquarederror}, $K$ is the set of $(u, i)$ pairs for which the rating $r_{ui}$ is known.
  The system learns by fitting previously observed data, but to avoid overfitting when predicting future ratings, it regularizes the learned parameters.
- This regularization is the second term of the equation, where $\lambda$ is an arbitrary constant that controls the extent of the regularization.
+ This regularization is found on the right side of the $+$ operator of the equation, where $\lambda$ is an arbitrary constant that controls the extent of the regularization.
  Stochastic gradient descent is one approach of minimizing the above equation.
  The algorithm will, in this approach, loop through all data in the training set, which is the known ratings.
  For each case, the system predicts a rating, and then computes the prediction error with the equation defined in \autoref{fig:calculatingerror}:
  \begin{figure}[H]
     \centering
     \includegraphics[]{/recommender/calculatingerror.png}
-     \caption{A simplified illustration of a latent factor approach.}
+     \caption{The equation for calculating the error of a prediction when the actual value is known}
      \label{fig:calculatingerror}
  \end{figure}
  \noindent
@@ -185,7 +197,7 @@ To learn the factor vectors $p_{u}$ and $q_{i}$ used for the equation in \autore
  \begin{figure}[H]
     \centering
     \includegraphics[]{/recommender/updatingq.png}
-     \caption{A simplified illustration of a latent factor approach.}
+     \caption{The rule for updating the value of $q$}
      \label{fig:updatingq}
  \end{figure}
  \noindent
@@ -193,7 +205,7 @@ To learn the factor vectors $p_{u}$ and $q_{i}$ used for the equation in \autore
  \begin{figure}[H]
     \centering
     \includegraphics[]{/recommender/updatingp.png}
-     \caption{A simplified illustration of a latent factor approach.}
+     \caption{The rule for updating the value of $p$}
      \label{fig:updatingp}
  \end{figure}
  \noindent
