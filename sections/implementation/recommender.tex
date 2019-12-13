@@ -20,7 +20,8 @@ A common scenario for web applications is that they present a list of items to a
 An item in such a scenario would have a representation dependent on the implementation, which could be used to analyze items of particular interest for a user.
 Items are often stored in databases, creating structured data with each entry having the same set of attributes. 
 This lends itself well to learning a user profile through different machine learning algorithms.
-Examples of a basic representation of items and users are shown in Figures \ref{tbl:content-item} and \ref{tbl:content-user}.
+Examples of a basic representation of items and users are shown in Tables \ref{tbl:content-item} and \ref{tbl:content-user}.
+As shown, users and items are represented by the same set of attributes.
 \begin{table}[H]
     \centering
     \begin{tabular}{|l|l|l|l|l|}
@@ -44,10 +45,10 @@ Examples of a basic representation of items and users are shown in Figures \ref{
     \label{tbl:content-user}
 \end{table}
 \noindent
-The basic idea for content-based filtering is then to compute the similarity of an unseen item with the user profile, and suggest the most similar items.
+The basic idea for content-based filtering is then to compute the similarity of an unseen item with the user profile, and suggest the items with attributes that are most similar to those in the user profile..
 Unstructured data, such as text fields with no restriction, create complications when creating a user profile, as relationships between the values on an attribute for different items for a specific user can be found, but an unrestricted text will generally be unique \cite{ContentBasedFiltering}. 
 If a user liked different restaurants based on the same cuisine, it could be indicated that this user would be likely to like other restaurants focused in the same cuisine as well, but a text review would not necessarily give this information.
-Many domains can be represented by semi-structured data where issues such as text fields are converted to a structured representation \cite{ContentBasedFiltering}.
+Many domains can be represented by semi-structured data where issues arising from certain types of unstructured data, such as text fields, are converted to a structured representation \cite{ContentBasedFiltering}.
 A user profile shows the preferences of the user, and consists mainly of two types of information:
 \begin{itemize}
     \item A description of the types of items that interest the user
