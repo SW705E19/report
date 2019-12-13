@@ -164,7 +164,7 @@ The sum is then inserted into the predictedRatings matrix.
 \end{lstlisting}
 After calculating the predicted ratings, we need to determine the error and update the values of the factor matrices.
 To calculate the error, we use the equation defined in \autoref{fig:calculatingerror}, which simply subtracts the predicted value from the actual value.
-We then use the updating rules defined in the equations in Figures \ref{fig:updatingq} and \ref{fig:updatingp} to update the values of the matrices.
+We then use the updating rules defined in the equations in \autoref{fig:updatingq} and \autoref{fig:updatingp} to update the values of the matrices.
 We define the $\gamma$ value from the equation as the \texttt{alphaValue}, the $\lambda$ value as \texttt{0.001} and assign them to be 0.001, based on testing and recommended values.
 
 \begin{lstlisting}[caption={}, captionpos=b, label={}]
