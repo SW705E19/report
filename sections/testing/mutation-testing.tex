@@ -4,6 +4,7 @@ This means that it is possible to get a full line, statement, and branch coverag
 One way to combat this problem is with the use of mutation testing.
 The idea behind mutation testing is to run some automated software (the mutation testing system), which will generate mutants by modifying minor parts of the system such as replacing a less than check with a greater than check.
 The objective is to have a test suite that \textit{kills} the mutants by revealing that the mutant behavior differs from the original program \cite{mutationtesting}.
+Mutants are considered killed if a unit test fails due to the modified code.
 
 Mutation testing can be split into two categories: strong and weak mutations.
 In strong mutation, we are only interested in the external observation of the code, meaning that the produced output of a given function is different when the mutation is introduced \cite{mutationtesting}.
