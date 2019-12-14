@@ -1,0 +1,30 @@
+\section{Scalability in the system}
+In \autoref{sec:scalability} we determined that there are different types of scalability, and that when designing for scalability certain principles should be followed.
+In this section we will examine and discuss which of these principles we followed throughout the creation of the system.
+
+\begin{itemize}
+    \item \textbf{Design for two for everything}: This is a principle we considering for designing the interface of the system as well as getting data for users.
+    For front end pages that show a variable amount of items we considered how to accommodate this in the design to ensure it would decent.
+    For getting data to the front end it was also a consideration, but not every part of the system deals wit hit optimally.
+    The show all services page, for example, will receive and attempt to show all services, which could pose problems in terms of scalability.
+    A way to mitigate this would be through introducing pagination to this page.
+    \item \textbf{Scale horizontally}. This was a concern throughout development, and as can be seen \todo{Laver vi noget testing på det, i så fald opdater lige det her lort}
+    \item \textbf{Build API first}. Whenever we wanted to implement a new part of the system, one of the first and primary concerns was how to accommodate this feature in the API.
+    The reason for this was to make it could function as a service usable by any system rather than tailored to the frontend. 
+    \item \textbf{Caching data}. Caching data after retrieval could help increase performance of the system if a user were to quickly swap between separate pages. 
+    As it stands, this system does not take advantage of caching.
+    \item \textbf{Eventual consistency}. The system does not have any parts that strictly require consistency, meaning scalability through availability should be possible. 
+    If a user is browsing the services, it is not imperative that, if a new service were to be added, it would update the page the user was using.
+    It would simply update the next time the user performed an action to change the state of the system, at which point it would be reloaded and shown.
+    \item \textbf{Easy maintenance and automation}. In order to make maintenance easy, the system has been designed to split responsibility.
+    If an update to the system was necessary, we attempted to make it easy by ensuring it would not require changes in multiple files.
+    \item \textbf{Write asynchronous code}. Allowing tasks to be executed on different threads is a way to increase availability. 
+    This was a primary concern when implementing the system, and all interactions with the database, and interactions between the front end and API are processed asynchronously.
+    \item \textbf{Storing information in the state}. The system does not store information about a component's state in the system servers.
+    As part of using React, the system stores information about states on the client side.
+    This means that any server can handle any client request, and they will not depend on each other.
+\end{itemize}
+We attempted to keep many of these design principles in mind when creating the system to increase scalability.
+However, we did not fully manage to account for all of them.
+A principle such as caching data would be beneficial, and is an obvious point of improvement for the system.
+Another point of improvement could be introducing pagination on some of the components that would benefit from it, to ensure the amount of data does not scale to be unnecessarily large.
