@@ -8,18 +8,22 @@ In this section, we will look at some of the more interesting prototypes where w
      \caption{Shows the admin dashboard for admins that are logged into the system}
      \label{fig:admin-dashboard}
  \end{figure}
-The admin dashboard gives the admin an overview of the recently reported tutors and the different categories. 
+ \noindent
+The admin dashboard illustrated in \autoref{fig:admin-dashboard} gives the admin an overview of the recently reported tutors and the different categories. 
 The admin needs to see tutor reports since they are the ones that will handle them and decide if a tutor should be banned. 
 Admins are also in charge of the different teaching categories, and therefore, they need to have an overview of the current ones and also be able to add new categories.
 We also have a top bar that is used on every page for when the user is logged in. It shows a couple of different icons where the user can go to the inbox, the calendar, or the user's own page. 
 It will also show notifications for when different events related to the user happen in the system. 
 On the far left side of the top bar, we will place a logo, which will lead to the landing page.
 \begin{figure}[H]
-   \includegraphics[width=\linewidth, scale=0.5]{/prototypes/landing-page.png}
+    \centering
+   \includegraphics[scale=0.2]{/prototypes/landing-page.png}
     \caption{The landing page for the system}
     \label{fig:landing-page}
 \end{figure}
-The landing page is the first page that the users of the system will see, and thus it is important that this page shows some interesting content. 
+\noindent
+\autoref{fig:landing-page} show the landing page.
+It is the first page that the users of the system will see, and thus it is important that this page shows some interesting content. 
 This page can be accessed both with and without being logged in. 
 We have a top bar that changes depending on if the user is logged in or not. 
 At the top of the landing page, we will have a carousel that shows some interesting images.
@@ -32,7 +36,9 @@ Finally, there will be some recommendations for the user, which will suggest spe
      \caption{The inbox for the messaging component in the system}
      \label{fig:inbox}
  \end{figure}
-When the user clicks the message icon in the top bar they will be redirected to the inbox page. Here they can view their recent messages. 
+ \noindent
+When the user clicks the message icon in the top bar they will be redirected to the inbox page shown on \autoref{fig:inbox}.
+Here they can view their recent messages. 
 We considered including a search functionality to find specific messages but ultimately did not add it to the prototypes. 
 The most recently received messages should be shown on the top of the list, so they are easy to find. 
 When a message is received, the topbar should also show a notification for this. 
@@ -41,11 +47,13 @@ The user can click a button on the left side of the page to start writing a new 
 
 
  \begin{figure}[H]
-    \includegraphics[width=\linewidth]{/prototypes/make-appointment.png}
+    \centering
+    \includegraphics[scale=0.2]{/prototypes/make-appointment.png}
      \caption{Page that shows a tutor's calendar where the student can request an appointment}
      \label{fig:make-appointment}
  \end{figure}
- This page is the tutor's calendar from a student's point of view. 
+ \noindent
+ \autoref{fig:make-appointment} is the tutor's calendar from a student's point of view. 
  The student is able to browse the tutor's calendar and look for a date where the tutor is available, shown as the color green. 
  The student then clicks the desired date, and the popup window will show. 
  Here they can specify the subject they wish to be taught and the timeslot as well as additional information. 
@@ -55,11 +63,12 @@ The user can click a button on the left side of the page to start writing a new 
  However, the money will not be withdrawn from the student's account until the tutor has approved the appointment.
 
  \begin{figure}[H]
-    \includegraphics[width=\linewidth]{/prototypes/view-information-on-tutor.png}
+    \includegraphics[scale=0.25]{/prototypes/view-information-on-tutor.png}
      \caption{The page where other users can view information about a specific tutor}
      \label{fig:view-information-on-tutor}
  \end{figure}
-This is the page where other users can go and view information about another tutor. 
+ \noindent
+The page where other users can go and view information about another tutor is shown on \autoref{fig:view-information-on-tutor}. 
 Much information should be available here so that a user can know if this tutor can be helpful to them.
 The page will show basic information on the left side and also show the tutor's rating. 
 A user can click \textit{see reviews} to see what other users wrote about the tutor. 
@@ -78,7 +87,8 @@ By clicking the \textit{Make appointment} button, the user is redirected to the 
      \caption{The page that shows a tutors available material}
      \label{fig:view-tutor-material}
  \end{figure}
-This page shows a specific tutors uploaded material. 
+ \noindent
+\autoref{fig:view-tutor-material} shows a specific tutor's uploaded material. 
 The material is divided into which subject it belongs to make it easier for other users to find the relevant material. 
 The material can be any kind of file, or it can be links to useful pages such as some reading material or perhaps a YouTube video. 
 When a specific user goes to a tutor's material page, only the material that is accessible to them should be made available. 
