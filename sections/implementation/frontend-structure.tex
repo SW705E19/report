@@ -1,16 +1,107 @@
 \section{Frontend structure}
-% Structure of Frontend
-Some introduction to React, maybe shortly mention states to go into states and props.
+This chapter focuses on the implementation of the frontend in \textit{React}.
+Some basic features within \textit{React} was previously described in \autoref{sec:intro-to-react}.
 
-\subsection{States and props}
-What are states, props and why is it important for react (with examples)
 
-\subsection{Components and containers}
-Something about stateful and stateless components and how we have split it in our folder structure to reflect it.
+\subsection{States}
+For many of our pages we use states to store a components dynamic data. 
+An example of this is the edit service page. 
+The constructor for this page is seen on \autoref{EditService-state}.
+Within the constructor \texttt{super(props)} is called. 
+This is used to call the \textit{React} parent constructor and pass props as an argument.
+This is necessary whenever you want to call \textit{this.} within the constructor.
+Within \texttt{this.state} is the variables that will be used on the page. 
+However, as the state is dynamic, if another variable is needed, it can be added anytime to the state.
+Whenever the state changes, the page will get rendered again. 
+This is very useful for many things. 
+For example it is easy to validate text fields and give an error message if the inputted text is invalid.  
 
+After the state declarations, we bind the functions to the component instance using the \texttt{.bind(this)} function.
+This is useful as we later can call the functions in the renderer using \texttt{this}.
+These functions often either change the state of the component or call the API to upload data.
+\begin{lstlisting}[caption={Constructor and state for edit service}, captionpos=b, label={EditService-state}]
+class EditService extends React.Component {
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+            service: null,
+            categories: [],
+            chosenCategoryNames: [],
+            redirectService: false,
+            redirectOwnUser: false,
+            openAlert: false
+        };
+            
+        this.handleOnChange = this.handleOnChange.bind(this);
+        this.handleOnChangeCategories = this.handleOnChangeCategories.bind(this);
+        this.submit = this.submit.bind(this);
+        this.deleteService = this.deleteService.bind(this);
+        this.handleClickCancel = this.handleClickCancel.bind(this);
+        this.handleClickDelete = this.handleClickDelete.bind(this);
+        this.handleClickOpen = this.handleClickOpen.bind(this);
+    }
+    ...
+\end{lstlisting}
 
 \subsection{Services}
-What are services? How do we connect to API to get data?
+Services are used to send or retrieve data from the API. 
+The \texttt{requestOptions} define the method you use, and the token that the user has.
+The function \texttt{authHeader()} check if you're logged in. 
+If you're logged in, a token is returned.
+The method that can be used are either \texttt{'GET'}, \texttt{'POST'}, \texttt{'PUT'}, \texttt{'PATCH'} or \texttt{'DELETE'}.
+\texttt{'GET'} returns what is requested if it exists.
+\texttt{'POST'} adds an additional row to the database.
+\texttt{'PUT'} and \texttt{'PATCH'} updates an element. 
+\texttt{'PUT'} should only be used if resource is replaced, where \texttt{PATCH is if you're updating an existing resource.}
 
-\subsection{Material UI}
-Why we chose to use material UI rather than making everything ourselves.
+Then the fetch is called with the URL link and then the response is handled with \texttt{handleResponse}. 
+This is a function that checks for errors in the response.
+
+\begin{lstlisting}[caption={Function to get a user by ID.}, captionpos=b, label={material-ui}]
+function getById(id) {
+	const requestOptions = { method: 'GET', headers: authHeader() };
+	return fetch(
+		`http://${process.env.REACT_APP_API_URI}:${process.env.REACT_APP_API_PORT}/api/users/${id}`,
+		requestOptions
+	)
+		.then(handleResponse)
+		.then(data => {
+			return JSON.parse(data);
+		});
+}
+\end{lstlisting}
+
+
+\subsection{Components and containers}
+%Something about stateful and stateless components and how we have split it in our folder structure to reflect it.
+
+
+\subsection{Material-UI}
+We have chosen to use the framework Material-UI, to make the implementation of good design easier????
+Material-UI is a collection of React components that are easy to integrate into the project.
+If we had to implement everything ourselves we would have to invest a lot of more time into making a good design.
+Using Material-UI design we also get the same designed things on all pages. ????
+Some of the most commonly used components in our application is \texttt{TextField}, \texttt{Typography}, \texttt{Grid}, \texttt{Button}, \texttt{MenuItem} or a logo component.
+A use of Material-UI in the header can be seen on \autoref{material-ui}. 
+\begin{lstlisting}[caption={Use of material-ui in the header}, captionpos=b, label={material-ui}]
+import {
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText
+} from '@material-ui/core';
+import {
+	Home
+} from '@material-ui/icons';
+...
+<List>
+    <ListItem button component={Link} to="/" key="Home" name="home">
+        <ListItemText primary="Home" />
+        <ListItemIcon>
+            <Home fontSize="large" />
+        </ListItemIcon>
+    </ListItem>
+...
+\end{lstlisting}
+
