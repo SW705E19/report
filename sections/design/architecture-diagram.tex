@@ -3,7 +3,7 @@ A component architecture diagram is useful to illustrate how a system is connect
 A component architecture is a system structure composed of interconnected components, where components are a collection of program parts that constitute a whole\cite{OOAD}.
 \autoref{fig:architecture-diagram} shows the component architecture.
 
-\begin{figure}[H]
+\begin{figure}[]
     \includegraphics[width=\linewidth]{/architecture.PNG}
     \caption{The component architecture of the system}
     \label{fig:architecture-diagram}
@@ -28,4 +28,6 @@ The model component takes information from the function component, and interface
 From the \textit{Technical Platform} layer it interfaces with the \textit{Database System} and the \textit{Logging} component.
 The model's content is received and stored in the \textit{Database System}.
 Whenever certain actions are performed through user actions, the \textit{Logging} component takes the relevant model content and logs it.
+\\\\
+Now that the architecture has been defined and prototypes created, we will discuss how, and with which frameworks we will be creating the front end.
 
