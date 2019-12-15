@@ -61,7 +61,8 @@ This is a function that checks for errors in the response, and ensures that the 
 function getById(id) {
 	const requestOptions = { method: 'GET', headers: authHeader() };
 	return fetch(
-		`http://${process.env.REACT_APP_API_URI}:${process.env.REACT_APP_API_PORT}/api/users/${id}`,
+        `http://${process.env.REACT_APP_API_URI}:
+           ${process.env.REACT_APP_API_PORT}/api/users/${id}`,
 		requestOptions
 	)
 		.then(handleResponse)
@@ -72,8 +73,80 @@ function getById(id) {
 \end{lstlisting}
 
 
-\subsection{Components and containers}
-%Something about stateful and stateless components and how we have split it in our folder structure to reflect it.
+\subsection{Components}
+There are two types of components. 
+First one is a smart component, also named containers.
+These are typically class component and are stateful because they have a state.
+They often also contain some kind of logic within.
+The second a presentational component.
+These are most often stateless and called presentational due to all they do is output UI elements \cite{Vumbula-react}.
+\\\\
+The container for the create user can be seen on \autoref{create-user}.
+The \texttt{CreateUser} class only contains the state, logic for the functions and a \texttt{render()}.
+Within the \texttt{render()} is the presentational component \texttt{UserForm}. 
+\begin{lstlisting}[caption={Component to create user}, captionpos=b, label={create-user}]
+export class CreateUser extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            firstName: { firstName: '', firstNameValid: true },
+            lastName: { lastName: '', lastNameValid: true },
+            ...
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleChange(){
+        ...
+    }
+    handleSubmit(){
+        ...
+    }
+    render() {
+        return (
+            <UserForm
+                firstName={this.state.firstName}
+                lastName={this.state.lastName}
+                ..
+            />
+        );
+    }
+\end{lstlisting}
+
+The UserForm can be seen on \autoref{user-form}.
+This presentational component does not have any states, but it uses the props that were passed by where the user form was declared.
+Within the \texttt{TextField} it checks through props if the first name is valid. 
+If it is not valid, and error will be should, and the \texttt{helperText} will also be shown.
+Whenever the \texttt{TextField} is changed the handleChange is called, and as it changes the state, the page will be rendered again.
+
+\begin{lstlisting}[caption={Presentational component for userform}, captionpos=b, label={user-form}]
+function UserForm(props) {
+    const { t, classes } = props;
+    
+    return (
+        <Container maxWidth="sm">
+            <div className={classes.paper}>
+                <Typography align="center" variant="h4">
+                    {t('registerasauser')}
+                </Typography>
+                <div className={classes.form}>
+                <Grid container spacing={2} direction="row">
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            name="firstname"
+                            label={t('firstname')}
+                            onChange={props.handleChange}
+                            error={!props.firstName.firstNameValid}
+                            helperText={
+                                props.firstName.firstNameValid ? '' : t('typefirstname')
+                            }
+                        />
+                ...
+\end{lstlisting}
+
+
+
+
 
 
 \subsection{Material-UI}
