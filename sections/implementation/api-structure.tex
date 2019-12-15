@@ -1,16 +1,28 @@
 \section{Structure of API}
-Intro stuff, what is the role of the API etc.
+This section will describe how how we have implemented and structured the API which is used as a link to the database.
 
 \subsection{Controllers, middlewares, services and routes}
 % Controllers, middlewares, services, routes
 Something about how the API is split into controllers, middlewares, services and routes.
 Talk a bit about each of them and why they are important.
 
+The API is split into controllers so that endpoints that are related to the same entities are in the same controller. 
+For example, the \texttt{authController} is responsible for endpoints such as logging in, registering a new user or changing a users password.
+
+
+
 \subsection{API responses}
 Something about HTTP responses and what to respond.
 Maybe briefly mention REST?
 
 \subsection{TypeORM}
+With TypeORM we can define entity classes which corresponds to the tables we want to create in the database.
+These entities are created as classes with attributes which we can put constraints on such as not allowing an attribute to be null. 
+We can also define relationships between entities such as many-to-many and many-to-one.
+Objects can be created using the entity classes. 
+These objects can be saved to the database or extracted data can be assigned to the objects and then be returned in a HTTP response. 
+Typeorm also provides repositories for each entity to allow for easy creation of queries to the database
+
 Something about using TypeORM and why it is nice, so we do not have to make an ORM ourselves, or manually write the queries.
 
 \subsection{Error handling}
