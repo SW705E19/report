@@ -1,5 +1,4 @@
 \section{Introduction to React}
-React is a library for JavaScript that we will be using to build the frontend of the system.
 In this section we will look at the different building blocks and concepts of React.
 React will often be used with a syntax extension to JavaScript called JSX \cite{introducingJSX} which makes it possible to declare variables that resemble HTML code.
 
@@ -14,7 +13,6 @@ In this case we are rendering the React element \texttt{element} to the DOM node
 \begin{center}
     \texttt{ReactDOM.render(element, document.getElementById('root'));}
 \end{center}
-
 A nice feature of JSX is that it allows you to include dynamic content in HTML, by including JavaScript variables wrapped in curly braces to indicate that they should be evaluated by the JavaScript engine upon rendering.
 
 \begin{lstlisting}
@@ -28,7 +26,7 @@ ReactDOM.render(
 \end{lstlisting}
 The variable that is embedded in the JSX can be any valid JavaScript expression \cite{introducingJSX}.
 \\\\
-In React we use components, which are files that hold all of the logic, HTML and styling that we need.
+In React components are used, which are files that hold all of the logic, HTML and styling that is needed.
 
 \begin{lstlisting}
 import React from "react";
@@ -47,7 +45,7 @@ In this example we create the component \texttt{App} and export it.
 By exporting it we can use the \texttt{App} component elsewhere and render it.
 In the function we return a JSX element which React will then compile to regular JavaScript that can be understood by the browser.
 The idea is to build the UI from components by exporting them and then importing them into other larger components to contain them.
-This means that the components act as the building blocks of the UI because we can reuse them in other components.
+This means that the components act as the building blocks of the UI because they can be reused in other components.
 \begin{lstlisting}
 import React from 'react';
 
