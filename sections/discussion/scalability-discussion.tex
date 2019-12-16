@@ -43,3 +43,42 @@ If the system were to be deployed, the diagram of components would be as illustr
 As shown, this would involve a horizontal scaling, with the main changes happening in the load balancer and server layer.
 The load balancer would be responsible for distributing clients to different API clusters.
 While there are different API cluster in order to spread out client requests, each cluster would also have multiple instances of the API, meaning an API cluster could consists of one to many API's.
+
+\subsection{Evaluation of API scalability}
+To evaluate the scalability in terms of availability, we ran load tests to test whether using a vertical scaling model worked.
+As most of the business logic is handled by the API, it was decided to focus load test on the API.
+We decided to do a peak load test using the tool LoadUI, which allows us to define an amount of arriving virtual users (VUs). %https://support.loadimpact.com/3.0/test-configuration/what-are-virtual-users-vus/
+These VUs work as concurrent users that can each open multiple connections in parallel to simulate having a large amount of users constantly arriving to the site.
+Unlike real users, these VUs will continuously send requests to the server at a rate of approximately 18 requests per second, as seen on the results in %ref appendix.
+
+For the load tests we used a setup where 20 new VUs would arrive every 10th second, and a test duration of five minutes.
+The tests were ran with the following vertical scaling setups:
+\begin{itemize}
+    \item 1 cluster with 1 instance
+    \item 1 cluster with 1 instance
+    \item 1 cluster with 8 instances
+    \item 1 cluster with 16 instances
+    \item 1 cluster with 32 instances
+\end{itemize}
+For all the tests, the API clusters were run on a Lenovo Legion Y530 laptop, using PM2 for handling the vertical scaling.
+
+\begin{table}[]
+    \begin{tabular}{|l|l|l|l|l|l|}
+    \hline
+    \textbf{Amount of instances} & \textbf{1} & \textbf{4} & \textbf{8} & \textbf{16} & \textbf{32} \\ \hline
+    Shortest response time       & 29 ms      & 13 ms      & 19 ms      & 27 ms       & 55 ms       \\ \hline
+    Longest response time        & 3451 ms    & 2609 ms    & 2509 ms    & 2387 ms     & 12182 ms    \\ \hline
+    Average response time        & 771 ms     & 633 ms     & 593 ms     & 582 ms      & 657 ms      \\ \hline
+    Failed assertions \%         & 20\%       & 9\%        & 9\%        & 6\%         & 8\%         \\ \hline
+    \end{tabular}
+    \caption{Summary of load test results.}
+    \label{table:load-test-table}
+\end{table}
+
+For all tests, we asserted that endpoints should respond within 800 ms, or it should be tagged as failed.
+As seen on \autoref{table:load-test-table}, the amount of failed assertions decreased as the cluster size increased, up until 32 instances, where the response times started increasing.
+
+We deem that, even though the amount of VUs is relatively low, the system should be able to sustain a significantly higher amount of real users, as they would most likely not be sending constant requests in the same manner that the VUs do.
+In general, we estimate that the average user would send less than one request per second on average, meaning that it is less than 18 times less load than the VUs.
+This mean that we, in theory, should be able to support at least 20*18=360 arriving users every 10th second with this current setup.
+For a real deployment of the service, the clusters would probably be split between multiple servers for horizontal scaling, and more specialized hardware that allows for better vertical scaling.
