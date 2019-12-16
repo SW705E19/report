@@ -1,15 +1,14 @@
 \section{Class diagram}
 A class diagram helps to create an understanding of the design of the system.
-The following diagram illustrates the relevant classes related to the problem domain for the system.
-It illustrates structural relations between classes and objects\cite{OOAD}.
-
-\begin{figure}[H]
-    \includegraphics[width=\linewidth]{/tutorclassdiagram.png}
+\begin{figure}[]
+    \includegraphics[scale=0.55]{/tutorclassdiagram.png}
      \caption{The class diagram describing classes in the problem domain}
      \label{fig:class-diagram}
  \end{figure}
+The diagram in \autoref{fig:class-diagram} illustrates the relevant classes related to the problem domain for the system.
+It illustrates structural relations between classes and objects\cite{OOAD}.
 
-\subsection{Users}
+\subsubsection{Users}
 Users are defined through the \texttt{users} cluster.
 A user aggregates 0 or more roles, which is a generalization of either the tutor or administrator classes.
 The role class ensures that the user can have both of the different roles, only one role or neither role, and that it can be dynamically changed.
@@ -21,24 +20,24 @@ A report is associated with exactly 2 users, one being the student creating the 
 Users are associated with 0 or more reviews in the same way, as students can rate their interactions with a tutor through a review.
 If a review is created, it is associated with exactly 2 users as well, since both the tutor being reviewed and the student doing the review are necessary.
 
-\subsection{Calendar}
+\subsubsection{Calendar}
 The calendar is the part of the system through which students and tutors establish dates on which to meet.
 One calendar is associated with one user.
 A calendar aggregates 0 or more calendar events.
 The calendar does not need an event, it can simply show the overall view of the month without any scheduled appointments.
 
-\subsection{Messages}
+\subsubsection{Messages}
 Users can send messages through the system.
 To facilitate this, users are associated with an inbox.
 This inbox aggregates 0 or more of the user's messages.
 
-\subsection{Reviews}
+\subsubsection{Reviews}
 Reviews are made by students and are used to review the services of a tutor.
 Since users make the reviews, they are associated with 0 or more reviews.
 The user could have reviewed multiple services, or none at all.
 The reviews are made for a particular service, meaning a service will be associated with 0 or more reviews, depending on whether or not any students have left any reviews for the service in question.
 
-\subsection{Services}
+\subsubsection{Services}
 A service is what the tutors provide through the system.
 A user is associated with a service.
 The user can be associated with 0 or more services, meaning that if the user is not a tutor they do not need to provide a service, and if they are a tutor they can provide more than one. 
