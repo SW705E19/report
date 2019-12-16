@@ -28,7 +28,7 @@ When designing systems to be scalable, some principles should be followed \cite{
     Add new servers to the system instead of buying a new server with a larger capacity each time to replace the old one when more capacity is needed. 
     In theory, this should also be cheaper since the old servers will still be in use. 
     However, distributing network traffic properly is required for a system with multiple servers to work.
-    \item Build the API first to avoid tailoring it to a specific type of frontend. 
+    \item Build the API first to avoid tailoring it to a specific type of front end. 
     The API should work as a service such that it can be used for any system such as a smartphone application or a web site. 
     \item Caching the data that is being accessed can have significant performance benefits since the system will not have to recompute the results that are often requested. 
     \item As mentioned in scalability in availability, the system does not need to provide the newest data available at all times if the users do not need to know. 
