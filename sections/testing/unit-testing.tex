@@ -1,13 +1,13 @@
 \section{Unit testing}
 Unit testing is our primary way of testing our system, and belongs in the dynamic white-box testing category.
 The purpose of unit testing is to see if an isolated subset of the system works as expected, given some pre-defined input \cite{TestDrivenDevelopment}.
-For this project, unit tests are utilized for both the React frontend and the API, to ensure that the system works as intended.
+For this project, unit tests are utilized for both the React front end and the API, to ensure that the system works as intended.
 
 \subsection{Choice of framework}
 One of the first decisions when creating unit tests, is the choice of test runner.
 Since the React library is shipped with Jest \cite{ReactRunningTests}, and since both parts of the system are JavaScript based, it seemed like the optimal solution to use the same test runner.
 However, after using Jest for testing the API for a while, several issues surfaced when trying to implement mock functions related to our ORM and some TypeScript functionality in general.
-These problems were related to the type security provided by TypeScript that TypeORM utilizies, meaning that TypeORM had a security feature where it would ensure that it was only called with real objects and not stubs created by Jest.
+These problems were related to the type security provided by TypeScript that TypeORM utilizes, meaning that TypeORM had a security feature where it would ensure that it was only called with real objects and not stubs created by Jest.
 To simplify the creation of unit testing on the API, the test driver for this was changed to Mocha, since it uses another approach to creating stub objects, which worked out of the box.
 
 One of the main differences between Jest and Mocha is that Jest is a complete suite that supports running the tests, asserting results, stubbing, test coverage and much more.
@@ -15,9 +15,9 @@ Mocha, on the other hand, is just a test runner and requires additional librarie
 We chose to use Chai for assertions, Sinon for stubbing and Nyc for generating code coverage.
 
 \subsection{What to test}
-The answer to what should be tested varies a lot between the frontend and the API.
+The answer to what should be tested varies a lot between the front end and the API.
 One of the axioms of testing states that it is impossible to test a program completely, and should be seen as a risk-based exercise where the tester asserts which parts of the system should be tested, and how thoroughly it should be tested \cite{SoftwareTesting}.
-For the frontend of the system, it would be possible to test whether each component is rendered to the user, if all the information is correct, what happens if you use 0 as input to the function, 1 as input, 3 as input.. And so on.
+For the front end of the system, it would be possible to test whether each component is rendered to the user, if all the information is correct, what happens if you use 0 as input to the function, 1 as input, 3 as input.. And so on.
 Instead, we chose to focus on testing if the components that are conditionally rendered are shown when the conditions are fulfilled.
 An example of this could be the \textit{Show User} page, where the system should show tutor info if and only if the user is actually a tutor.
 This now leads to test cases like is the info rendered if:
@@ -27,7 +27,7 @@ This now leads to test cases like is the info rendered if:
     \item the user is a tutor, but the tutor information is incomplete?
 \end{itemize}
 
-In addition to the conditional rendering, any business logic located on the frontend should be tested to ensure both that it works as intended, but also that any future updates to the code will not break it, which is referred to as regression testing.
+In addition to the conditional rendering, any business logic located on the front end should be tested to ensure both that it works as intended, but also that any future updates to the code will not break it, which is referred to as regression testing.
 This security is done by enforcing that all unit tests must run before the feature can be merged into the development branch of the system.
 
 For the API, some functionality like the ORM is handled by external packages.
