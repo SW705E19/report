@@ -1,6 +1,6 @@
 \section{Frontend structure}
-This chapter focuses on the implementation of the frontend in \texttt{React}.
-Some basic features within \texttt{React} were previously described in \autoref{sec:intro-to-react}.
+This chapter focuses on the implementation of the frontend in React.
+Some basic features within React were previously described in \autoref{sec:intro-to-react}.
 
 
 \subsection{States}
@@ -8,15 +8,15 @@ For many of our pages we use states to store a component's dynamic data.
 An example of this is the edit service page. 
 The constructor for this page is seen on \autoref{EditService-state}.
 Within the constructor \texttt{super(props)} is called. 
-This is used to call the \texttt{React} parent constructor and pass its properties as an argument.
-This is necessary whenever you want to call \textit{this} within the constructor.
+This is used to call the React parent constructor and pass its properties as an argument.
+This is necessary whenever you want to call \texttt{this} within the constructor.
 Variables that will be used on the page are found within \texttt{this.state}. 
 However, if another variable is needed, it can be added to the state at any time as the state is dynamic.
 The page will get rendered again whenever the state changes. 
 This is very useful for many things. 
 For example, it is easy to validate text fields and send an error message if the text input is invalid.  
 After the state declarations, we bind the functions to the component instance using the \texttt{.bind(this)} function.
-This is useful as we later can call the functions in the renderer using \texttt{this}.
+This is useful as we can later call the functions in the renderer using \texttt{this}.
 These functions often either change the state of the component or call the API to upload data.
 \begin{lstlisting}[caption={Constructor and state for edit service}, captionpos=b, label={EditService-state}]
 class EditService extends React.Component {
@@ -50,7 +50,7 @@ The methods that can be used are either \texttt{'GET'}, \texttt{'POST'}, \texttt
 \texttt{'GET'} returns what is requested if it exists.
 \texttt{'POST'} adds an additional row to the database.
 \texttt{'PUT'} and \texttt{'PATCH'} updates an element. 
-\texttt{'PUT'} should only be used if resource is replaced, where \texttt{PATCH} is if you're updating an existing resource.
+\texttt{'PUT'} should only be used if a resource is replaced, where \texttt{PATCH} is used if an existing resource needs to be updated.
 For \texttt{post} methods the \texttt{requestOptions} will contain the data to send to the API as the body of the request.
 For many requests it is necessary for the user to be logged in, which is defined in the header of the request through the function \texttt{authHeader()}, which checks if the user is logged in.
 
@@ -75,13 +75,13 @@ function getById(id) {
 
 \subsection{Components}
 There are two types of components. 
-First one is a smart component, also named containers.
+The first one is a smart component, also named containers.
 These are typically class component and are stateful because they have a state.
 They often also contain some kind of logic within.
-The second a presentational component.
-These are most often stateless and called presentational due to all they do is output UI elements \cite{Vumbula-react}.
+The second is a presentational component.
+These are most often stateless and are called presentational since all they should do is output UI elements \cite{Vumbula-react}.
 \\\\
-The container for the create user can be seen on \autoref{create-user}.
+The container for the create user page can be seen on \autoref{create-user}.
 The \texttt{CreateUser} class only contains the state, logic for the functions and a \texttt{render()}.
 Within the \texttt{render()} is the presentational component \texttt{UserForm}. 
 \begin{lstlisting}[caption={Component to create user}, captionpos=b, label={create-user}]
@@ -113,11 +113,11 @@ export class CreateUser extends Component {
     }
 \end{lstlisting}
 
-The UserForm can be seen on \autoref{user-form}.
-This presentational component does not have any states, but it uses the props that were passed by where the user form was declared.
+The \texttt{UserForm} render can be seen on \autoref{user-form}.
+This presentational component does not have any states, but it uses the props that were passed from where the user form was declared.
 Within the \texttt{TextField} it checks through props if the first name is valid. 
-If it is not valid, and error will be should, and the \texttt{helperText} will also be shown.
-Whenever the \texttt{TextField} is changed the handleChange is called, and as it changes the state, the page will be rendered again.
+If it is not valid an error will be shown, and the \texttt{helperText} will also be shown.
+Whenever the \texttt{TextField} is changed the \texttt{handleChange} is called, and as it changes the state the page will be rendered again.
 
 \begin{lstlisting}[caption={Presentational component for userform}, captionpos=b, label={user-form}]
 function UserForm(props) {
@@ -150,12 +150,12 @@ function UserForm(props) {
 
 
 \subsection{Material-UI}
-We have chosen to use the framework \texttt{Material-UI}, to ease the implementation of design, and ensure it is of a certain quality.
-\texttt{Material-UI} is a collection of \texttt{React} components that are easy to integrate into the project.
+We have chosen to use the framework \textit{Material-UI}, to ease the implementation of design, and ensure it is of a certain quality.
+Material-UI is a collection of React components that are easy to integrate into the project.
 If we had to implement everything ourselves we would have to invest a lot of more time into making a good design.
-By using \texttt{Material-UI} for the design we also get consistently designed pages.
+By using Material-UI for the design we also get consistently designed pages.
 Some of the most commonly used components in our application are \texttt{TextField}, \texttt{Typography}, \texttt{Grid}, \texttt{Button} or \texttt{MenuItem}.
-An example of using \texttt{Material-UI} in the header can be seen on \autoref{material-ui}.
+An example of using Material-UI in the header can be seen on \autoref{material-ui}.
 As seen in the begin of the file, we import the different components that are needed.
 From line 11 onwards we then use them to create the design.
 We create a list, add an item to it which is a link to the landing page, and finally give it some text and an icon.
@@ -179,4 +179,3 @@ import {
     </ListItem>
 ...
 \end{lstlisting}
-
