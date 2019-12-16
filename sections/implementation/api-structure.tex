@@ -1,14 +1,78 @@
 \section{Structure of API}
 This section will describe how how we have implemented and structured the API which is used as a link to the database.
 
+
 \subsection{Controllers, middlewares, services and routes}
 % Controllers, middlewares, services, routes
 Something about how the API is split into controllers, middlewares, services and routes.
 Talk a bit about each of them and why they are important.
 
+The API is the service that is responsible for communication with database. 
+To create the API we have used a framework called express.
+Clients are able to send HTTP requests to the endpoints defined in the API and also receive responds from the API.
+Both the requests and the responds can contain data. 
+The requests are able to call the correct pieces of code by providing the endpoint for which the request should be send to.
+\begin{center}
+    \texttt{http://localhost:3000/api/users/3}
+\end{center}
+The above URL is an endpoint for the user with the id 3. 
+Different HTTP methods can then be defined for this endpoints should as a POST request or and GET requests.
+Multiple endpoints can be defined from the same URL but with different HTTP methods.
+\\\\
 The API is split into controllers so that endpoints that are related to the same entities are in the same controller. 
 For example, the \texttt{authController} is responsible for endpoints such as logging in, registering a new user or changing a users password.
+To allow the requests to find the correct code to run we define routes for the different endpoints in each controller as well as the HTTP method for them.
 
+\begin{lstlisting}[caption={The route used for all user related endpoints}, captionpos=b, label={routes-general}]
+    routes.use('/api/users', users);
+\end{lstlisting}
+In \autoref{routes-general} we see the route used for all the user related endpoints found in the \texttt{userController}.
+\begin{lstlisting}[caption={Some of the routes for the different user endpoints}, captionpos=b, label={routes-user}]
+    router.get('/', [checkJwt, checkRole(['ADMIN'])], UserController.listAll);
+
+    router.get('/:id([0-9]+)', UserController.getOneById);
+
+    router.patch('/:id([0-9]+)', [checkJwt, checkRole(['ADMIN'])], UserController.editUser);
+
+    router.delete('/:id([0-9]+)', [checkJwt], UserController.deleteUser);
+\end{lstlisting}
+With the router object we can specify the HTTP method for each endpoint. 
+On the first line in \autoref{routes-user} we specify that the HTTP method for this endpoint is a GET.
+The first argument is the last part of the endpoint URL in \autoref{routes-general}. 
+With the second argument we can provide some middleware functionality such as \texttt{checkJwt} which restricts the access of the endpoint to users that are logged in.
+\texttt{checkRole(['ADMIN'])} will rescrict access to the endpoint to only allow admin users. 
+The third argument specifies which function from which controller to be called with the endpoint.
+We define a route for each endpoint we have implemented in the controllers using the router object.
+
+\begin{lstlisting}[caption={Shows some of the endpoints from the UserController}, captionpos=b, label={user-controller}]
+class UserController {
+	static listAll = async (req: Request, res: Response): Promise<Response> => {
+		const users: User[] = await userService.getAll();
+		//Send the users object
+		return res.status(200).send(users);
+    };
+
+    static getOneById = async (req: Request, res: Response): Promise<Response> => {
+		//Get the ID from the url
+		const userId: number = (req.params.id as unknown) as number;
+
+		//Get the user from database
+		let user: User;
+		try {
+			user = await userService.getById(userId);
+		} catch (error) {
+			userLogger.error(error);
+			return res.status(404).send('User not found');
+		}
+		return res.status(200).send(user);
+	};
+}
+\end{lstlisting}
+In \autoref{user-controller} we see an example of some of the functions defined in the \texttt{userController}. 
+The first function \texttt{listAll} takes a request and a response as arguments and returns a \texttt{Promise<Response>}. 
+Each function in the controllers are tagged with \texttt{async} to allow them to be called asynchronously. 
+\texttt{listAll} gets all the users from the database using the \texttt{userService.getAll()}.
+A response is then returned with the status code 200, meaning that request has succeded, and the users are returned in the response. 
 
 
 \subsection{API responses}
@@ -22,6 +86,30 @@ We can also define relationships between entities such as many-to-many and many-
 Objects can be created using the entity classes. 
 These objects can be saved to the database or extracted data can be assigned to the objects and then be returned in a HTTP response. 
 Typeorm also provides repositories for each entity to allow for easy creation of queries to the database
+
+
+\begin{lstlisting}[caption={The route used for all user related endpoints}, captionpos=b, label={routes-general}]
+@Entity()
+@Unique(['name'])
+export class Category {
+	@PrimaryGeneratedColumn()
+	id: number;
+
+	@Column()
+	@Length(2, 40)
+	name: string;
+
+	@Column()
+	@Length(2, 200)
+	description: string;
+
+	@ManyToMany(type => Service, service => service.categories)
+	@JoinTable()
+	services: Service[];
+}
+\end{lstlisting}
+
+
 
 Something about using TypeORM and why it is nice, so we do not have to make an ORM ourselves, or manually write the queries.
 
