@@ -96,7 +96,6 @@ class Button extends React.Component {
 
 A component is conceptually a JavaScript function or class, which means that they can accept inputs called \texttt{props} which can contain data that can be used in the React elements.
 If a component is used in another component, we can use \texttt{props} to pass data to the child component.
-\\\\
 \subsection*{Props}
 When a component is instantiated it is possible to pass an arbitrary number of arguments to the component by passing key and value pairs.
 These are then accessed through the props object in the component.
@@ -167,7 +166,7 @@ class ourComponent extends Component {
 \end{lstlisting}
 
 \subsection*{Lifecycle}
-When a component is implemented as a class that extends \texttt{Component} from the react library, it gives us access to some functions that are automatically called at different points in the lifecycle of a component.
+When a component is implemented as a class that extends \texttt{Component} from the React library, it gives us access to some functions that are automatically called at different points in the lifecycle of a component.
 The function that we will mostly be using is \texttt{componentDidMount}.
 This function is called right after the component is rendered for the first time in its lifecycle.
 This is useful for when we need to fetch data from the API that we want to save in the state of the component.
