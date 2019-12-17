@@ -51,6 +51,7 @@ The methods that can be used are either \texttt{'GET'}, \texttt{'POST'}, \texttt
 \texttt{'PUT'} and \texttt{'PATCH'} updates an element. 
 \texttt{'PUT'} should only be used if a resource is replaced, where \texttt{'PATCH'} is used if an existing resource needs to be updated.
 For \texttt{'POST'} methods the \texttt{requestOptions} will contain the data to send to the API as the body of the request.
+\todo{Overvej om det skal flyttes til API}
 For many requests it is necessary for the user to be logged in, which is defined in the header of the request through the function \texttt{authHeader()}, which checks if the user is logged in.
 
 The fetch is then called with the URL link and the response is handled with the \texttt{handleResponse} function. 
@@ -123,6 +124,8 @@ export class CreateUser extends Component {
     }
 \end{lstlisting}
 
+\todo{erstat ... med vdots}
+\todo{overvej om det er et godt kode eksempel}
 The implementation of \texttt{UserForm} can be seen on \autoref{user-form}.
 This presentational component is stateless and uses the props that were passed to the \texttt{UserForm} component when it was instantiated in the \autoref{create-user} container.
 Within the \texttt{TextField} it checks through props if the first name is valid. 
@@ -154,10 +157,13 @@ function UserForm(props) {
                 ...
 \end{lstlisting}
 
+\todo{erstat ... med vdots}
+
 \subsection{Material-UI}
 We have chosen to use the framework \textit{Material-UI}, to ease the implementation of design, and ensure it is of a certain quality.
 Material-UI is a collection of React components that are easy to integrate into the project.
 If we had to implement everything ourselves we would have to invest a lot of more time into making a good design.
+\todo{skriv kort hvad material design er?}
 By using Material-UI for the design we also get consistently designed pages.
 Some of the most commonly used components in our application are \texttt{TextField}, \texttt{Typography}, \texttt{Grid}, \texttt{Button} or \texttt{MenuItem}.
 An example of using Material-UI in the header can be seen on \autoref{material-ui}.
