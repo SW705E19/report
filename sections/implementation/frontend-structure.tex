@@ -44,6 +44,7 @@ class EditService extends React.Component {
 
 \subsection{Services}
 Services are used to send or retrieve data from the API. 
+\autoref{get-by-id} shows an example or retrieving a user by their id from the database.
 The \texttt{requestOptions} used as a parameter defines the type of method you use.
 The methods that can be used are either \texttt{'GET'}, \texttt{'POST'}, \texttt{'PUT'}, \texttt{'PATCH'} or \texttt{'DELETE'}.
 \texttt{'GET'} returns what is requested if it exists.
@@ -56,7 +57,7 @@ For many requests it is necessary for the user to be logged in, which is defined
 The fetch is then called with the URL link and the response is handled with the \texttt{handleResponse} function. 
 This is a function that checks for errors in the response, and ensures that the user requesting the response has the proper privileges to access it.
 
-\begin{lstlisting}[caption={Function to get a user by ID.}, captionpos=b, label={material-ui}]
+\begin{lstlisting}[caption={Function to get a user by ID.}, captionpos=b, label={get-by-id}]
 function getById(id) {
 	const requestOptions = { method: 'GET', headers: authHeader() };
 	return fetch(
