@@ -22,7 +22,7 @@ In this section we will examine and discuss which of these principles we followe
     If an update to the system was necessary, we attempted to make it easy by ensuring it would not require changes in multiple files.
     \item \textbf{Write asynchronous code}: Allowing tasks to be executed on different threads is a way to increase availability. 
     This was a primary concern when implementing the system, and all interactions between the API and the database, and the front end and API are processed asynchronously.
-    If the code would not have been asynchronous it would have meant enourmes idle times where the program would have waited for I/O actions to return.
+    If the code would not have been asynchronous it would have meant enormous idle times where the program would have waited for I/O actions to return.
     \item \textbf{Storing information in the state}: The system does not store information about a component's state in the system servers.
     As part of using React, the system stores information about states on the client side.
     This means that any server can handle any client request, and they will not depend on each other.
