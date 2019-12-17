@@ -1,5 +1,5 @@
-\section{Frontend structure}
-This chapter focuses on the implementation of the frontend in React.
+\section{Front end structure}
+This chapter focuses on the implementation of the front end in React.
 Some basic features within React were previously described in \autoref{sec:intro-to-react}.
 
 \subsection{States}
@@ -43,7 +43,7 @@ class EditService extends React.Component {
 
 \subsection{Services}
 Services are used to send or retrieve data from the API. 
-An example can be seen on \autoref{get-by-id}.
+\autoref{get-by-id} shows an example or retrieving a user by their id from the database.
 The \texttt{requestOptions} used as a parameter defines the type of method you use.
 The methods that can be used are either \texttt{'GET'}, \texttt{'POST'}, \texttt{'PUT'}, \texttt{'PATCH'} or \texttt{'DELETE'}.
 \texttt{'GET'} returns what is requested if it exists.
@@ -156,8 +156,10 @@ Some of the most commonly used components in our application are \texttt{TextFie
 An example of using Material-UI in the header can be seen on \autoref{material-ui}.
 As seen in the begin of the file, we import the different components that are needed.
 From line 11 onwards we then use them to create the design.
-We create a list, add an item to it which is a link to the landing page, and finally give it some text and an icon.
+We create a list, add an item to it which is a link to the login page, and finally give it some text and an icon.
 The header can bee seen on \autoref{fig:header}.
+In \autoref{material-ui} implement parts of the header, more specifically the log in icon in the right side.
+If the button is pressed, then it is redirected to \texttt{"/login"}.
 \begin{lstlisting}[caption={Use of material-ui in the header}, captionpos=b, label={material-ui}]
 import {
     List,
@@ -166,14 +168,14 @@ import {
     ListItemText
 } from '@material-ui/core';
 import {
-	Home
+	ExitToApp
 } from '@material-ui/icons';
 ...
 <List>
-    <ListItem button component={Link} to="/" key="Home" name="home">
-        <ListItemText primary="Home" />
+    <ListItem button component={Link} to="/login" key="LoginCircle" name="login">
+        <ListItemText primary="Login" />
         <ListItemIcon>
-            <Home fontSize="large" />
+            <ExitToApp fontSize="large" />
         </ListItemIcon>
     </ListItem>
 ...
