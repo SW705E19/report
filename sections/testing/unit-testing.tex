@@ -45,7 +45,7 @@ An example of this can be seen in the unit test in \autoref{lst:unitTestStubbing
 In the real code, the code seen on \autoref{lst:getByEmail} would be called as a part of the call to the login function on line 16, which connects to the database, but instead of doing so we use the Sinon library to stub the function, and tell it to throw an exception instead, so we can see how the controller handles this case.
 
 \begin{lstlisting}[caption={Unit test with stubbing},label={lst:unitTestStubbing}]
-...
+(*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
 it('returns status 400 if service throws exception', async function() {
     const request = {
         body: {},
@@ -64,7 +64,7 @@ it('returns status 400 if service throws exception', async function() {
     expect(res.statusCode).to.equal(400);
     stubResult.restore();
 });
-...
+(*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
 \end{lstlisting}
 
 \begin{lstlisting}[caption={Actual getByEmail function},label={lst:getByEmail}]
