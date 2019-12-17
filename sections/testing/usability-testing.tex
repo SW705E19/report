@@ -24,25 +24,25 @@ The tester called Mikkel encountered some issues with logging in.
 This was caused by some issues related to the test setup, and resulted in the time spent on the first few assignments not being indicative of the actual time it would take.
 While the time was invalid, he still completed the assignments, looking for design deficiencies.
 \begin{table}[]
-    \begin{tabular}{|l|l|l|l|l|}
+    \begin{tabular}{|l|l|l|l|l|l|}
     \hline
-                                            & Mikkel     & Melanie      & Martin           & Robin               \\ \hline
-    Create user                             & N/A        & 1 min 31 sec & 1 min 24 sec     & 1 minute 11 seconds \\ \hline
-    Log in                                  & N/A        & 10 seconds   & 34 seconds       & 18 seconds          \\ \hline
-    Change language                         & N/A        & 15 seconds   & 14 seconds       & 12 seconds          \\ \hline
-    Find "Butterfly"                        & N/A        & 13 seconds   & 12 seconds       & 10 seconds          \\ \hline
-    Find other services by "Mathias Møller" & N/A        & 12 seconds   & 1 min 31 seconds & 13 seconds          \\ \hline
-    Delete user                             & N/A        & 20 seconds   & 21 seconds       & 22 seconds          \\ \hline
-    Login as admin                          & N/A        & 20 seconds   & 22 seconds       & 18 seconds          \\ \hline
-    Create a service                        & 21 seconds & 38 seconds   & 45 seconds       & 30 seconds          \\ \hline
-    Rate specific service                   & 10 seconds & 19 seconds   & 20 seconds       & 21 seconds          \\ \hline
-    Log out                                 & 5 seconds  & 10 seconds   & 4 seconds        & 5 seconds           \\ \hline
+                                            & Mikkel     & Melanie      & Martin           & Robin                  & Heidi               \\ \hline
+    Create user                             & N/A        & 1 min 31 sec & 1 min 24 sec     & 1 minute 11 seconds    & 2 minutes 30 seconds \\ \hline
+    Log in                                  & N/A        & 10 seconds   & 34 seconds       & 18 seconds             & 38 seconds \\ \hline
+    Change language                         & N/A        & 15 seconds   & 14 seconds       & 12 seconds             & 10 seconds \\ \hline
+    Find "Butterfly"                        & N/A        & 13 seconds   & 12 seconds       & 10 seconds             & 10 seconds \\ \hline
+    Find other services by "Mathias Møller" & N/A        & 12 seconds   & 1 min 31 seconds & 13 seconds             & 25 seconds \\ \hline
+    Delete user                             & N/A        & 20 seconds   & 21 seconds       & 22 seconds             & 24 seconds \\ \hline
+    Login as admin                          & N/A        & 20 seconds   & 22 seconds       & 18 seconds             & 35 seconds\\ \hline
+    Create a service                        & 21 seconds & 38 seconds   & 45 seconds       & 30 seconds             & 1 minute 43 seconds \\ \hline
+    Rate specific service                   & 10 seconds & 19 seconds   & 20 seconds       & 21 seconds             & 25 seconds \\ \hline
+    Log out                                 & 5 seconds  & 10 seconds   & 4 seconds        & 5 seconds              & 7 seconds \\ \hline
     \end{tabular}
     \caption{A comparison of the time it took to perform the different tasks}
     \label{tab:usabilitytest}
 \end{table}
 Creating a user consistently took the longest amount of time.
-As can be seen, for all applicable tester, it took longer than 1 minute.
+As can be seen, for all applicable tester, it took longer than 1 minute, for one even longer than 2 minutes.
 The reason for this is that when creating a user, more input is required than many other parts of the system.
 The testers encountered an issue with their passwords, as the restrictions put on this made them have to redo this.
 The password requires at least 8 characters, with one number and one capital character.
@@ -54,15 +54,19 @@ This led to some of them repeatedly clicking the same language multiple times, s
 A possible fix for these issues could be to close the dropdown once a language has been chosen, but this might not communicate that the user is capable of selecting multiple languages.
 \\\\
 The assignment to find other services by a certain tutor had the largest deviation in terms of time spent.
-Two of the testers spent respectively 12 and 13 seconds, while the third spent a full minute and 31 seconds to complete the task.
+Three of the testers spent respectively 12, 13 and 25 seconds, while the third spent a full minute and 31 seconds to complete the task.
 The reason for this deviation is that the tester was confused what exactly he was supposed to do.
 Once he figured it out, he felt it was not immediately obvious where to go.
 Finally, he attempted to search for the tutor, which ended in him encountering a bug in which the search functionality did not work.
 This bug has since been fixed such that users can search for the name of a tutor.
 \\\\
+Heidi was a bit of an outlier when creating a service.
+However, she did not really encounter any problems, she just took her time when performing the task, especially when choosing categories for the service.
+She also did not realize that multiple categories could be selected at a time.
+Since other testers did not really have this issue, we expect that it is not a glaring design issue, and would be fixed with multiple uses.
 One of the testers commented on the icons used in the system, saying some of them might not be as intuitive as intended.
 This tester was confused with the log in button, thinking it looked like a log out button instead.
 Generally, the assignments felt easy to complete for the testers.
-Outside of the two discussions above, the assignments were completed quickly, and the testers spent around the same amount of time on all of them.
+Outside of the discussions above, the assignments were completed quickly, and the testers spent around the same amount of time on all of them.
 This, along with the lack of problems caused by the design during testing could indicate that, generally, the design of the system is fairly intuitive, while some of the icons could be a bit unintuitive. 
 
