@@ -87,8 +87,8 @@ These are most often stateless and are called presentational since all they shou
 
 The container for the create user page can be seen on \autoref{create-user}.
 The \texttt{CreateUser} class only contains the state, some functions and a \texttt{render()}.
-Within the state object of CreateUser, there is an object called firstName, which contains a firstName string and a firstNameValid boolean to indicate if firstName is valid.
-It is initialized as true, so that the error messages aren't visible when entering the page.
+Within the state object of CreateUser, there is an object called \texttt{firstName}, which contains a \texttt{firstName} string and a \texttt{firstNameValid} boolean to indicate if \texttt{firstName} is valid.
+It is initialized as true, so that the error messages are not visible when entering the page.
 When they press the submit button, the \texttt{handleSubmit} function will be called, which checks if the values are valid.
 If the values are invalid, the booleans in the state will be updated. 
 If these are set to false, an error message will be shown as can be seen in \autoref{fig:create-user-error}.
