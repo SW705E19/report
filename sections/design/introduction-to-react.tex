@@ -127,7 +127,7 @@ There two kinds of components, which are stateful and stateless components.
 In our application we will mostly implement stateful components as class components and stateless components as functional components. 
 Functional components can also be stateful, but the choice of using class components is mostly a question of preference.
 A stateful component has a state which contains all the dynamic data in the component.
-This is useful since the render method is called every time the local \textit{State} is changed.
+This is useful since the render method is called every time the local \texttt{State} is changed.
 We can set the initial state of a component by assigning \texttt{this.state} in the constructor of the component.
 \begin{center}
     \texttt{this.state = \{textToDisplay: 'Initial text'\};}
@@ -138,7 +138,7 @@ This is done by using the \texttt{this.setState()} function.
     \texttt{this.setState(\{textToDisplay: 'New text'\});}
 \end{center}
 Parent or child components should not care if a certain component is stateful or stateless since the state is local and not accessible by other components.
-A component can however pass variables from its state through \texttt{props} to a child component, which means that information about a state can only be passed in a \textit{top-down} approach \cite{ReactJS}.
+A component can however pass variables from its state through \texttt{props} to a child component, which means that information about a state can only be passed in a \texttt{top-down} approach \cite{ReactJS}.
 Every time a state is changed with \texttt{this.setState()} the component that the state belongs to and all of its children are re-rendered.
 By passing callback to the props of children we can allow  the children of a component to transfer data back to its parent and even trigger re-renders by passing callback functions that set the state of the parent component.
 If a function calls \texttt{this.setState()}, it has to be bound in the constructor of the component.
