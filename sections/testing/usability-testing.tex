@@ -13,3 +13,65 @@ With usability testing, it is possible to get feedback on more subjective parts 
 
 When conducting usability tests, a set of pre-defined tasks are given to the testers one at a time.
 These tests should aim to resemble how actual users would use the system, to observe where they struggle to understand how the system works.
+
+\subsection{Our usability tests}
+To get feedback on the subjective parts of the system, we conducted usability tests.
+The tests that the users performed can be found in \autoref{app:usability}.
+
+\subsubsection{Comparison of the tests}
+\autoref{tab:usabilitytest} shows the different testers and the time it took for them to perform the tasks defined.
+The tester called Mikkel encountered some issues with logging in.
+This was caused by some issues related to the test setup, and resulted in the time spent on the first few assignments not being indicative of the actual time it would take.
+While the time was invalid, he still completed the assignments, looking for design deficiencies.
+\begin{table}[]
+    \begin{tabular}{|l|l|l|l|l|l|}
+    \hline
+                                            & Mikkel     & Melanie      & Martin           & Robin                  & Heidi               \\ \hline
+    Create user                             & N/A        & 1 min 31 sec & 1 min 24 sec     & 1 minute 11 seconds    & 2 minutes 30 seconds \\ \hline
+    Log in                                  & N/A        & 10 seconds   & 34 seconds       & 18 seconds             & 38 seconds \\ \hline
+    Change language                         & N/A        & 15 seconds   & 14 seconds       & 12 seconds             & 10 seconds \\ \hline
+    Find "Butterfly"                        & N/A        & 13 seconds   & 12 seconds       & 10 seconds             & 10 seconds \\ \hline
+    Find other services by "Mathias Møller" & N/A        & 12 seconds   & 1 min 31 seconds & 13 seconds             & 25 seconds \\ \hline
+    Delete user                             & N/A        & 20 seconds   & 21 seconds       & 22 seconds             & 24 seconds \\ \hline
+    Login as admin                          & N/A        & 20 seconds   & 22 seconds       & 18 seconds             & 35 seconds\\ \hline
+    Create a service                        & 21 seconds & 38 seconds   & 45 seconds       & 30 seconds             & 1 minute 43 seconds \\ \hline
+    Rate specific service                   & 10 seconds & 19 seconds   & 20 seconds       & 21 seconds             & 25 seconds \\ \hline
+    Log out                                 & 5 seconds  & 10 seconds   & 4 seconds        & 5 seconds              & 7 seconds \\ \hline
+    \end{tabular}
+    \caption{A comparison of the time it took to perform the different tasks}
+    \label{tab:usabilitytest}
+\end{table}
+Creating a user consistently took the longest amount of time.
+As can be seen, for all applicable tester, it took longer than 1 minute, for one even longer than 2 minutes.
+The reason for this is that when creating a user, more input is required than many other parts of the system.
+We discovered a bug when they had to create a user. 
+Multiple testers input a password that did not live up to the restrictions, but the users were still created. 
+This was due to us missing a check on whether or not the password was valid, and was quickly fixed the day after.
+Another consistent issue was the design of choosing a language when creating a user.
+The user has to choose the languages they are capable of speaking, such that, if they were to become tutors and create a service, prospective learners would know in which languages the service could be provided.
+During the test it was implemented as a dropdown in which users could select multiple languages at a time.
+This turned out to be unintuitive, as they were unsure whether or not they had actually chosen a language after selecting one.
+This led to some of them repeatedly clicking the same language multiple times, selecting and deselecting it.
+A possible fix for these issues could be to close the dropdown once a language has been chosen, but this might not communicate that the user is capable of selecting multiple languages.
+\\\\
+The assignment to find other services by a certain tutor had the largest deviation in terms of time spent.
+Three of the testers spent respectively 12, 13 and 25 seconds, while the third spent a full minute and 31 seconds to complete the task.
+The reason for this deviation is that the tester was confused what exactly he was supposed to do.
+Once he figured it out, he felt it was not immediately obvious where to go.
+Finally, he attempted to search for the tutor, which ended in him encountering a bug in which the search functionality did not work.
+This bug has since been fixed such that users can search for the name of a tutor.
+\\\\
+One problem that all testers faced was a bug where they were unable to get to their own account if they were on another user's page.
+This is due to their own account and the user's page being rendered by the same component.
+The system then assumes that the state does not need to be updated, as the content of the page should be the same.
+This can be fixed by forcing an update whenever the account icon is pressed, to force a rerender.
+\\\\
+Heidi was a bit of an outlier when creating a service.
+However, she did not really encounter any problems, she just took her time when performing the task, especially when choosing categories for the service.
+She also did not realize that multiple categories could be selected at a time.
+Since other testers did not really have this issue, we expect that it is not a glaring design issue, and would be fixed with multiple uses.
+One of the testers commented on the icons used in the system, saying some of them might not be as intuitive as intended.
+This tester was confused with the log in button, thinking it looked like a log out button instead.
+Generally, the assignments felt easy to complete for the testers.
+Outside of the discussions above, the assignments were completed quickly, and the testers spent around the same amount of time on all of them.
+This, along with the lack of problems caused by the design during testing could indicate that, generally, the design of the system is fairly intuitive, while some of the icons could be a bit unintuitive. 
