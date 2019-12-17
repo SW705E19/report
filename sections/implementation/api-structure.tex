@@ -22,22 +22,23 @@ Both the requests and the responses can contain data, and the type of this data 
 In our case the data is sent in a json format.
 \begin{lstlisting}[caption={Shows how a user object looks in a json format}, captionpos=b, label={user-json}]
 {
-    "id": 55,
-    "phoneNumber": "888888888",
-    "education": "Software",
-    "address": "boulevarden 7 3 th",
-    "dateOfBirth": "1997-03-14T00:00:00.000Z",
+    "id": 49,
+    "phoneNumber": "23242526",
+    "education": "",
+    "address": "Vestergade 22",
+    "dateOfBirth": "1992-11-12T00:00:00.000Z",
     "avatarUrl": "",
     "languages": [
-        "Danish"
+        "Danish",
+        "English"
     ],
-    "subjectsOfInterest": [
-        "Math"
-    ],
-    "email": "mijens17@student.aau.dk",
-    "firstName": "MIkkel",
-    "lastName": "Jensen",
-    "roles": []
+    "subjectsOfInterest": [],
+    "email": "johnnyrommy@email.com",
+    "firstName": "Johnny",
+    "lastName": "Romanowski",
+    "roles": [
+        "TUTOR"
+    ]
 }
 \end{lstlisting}
 In \autoref{user-json} we see what a user object that is returned in a response from the API looks like in a json format. 
