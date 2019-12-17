@@ -44,8 +44,9 @@ While the time was invalid, he still completed the assignments, looking for desi
 Creating a user consistently took the longest amount of time.
 As can be seen, for all applicable tester, it took longer than 1 minute, for one even longer than 2 minutes.
 The reason for this is that when creating a user, more input is required than many other parts of the system.
-The testers encountered an issue with their passwords, as the restrictions put on this made them have to redo this.
-The password requires at least 8 characters, with one number and one capital character.
+We discovered a bug when they had to create a user. 
+Multiple testers inputted a password that did not live up to the restrictions, but the users were still created. 
+This was due to us missing a check on whether or not the password was valid, and was quickly fixed the day after.
 Another consistent issue was the design of choosing a language when creating a user.
 The user has to choose the languages they are capable of speaking, such that, if they were to become tutors and create a service, prospective learners would know in which languages the service could be provided.
 During the test it was implemented as a dropdown in which users could select multiple languages at a time.
@@ -59,6 +60,11 @@ The reason for this deviation is that the tester was confused what exactly he wa
 Once he figured it out, he felt it was not immediately obvious where to go.
 Finally, he attempted to search for the tutor, which ended in him encountering a bug in which the search functionality did not work.
 This bug has since been fixed such that users can search for the name of a tutor.
+\\\\
+One problem that all testers faced was a bug where they were unable to get to their own account if they were on another user's page.
+This is due to their own account and the user's page being rendered by the same component.
+The system then assumes that the state doe snot need to be updated, as the content of the page should be the same.
+This can be fixed by forcing an update whenever the account icon is pressed, to force a rerender.
 \\\\
 Heidi was a bit of an outlier when creating a service.
 However, she did not really encounter any problems, she just took her time when performing the task, especially when choosing categories for the service.
