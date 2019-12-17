@@ -64,9 +64,9 @@ As an example we can create a button component with an on-click event embedded i
 Here we use brackets to enable us to embed a callback function in the JSX which will be called when the button is clicked.
 We can now export this button and it can be imported by other components.
 There are both class components and functional components.
-An example of this can be seen in the following listings:
+An example of this can be seen in \autoref{lst:on-click-example-1} and \autoref{lst:on-click-example-2}
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Example of a button with a onClick event in a functional component},label={lst:on-click-example-1}]
 function Button(props) {
 	return (
 		<div>
@@ -78,7 +78,7 @@ function Button(props) {
 
 We can convert this into a class like this:
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={Example of a button with a onClick event in a class component},label={lst:on-click-example-2}]
 class Button extends React.Component {
 	constructor(props){
 		super(props);
@@ -100,9 +100,9 @@ If a component is used in another component, we can use \texttt{props} to pass d
 \subsection*{Props}
 When a component is instantiated it is possible to pass an arbitrary number of arguments to the component by passing key and value pairs.
 These are then accessed through the props object in the component.
-An example of this can be seen in the following listing.
+An example of this can be seen in \autoref{lst:react-props-lsting}.
 
-\begin{lstlisting}[label={lst:react-props-lsting}]
+\begin{lstlisting}[caption={An example of how properties are passed to children components}, label={lst:react-props-lsting}]
 function Site(){
 	const titleVariable = 'title';
 	const descriptionVariable = 'This is a component';
@@ -142,8 +142,8 @@ A component can however pass variables from its state through \texttt{props} to 
 Every time a state is changed with \texttt{this.setState()} the component that the state belongs to and all of its children are re-rendered.
 By passing callback to the props of children we can allow  the children of a component to transfer data back to its parent and even trigger re-renders by passing callback functions that set the state of the parent component.
 If a function calls \texttt{this.setState()}, it has to be bound in the constructor of the component.
-An example of how this is done can be seen in the following listing.
-\begin{lstlisting}
+An example of how this is done can be seen in \autoref{callback-example}.
+\begin{lstlisting}[caption={An example of a callback function}, label={callback-example}]
 class ourComponent extends Component {
 	constructor(props){
 		super(props);
@@ -174,5 +174,40 @@ This is useful for when we need to fetch data from the API that we want to save 
 The reason that this is not done in the constructor of the component is that the render function should not be waiting for asynchronous operations before it is allowed to render.
 This is because we do not know how long it will take before the asynchronous function is done executing, or if it will even succeed.
 Instead of waiting, it is better to first render the component before calling asynchronous functions that will trigger a re-rendering of the component.
+\begin{lstlisting}[caption={Example with the componentDidMount function}, label={lst:componentDidMount-example}]
+class OurComponent extends Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			data: null
+		};
+	}
+
+	componentDidMount(){
+		userService.getUserById(1).then((dataRes) => {
+			this.setState({
+				data: dataRes
+			});
+		})
+	}
+
+	render(){
+		if(this.state.data !== null){
+			return <ChildComponent data={this.state.data} />:
+		}
+			
+		return null;
+	}
+}
+\end{lstlisting}
+An example of \texttt{componentDidMount} can be seen on \autoref{lst:componentDidMount-example}.
+We initialize the state with a null.
+We check in the render function if the value in the state is null.
+If it is null we return null, which just renders nothing.
+If it is not null we render a component and pass the data as a prop.
+The first time the render function is called, the value is null.
+After it has rendered the \texttt{componentDidMount} function is called.
+In \texttt{componentDidMount} we make an API call and then set \texttt{data} in the \texttt{state} equals to the response.
+Because the state is changed the \texttt{component} re-renders and \texttt{ChildComponent} is rendered this time.
 \\\\
 Finally we will take a look at designing an API, and choosing and designing a database.
