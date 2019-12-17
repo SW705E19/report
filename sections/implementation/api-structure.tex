@@ -134,6 +134,8 @@ class UserController {
 \end{lstlisting}
 In \autoref{user-controller} we see an example of some of the functions defined in the \texttt{userController}.
 The first function \texttt{listAll} takes a request and a response as arguments and returns a \texttt{Promise<Response>}.
+A \texttt{Promise} is used as return type for asynchronous functions to represent that the function does not need to immediately return a value.
+It is a placeholder for a result that has not happened yet but will eventually happen and return either the completed or failed result and its value.
 Each function in the controller is tagged with \texttt{async} to allow them to be called asynchronously. 
 \texttt{listAll} gets all the users from the database using the \texttt{userService.getAll()}.
 A response is then returned with the status code 200, meaning that request has succeded, and the users are returned in the response. 
