@@ -8,9 +8,9 @@ This means that both a relational and non-relational database system could work,
 \\\\
 The main factor to consider when making the choice between a relational or non-relational database is the structure of the data to be used \cite{sqlvsnosql}.
 If the system primarily uses structured data, a relational database would be preferable.
-On the other hand, when the system deals with unclear data requirements or unstructured data, a non-relation dalatabase would be preferable. 
+On the other hand, when the system deals with unclear data requirements or unstructured data, a non-relation database would be preferable. 
 When ACID compliance is important, a relational database should be considered.
-Being ACID compliant means upholding the following principles\cite{sqlvsnosql}:
+Being ACID compliant means upholding the following principles \cite{sqlvsnosql}:
 \begin{itemize}
     \item Atomicity - transactions either succeed completely or get rolled back
     \item Consistency - data written to a database must be valid according to the defined rules
@@ -20,7 +20,7 @@ Being ACID compliant means upholding the following principles\cite{sqlvsnosql}:
 In terms of scalability, there are also some distinct differences between the two options. 
 Relational databases scale vertically, meaning the capacity of a single server will generally have to be increased, whereas non-relational databases scale horizontally, allowing for easier addition of more servers.
 Since data in non-relational databases requires less structure, they can be viewed as self-contained objects meaning they can easily be stored on multiple servers.
-We considered going with a non-relational database, as such a database system is often used with the chosen frontend framework React, as well as the focus of scalability in the project.
+We considered going with a non-relational database, as such a database system is often used with the chosen front end framework React, as well as the focus of scalability in the project.
 However, ACID compliance is an important factor for the system.
 Transactions will happen between students and tutors, and as such we need to ensure they either succeed fully or get rolled by as defined by the atomicity principle.
 The data used for this system will also be structured, and the team has more experience working with relational databases.
@@ -35,29 +35,29 @@ The following databases were considered for use:
     \item Microsoft SQL Server
 \end{itemize}
 Postgres is an open source relational database \cite{Postgres}.
-It is free and is one of the most popular databases being used\cite{databasePopularity}.
+It is free and is one of the most popular databases being used \cite{databasePopularity}.
 It has great documentation and a large, active user base.
 Furthermore, it is not only a relational database but an object-relational database which gives it support for user-defined objects, functions, operators and more.
 It also allows storing of JSON objects and can therefore be used almost akin to a non-relational database.
 Postgres is also ACID compliant, meaning that a database transaction is ensured to be completed even in the event of errors or possibly even power failures.
 \\
 \\
-MySQL is the most popular database used today\cite{databasePopularity}.
-It is almost completely open source and has a very active community\cite{MySQL}.
+MySQL is the most popular database used today \cite{databasePopularity}.
+It is almost completely open source and has a very active community \cite{MySQL}.
 MySQL has also added the functionality to act akin to a non-relational database.
 MySQL is not ACID compliant.
 \\
 \\
-Oracle is a commercial database and is quite expensive to obtain\cite{oracle}.
+Oracle is a commercial database and is quite expensive to obtain \cite{oracle}.
 Furthermore, you have to pay for extra features.
 For these reasons it was decided that this database would not be used.
 \\
 \\
-MariaDB is also an opensource relational database\cite{MariaDB}.
+MariaDB is also an opensource relational database \cite{MariaDB}.
 Just like Postgres it is ACID compliant, can store JSON objects and has good documentation.
 \\
 \\
-Microsoft SQL Server is a commercial database system\cite{MSSQLSERVER}.
+Microsoft SQL Server is a commercial database system \cite{MSSQLSERVER}.
 Just like Oracle, that means you will have to pay for access to the full system.
 \\
 \\

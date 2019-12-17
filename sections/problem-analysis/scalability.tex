@@ -1,11 +1,11 @@
 \section{Scalability}\label{sec:scalability}
-In this section, we will look at what scalability in software is and how to design a system to be scalable. 
+In this section, we will look at what scalability in software is and how to design a system to be scalable, as it is a part of the semester goals and some research is necessary before designing the system, to ensure that it will be able to scale properly.
 
 \subsection{What is scalability}
 There are different types of scalability related to software design \cite{ScalabilityDesignPrinciples}.
 \begin{itemize}
     \item \textbf{Scalability in performance} The system should be able to maintain high performance even if there are many users. This can be facilitated by adding more capacity to the system's components to allow more parallel computing. 
-    However, performance does not scale linearly as there is a limit to how much speedup that can be achieved by using multiple processors according to \textit{Amdahl's Law}. 
+    However, performance does not scale linearly as there is a limit to how much speedup that can be achieved by using multiple processors. 
     \item \textbf{Scalability in availability} According to the \textit{CAP theorem}, consistency and availability cannot be guaranteed in a distributed system. 
     Usually, in web applications that need to be scalable, availability is favored over consistency. 
     The system will instead make use of \textit{eventual consistency}, meaning that all the users will, at some point, be able to read the most recent updates but not at the same time. 
@@ -19,6 +19,7 @@ There are different types of scalability related to software design \cite{Scalab
     Another thing to consider is using industry-standard technologies, as it will most likely also be it easier to hire experts on these in the future.
 \end{itemize}
 
+
 \subsection{Designing a system for scalability}
 When designing systems to be scalable, some principles should be followed \cite{ScalabilityDesignPrinciples}.
 \begin{itemize}
@@ -28,7 +29,7 @@ When designing systems to be scalable, some principles should be followed \cite{
     Add new servers to the system instead of buying a new server with a larger capacity each time to replace the old one when more capacity is needed. 
     In theory, this should also be cheaper since the old servers will still be in use. 
     However, distributing network traffic properly is required for a system with multiple servers to work.
-    \item Build the API first to avoid tailoring it to a specific type of frontend. 
+    \item Build the API first to avoid tailoring it to a specific type of front end. 
     The API should work as a service such that it can be used for any system such as a smartphone application or a web site. 
     \item Caching the data that is being accessed can have significant performance benefits since the system will not have to recompute the results that are often requested. 
     \item As mentioned in scalability in availability, the system does not need to provide the newest data available at all times if the users do not need to know. 
