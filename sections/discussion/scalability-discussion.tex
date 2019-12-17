@@ -42,13 +42,13 @@ If the system were to be deployed, the diagram of components would be as illustr
  \noindent
 As shown, this would involve a horizontal scaling, with the main changes happening in the load balancer and server layer.
 The load balancer would be responsible for distributing clients to different API clusters.
-While there are different API cluster in order to spread out client requests, each cluster would also have multiple instances of the API, meaning an API cluster could consists of one to many API's.
+While there are different API clusters in order to spread out client requests, each cluster would also have multiple instances of the API, meaning an API cluster could consists of one to many API's.
 
 \subsection{Evaluation of API scalability}
 To evaluate the scalability in terms of availability, we ran load tests to test whether using a vertical scaling model worked.
 As most of the business logic is handled by the API, it was decided to focus load test on the API.
 We decided to do a peak load test using the tool \texttt{LoadUI}, which allows us to define an amount of arriving virtual users (VUs) \cite{loadimpactSource}. 
-These VUs work as concurrent users that were each can open multiple connections in parallel to simulate having a large amount of users constantly arriving to the site.
+These VUs work as concurrent users that can each open multiple connections in parallel to simulate having a large amount of users constantly arriving to the site.
 Unlike real users, these VUs will continuously send requests to the server at a rate of approximately 18 requests per second, as seen on the results in the appendix\autoref{App:LoadTestResults}.
 \\
 For the load tests we used a setup where 20 new VUs would arrive every 10th second, and a test duration of five minutes.
