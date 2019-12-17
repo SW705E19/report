@@ -16,6 +16,7 @@ We discuss two methods of creating a recommender, \textit{content-based filterin
 
 \subsection{Content-based filtering}\label{content-based-filtering}
 Content-based recommender systems recommend an item to a user based upon a description of the item and a profile of the user's interests \cite{ContentBasedFiltering}.
+\todo{cite er fucked?}
 A common scenario for web applications is that they present a list of items to a user, and the user then selects among these to receive more details. 
 An item in such a scenario would have a representation dependent on the implementation, which could be used to analyze items of particular interest for a user.
 Items are often stored in databases, creating structured data with each entry having the same set of attributes. 
@@ -44,6 +45,8 @@ As shown, users and items are represented by the same set of attributes.
     \caption{This figure shows a possible representation of a user.}
     \label{tbl:content-user}
 \end{table}
+
+\todo{table er næsten for langt til siden}
 \noindent
 The basic idea for content-based filtering is then to compute the similarity of an unseen item with the user profile, and suggest the items with attributes that are most similar to those in the user profile..
 Unstructured data, such as text fields with no restriction, create complications when creating a user profile, as relationships between the values on an attribute for different items for a specific user can be found, but an unrestricted text will generally be unique \cite{ContentBasedFiltering}. 
@@ -58,6 +61,7 @@ Historical data of interactions can be used to filter out already purchased item
 Creating a model of a user's preferences is then done through a form of classification learning, in which training data is divided into categories, an example being the binary categories \textit{Items the user likes} and \textit{items the user dislikes} \cite{ContentBasedFiltering}.
 These algorithms learn a function that model's a users interests, and given a new item and the user model, this function predicts whether or not the user is interested in the item through a probability or a numeric value by analyzing the item representation and user profile.
 Popular learning approaches for content-based filtering are \textit{naïve Bayes}, \textit{nearest neighbor methods} or \textit{linear classifiers}.
+\todo{cites er fucked}
 
 \subsection{Collaborative filtering}
 Collaborative filtering differs from content-based filtering in that it focuses on matching users and items through the opinions of other people.
@@ -97,7 +101,7 @@ The latent factor approach focuses on splitting the rating matrix into separate 
 Content-based filtering and collaborative filtering use different underlying assumptions \cite{CollaborativeFiltering}.
 Content-based filtering assumes that items with similar objective features will be rated similarly, whereas collaborative filtering assumes that people with similar tastes rate things similarly, and that customers who had similar tastes in the past will have similar tastes in the future.
 The assumption that collaborative filtering employs, that users will have similar taste in the future, is quite strong and cannot be guaranteed, as tastes are likely to change over time.
-Content-based filtering can predict relevance for items without without ratings by looking at similar items, whereas collaborative filtering requires ratings for an item to create predictions.
+Content-based filtering can predict relevance for items without ratings by looking at similar items, whereas collaborative filtering requires ratings for an item to create predictions.
 This means content-based filtering is especially useful for items that change a lot, but it needs content to analyze.
 For domains where content is scarce, such as for a system in which users rate movies since a small amount of users will actually leave a rating, collaborative filtering has an edge since it does not require content.
 Content-based techniques can have problems with new users, as there is a ramp-up phase when learning a model of the user's interests.
@@ -123,6 +127,7 @@ Content-based and collaborative filtering are not mutually exclusive, and both c
 \subsection{Our choice}
 Ideally, a combination of both collaborative and content-based filtering is ideal.
 However, for this project implementing such a combination was not feasible, and we had to focus on one type of recommender system.
+The reason it was not feasible was due to the recommender system being based on knowledge acquired from one of the semester courses, and such systems were only detailed towards the end of the semester, leading to a lack of time to create a combined solution.
 The system has a simple rating system in which users rate a service on a numerical scale of one to five.
 It is assumed that services will be rated by a small subset of users, since not all users will participate in all services, and not all who participate in a given service will leave a rating of it.
 This means the domain will have content that is scarce.
@@ -150,6 +155,7 @@ Matrix factorization aims to characterize items and users by vectors of factors,
 
 \subsubsection{Matrix factorization}
 Matrix factorization map users and items to a latent factor space of dimensionality \textit{f} \cite{MatrixFactorization}. 
+\cite{Kilde er fucked}
 This is achieved by taking the ratings matrix and splitting it into two matrices of the following dimensions, where $N_{i}$ is the number of items, $N_{u}$ is the number of users and $f$ is the number of factors:
 \begin{equation}
     N_{i} \times f
@@ -231,14 +237,15 @@ export default class Recommender {
         let userServiceMatrix: number[][] = [];
         let predictedRatings: number[][] = [];
         let userFactorMatrix: number[][] = [];
-        let serviceFactorMatrix: number[][] = [];
+        let factorServiceMatrix: number[][] = [];
 
         userServiceMatrix = initUserServiceMatrix(numberOfRows, numberOfCols, allUsers, allServices, userServiceMatrix);
 
 		userServiceMatrix = populateUserServiceMatrix(allRatings, numberOfRows, numberOfCols, userServiceMatrix);
-    \dots
+(*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
 \end{lstlisting}
-When we initialize both the matrix for users and factors as well as the matrix for services and factors we initialize all entries with random values between 0 and 1.
+When we initialize both the matrix for users and factors as well as the matrix for factors and services we initialize all entries with random values between 0 and 1.
+Initialization is illustrated in \autoref{lst:initUserFactor}.
 This is done to ensure we can calculate a predicted rating.
 The actual value is arbitrary, but a small value is chosen, as this should make the algorithm arrive at a model faster, compared to initializing with a greater value \cite{FunkMatrixFactorization}.
 \begin{lstlisting}[caption={Initializing the user and factor matrix}, captionpos=b, label={lst:initUserFactor}]
@@ -246,10 +253,43 @@ function initUserFactorMatrix(numberOfRows: number, numberOfFactors: number, use
     for (let i = 0; i < numberOfRows; i++) {
         userFactorMatrix[i] = []; // Initialize inner array
         for (let j = 0; j < numberOfFactors; j++) {
-            userFactorMatrix[i][j] = Math.random() * 1;
+            userFactorMatrix[i][j] = Math.random();
         }
     }   
     return userFactorMatrix;
+}
+\end{lstlisting}
+\autoref{lst:initUserService} illustrates how we initialize the matrix for users and services.
+On the first row we insert the ids of all services, and on the first column we insert all user ids.
+This is done to ensure we can get the proper ids for the users and services to recommend.
+Then we insert 0 in all entries, and call another function to populate the entries in which there are ratings.
+If there is a rating from a user on a given service, we find the entry corresponding to these ids and insert the rating value.
+This means we end with a matrix consisting of a row of service ids, a column of user ids, the rating values and 0 for those entries without ratings.
+\begin{lstlisting}[caption={Initializing the user and service matrix}, captionpos=b, label={lst:initUserService}]
+    export function initUserServiceMatrix(
+	numberOfRows: number,
+	numberOfCols: number,
+	allUsers: User[],
+	allServices: Service[],
+	userServiceMatrix: number[][],
+): number[][] {
+	userServiceMatrix[0] = [];
+	for (let i = 0; i < numberOfRows; i++) {
+		userServiceMatrix[i + 1] = [];
+		userServiceMatrix[i + 1][0] = allUsers[i].id;
+	}
+
+	for (let i = 0; i < numberOfCols; i++) {
+		userServiceMatrix[0][i + 1] = allServices[i].id;
+	}
+
+	for (let i = 1; i < numberOfRows + 1; i++) {
+		for (let j = 1; j < numberOfCols + 1; j++) {
+			userServiceMatrix[i][j] = 0;
+		}
+	}
+
+	return userServiceMatrix;
 }
 \end{lstlisting}
 After initializing the matrices, we start the first calculation of predictions.
@@ -283,7 +323,7 @@ After calculating the predicted ratings, we need to determine the error and upda
 We do this with the code snippet in listing \autoref{lst:errorandupdates}.
 To calculate the error, we use the equation defined in \autoref{fig:calculatingerror}, which simply subtracts the predicted value from the actual value.
 We then use the updating rules defined in the equations in \autoref{fig:updatingq} and \autoref{fig:updatingp} to update the values of the matrices.
-We define the $\gamma$ value from the equation as the \texttt{alphaValue}, the $\lambda$ value as \texttt{0.001} and assign them to be 0.001, based on testing and recommended values.
+We define the $\gamma$ value from the equation as the \texttt{alphaValue}, the $\lambda$ value as \texttt{betaValue}, and assign them to be \texttt{0.001}, based on testing and recommended values.
 
 \begin{lstlisting}[caption={Calculating error and updating values}, captionpos=b, label={lst:errorandupdates}]
 const alphaValue = 0.001;
@@ -303,7 +343,9 @@ for (let i = 0; i < numberOfRows; i++) {
         }
     }
 }
-\dots
+.
+.
+.
 \end{lstlisting}
 After updating the values, we calculate the dot product of the two factor matrices again, and use the new predictions to calculate the squared error through the code in \autoref{lst:squarederror}.
 The squared error is calculated with the equation defined in \autoref{fig:minimizesquarederror}.
@@ -326,7 +368,7 @@ for (let i = 0; i < numberOfRows; i++) {
         }
     }
 }
-\dots
+(*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
 \end{lstlisting}
 Once the algorithm completes, we need to make our data persist.
 To do this, we keep a separate ratings table in the database consisting of predicted ratings.
@@ -344,5 +386,5 @@ for (let i = 0; i < numberOfRows; i++) {
         }
     }
 }
-\dots
+(*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
 \end{lstlisting}
