@@ -237,9 +237,7 @@ export default class Recommender {
         userServiceMatrix = initUserServiceMatrix(numberOfRows, numberOfCols, allUsers, allServices, userServiceMatrix);
 
 		userServiceMatrix = populateUserServiceMatrix(allRatings, numberOfRows, numberOfCols, userServiceMatrix);
-    .
-    .
-    .
+(*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
 \end{lstlisting}
 When we initialize both the matrix for users and factors as well as the matrix for factors and services we initialize all entries with random values between 0 and 1.
 Initialization is illustrated in \autoref{lst:initUserFactor}.
@@ -365,9 +363,7 @@ for (let i = 0; i < numberOfRows; i++) {
         }
     }
 }
-.
-.
-.
+(*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
 \end{lstlisting}
 Once the algorithm completes, we need to make our data persist.
 To do this, we keep a separate ratings table in the database consisting of predicted ratings.
@@ -385,7 +381,5 @@ for (let i = 0; i < numberOfRows; i++) {
         }
     }
 }
-.
-.
-.
+(*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
 \end{lstlisting}
