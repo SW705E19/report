@@ -5,7 +5,7 @@ In this section, we will look at what scalability in software is and how to desi
 There are different types of scalability related to software design \cite{ScalabilityDesignPrinciples}.
 \begin{itemize}
     \item \textbf{Scalability in performance} The system should be able to maintain high performance even if there are many users. This can be facilitated by adding more capacity to the system's components to allow more parallel computing. 
-    However, performance does not scale linearly as there is a limit to how much speedup that can be achieved by using multiple processors according to \textit{Amdahl's Law}. 
+    However, performance does not scale linearly as there is a limit to how much speedup that can be achieved by using multiple processors. 
     \item \textbf{Scalability in availability} According to the \textit{CAP theorem}, consistency and availability cannot be guaranteed in a distributed system. 
     Usually, in web applications that need to be scalable, availability is favored over consistency. 
     The system will instead make use of \textit{eventual consistency}, meaning that all the users will, at some point, be able to read the most recent updates but not at the same time. 
@@ -18,8 +18,6 @@ There are different types of scalability related to software design \cite{Scalab
     It is crucial to not only think of the costs of developing different components versus reusing existing ones, but also look at what the costs of maintaining these components will be in the future. 
     Another thing to consider is using industry-standard technologies, as it will most likely also be it easier to hire experts on these in the future.
 \end{itemize}
-
-\todo{hvad er amdahls law?}
 
 
 \subsection{Designing a system for scalability}
