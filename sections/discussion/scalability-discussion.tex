@@ -4,14 +4,14 @@ In \autoref{sec:scalability} we determined that there are different types of sca
 In this section we will examine and discuss which of these principles we followed throughout the creation of the system.
 
 \begin{itemize}
-    \item \textbf{Design two of everything}: When designing two of everything it is important to identify if there is any single points of failure.
+    \item \textbf{Design two of everything}: When designing two of everything it is important to identify if there is any single point of failure.
     In our case that would be the API and the database.
-    For our API we could start multilpe machines that each run an API so that if one fails the others will take over the workload.
+    For our API we could start multiple machines that each run an API so that if one fails the others will take over the workload.
     The same would work for the database, but in that case it would need to handle updating the data of each database instance to ensure consistency.
     \item \textbf{Scale horizontally}: Horizontal scaling is the smarter way to scale an application, as we talked about in \autoref{sec:scalability}.
-    However we were only able to test it with vertical scaling as running horizontal scaling required us to run the system on multilpe machines and then route the traffic to the different machines.
+    However, we were only able to test it with vertical scaling as running horizontal scaling required us to run the system on multiple machines and then route the traffic to the different machines.
     We had difficulties in doing this as we were not able to do this on the university network since each machine gets its own subnetwork.
-    \item \textbf{Build API first}: Whenever we implemented a new functionality we always started with creating the API endpoints.
+    \item \textbf{Build API first}: Whenever we implemented a new functionality we always started by creating the API endpoints.
     We did this to ensure that the API could be used for other systems in the future and made sure that the data was as generic as possible to not tailor the API for the front end. 
     \item \textbf{Caching data}: Caching data after retrieval could help increase performance of the system if a user were to quickly swap between separate pages. 
     As it stands, our system does not take advantage of caching.
@@ -47,7 +47,7 @@ While there are different API cluster in order to spread out client requests, ea
 \subsection{Evaluation of API scalability}
 To evaluate the scalability in terms of availability, we ran load tests to test whether using a vertical scaling model worked.
 As most of the business logic is handled by the API, it was decided to focus load test on the API.
-We decided to do a peak load test using the tool LoadUI, which allows us to define an amount of arriving virtual users (VUs)\cite{loadimpactSource}. 
+We decided to do a peak load test using the tool \texttt{LoadUI}, which allows us to define an amount of arriving virtual users (VUs) \cite{loadimpactSource}. 
 These VUs work as concurrent users that were each can open multiple connections in parallel to simulate having a large amount of users constantly arriving to the site.
 Unlike real users, these VUs will continuously send requests to the server at a rate of approximately 18 requests per second, as seen on the results in the appendix\autoref{App:LoadTestResults}.
 \\
@@ -79,7 +79,7 @@ For all tests, we asserted that endpoints should respond within 800 ms, or it sh
 As seen on \autoref{table:load-test-table}, the amount of failed assertions decreased as the cluster size increased, up until 32 instances, where the response times started increasing.
 \\
 We deem that, even though the amount of VUs is relatively low, the system should be able to sustain a significantly higher amount of real users, as they would most likely not be sending constant requests in the same manner that the VUs do.
-In general, we estimate that the average user would send less than one request per second on average, meaning that it is less than 18 times less load than what the VUs exposed the API for.
+In general, we estimate that the average user would send less than one request per second on average, meaning that it is less than 18 times the load the VUs subjected the API to.
 \\
-This mean that we, in theory, should be able to support at least 20*18=360 arriving users every 10th second with this current setup.
+This means that we, in theory, should be able to support at least 20*18=360 arriving users every 10th second with this current setup.
 For a real deployment of the service, the clusters would probably be split between multiple servers for horizontal scaling, and more specialized hardware that allows for better vertical scaling.
