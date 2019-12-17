@@ -78,14 +78,21 @@ These are typically class components and have a state.
 They often contain some kind of logic and some conditional rendering dependent on the current state.
 The second is a presentational component.
 These are most often stateless and are called presentational since all they should do is output UI elements \cite{Vumbula-react}.
-\\\\
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{figures/create-user-error.png}
+    \caption{The header for the application}
+    \label{fig:create-user-error}
+\end{figure}
+
 The container for the create user page can be seen on \autoref{create-user}.
 The \texttt{CreateUser} class only contains the state, some functions and a \texttt{render()}.
 Within the state object of CreateUser, there is an object called firstName, which contains a firstName string and a firstNameValid boolean to indicate if firstName is valid.
 It is initialized as true, so that the error messages aren't visible when entering the page.
 When they press the submit button, the \texttt{handleSubmit} function will be called, which checks if the values are valid.
 If the values are invalid, the booleans in the state will be updated. 
-If these are set to false, an error message will be shown.
+If these are set to false, an error message will be shown as can be seen in \autoref{fig:create-user-error}.
+
 The presentational component \texttt{UserForm} is rendered in the \texttt{render()} function. 
 \begin{lstlisting}[caption={Component to create user}, captionpos=b, label={create-user}]
 export class CreateUser extends Component {
