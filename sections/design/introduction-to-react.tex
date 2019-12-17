@@ -173,6 +173,16 @@ This is useful for when we need to fetch data from the API that we want to save 
 The reason that this is not done in the constructor of the component is that the render function should not be waiting for asynchronous operations before it is allowed to render.
 This is because we do not know how long it will take before the asynchronous function is done executing, or if it will even succeed.
 Instead of waiting, it is better to first render the component before calling asynchronous functions that will trigger a re-rendering of the component.
+An example of \texttt{componentDidMount} can be seen on \autoref{lst:componentDidMount-example}.
+We initialize the state with a null.
+We check in the render function if the value in the state is null.
+If it is null we return null, which just renders nothing.
+If it is not null we render a component and pass the data as a prop.
+The first time the render function is called, the value is null.
+After it has rendered the \texttt{componentDidMount} function is called.
+In \texttt{componentDidMount} we make an API call and then set \texttt{data} in the \texttt{state} equal to the response.
+Because the state is changed the \texttt{component} re-renders and \texttt{ChildComponent} is rendered this time.
+
 \begin{lstlisting}[caption={Example with the componentDidMount function}, label={lst:componentDidMount-example}]
 class OurComponent extends Component {
 	constructor(props){
@@ -199,14 +209,6 @@ class OurComponent extends Component {
 	}
 }
 \end{lstlisting}
-An example of \texttt{componentDidMount} can be seen on \autoref{lst:componentDidMount-example}.
-We initialize the state with a null.
-We check in the render function if the value in the state is null.
-If it is null we return null, which just renders nothing.
-If it is not null we render a component and pass the data as a prop.
-The first time the render function is called, the value is null.
-After it has rendered the \texttt{componentDidMount} function is called.
-In \texttt{componentDidMount} we make an API call and then set \texttt{data} in the \texttt{state} equal to the response.
-Because the state is changed the \texttt{component} re-renders and \texttt{ChildComponent} is rendered this time.
+
 \\\\
 Finally we will take a look at designing an API, and choosing and designing a database.
