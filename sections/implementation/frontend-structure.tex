@@ -6,17 +6,16 @@ Some basic features within React were previously described in \autoref{sec:intro
 For many of our pages we use states to store a component's dynamic data. 
 An example of this is the edit service page. 
 The constructor for this page is seen on \autoref{EditService-state}.
-Within the constructor \texttt{super(props)} is called. 
-This is used to call the React parent constructor and pass its properties as an argument.
-This is necessary whenever you want to call \texttt{this} within the constructor.
-Variables that will be used on the page are found within \texttt{this.state}. 
+The constructor takes a variable called props as an argument, props contains all of the arguments that the component received when it was instantiated. 
+Within the constructor \texttt{super(props)} is called.
+This needs to be done to be able to use \texttt{this.props} to access the props anywhere in the component.
+Dynamic variables that will be used on the page are initialized in \texttt{this.state}. 
 However, if another variable is needed, it can be added to the state at any time as the state is dynamic.
-The page will get rendered again whenever the state changes. 
-This is very useful for many things. 
+Variables in the state can be changed by calling the react hook \texttt{this.setState()} and this will automatically trigger a new rendering of the component and all of its children.
 For example, it is easy to validate text fields and send an error message if the text input is invalid.  
 After the state declarations, we bind the functions to the component instance using the \texttt{.bind(this)} function.
-This is useful as we can later call the functions in the renderer using \texttt{this}.
-These functions often either change the state of the component or call the API to upload data.
+This has to be done if the function uses \texttt{this.setState} to change the state of the component.
+Generally it needs to be done for all functions that need to access React hooks through \texttt{this}.
 \begin{lstlisting}[caption={Constructor and state for edit service}, captionpos=b, label={EditService-state}]
 class EditService extends React.Component {
     constructor(props) {
@@ -74,15 +73,27 @@ function getById(id) {
 
 \subsection{Components}
 There are two types of components. 
-The first one is a smart component, also named containers.
-These are typically class component and are stateful because they have a state.
-They often also contain some kind of logic within.
+The first one is a stateful component, also called a container.
+These are typically class components and have a state.
+They often contain some kind of logic and some conditional rendering dependent on the current state.
 The second is a presentational component.
 These are most often stateless and are called presentational since all they should do is output UI elements \cite{Vumbula-react}.
-\\\\
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{figures/create-user-error.png}
+    \caption{The header for the application}
+    \label{fig:create-user-error}
+\end{figure}
+
 The container for the create user page can be seen on \autoref{create-user}.
-The \texttt{CreateUser} class only contains the state, logic for the functions and a \texttt{render()}.
-Within the \texttt{render()} is the presentational component \texttt{UserForm}. 
+The \texttt{CreateUser} class only contains the state, some functions and a \texttt{render()}.
+Within the state object of \texttt{CreateUser}, there is an object called \texttt{firstName}, which contains a \texttt{firstName} string and a \texttt{firstNameValid} boolean to indicate if \texttt{firstName} is valid.
+It is initialized as true, so that the error messages are not visible when entering the page.
+When they press the submit button, the \texttt{handleSubmit} function will be called, which checks if the values are valid.
+If the values are invalid, the booleans in the state will be updated. 
+If these are set to false, an error message will be shown as can be seen in \autoref{fig:create-user-error}.
+
+The presentational component \texttt{UserForm} is rendered in the \texttt{render()} function. 
 \begin{lstlisting}[caption={Component to create user}, captionpos=b, label={create-user}]
 export class CreateUser extends Component {
     constructor(props) {
@@ -112,11 +123,11 @@ export class CreateUser extends Component {
     }
 \end{lstlisting}
 
-The \texttt{UserForm} render can be seen on \autoref{user-form}.
-This presentational component does not have any states, but it uses the props that were passed from where the user form was declared.
+The implementation of \texttt{UserForm} can be seen on \autoref{user-form}.
+This presentational component is stateless and uses the props that were passed to the \texttt{UserForm} component when it was instantiated in the \autoref{create-user} container.
 Within the \texttt{TextField} it checks through props if the first name is valid. 
 If it is not valid an error will be shown, and the \texttt{helperText} will also be shown.
-Whenever the \texttt{TextField} is changed the \texttt{handleChange} is called, and as it changes the state the page will be rendered again.
+Whenever the \texttt{TextField} is changed the \texttt{handleChange} is called, and as it changes the state of the parent component the page will be re-rendered.
 
 \begin{lstlisting}[caption={Presentational component for userform}, captionpos=b, label={user-form}]
 function UserForm(props) {
@@ -152,7 +163,9 @@ Some of the most commonly used components in our application are \texttt{TextFie
 An example of using Material-UI in the header can be seen on \autoref{material-ui}.
 As seen in the begin of the file, we import the different components that are needed.
 From line 11 onwards we then use them to create the design.
-We create a list, add an item to it which is a link to the landing page, and finally give it some text and an icon.
+The header can be seen on \autoref{fig:header}.
+In \autoref{material-ui} we implement parts of the header, more specifically the log in icon in the right side.
+If the button is pressed, the user is redirected to the login page.
 \begin{lstlisting}[caption={Use of material-ui in the header}, captionpos=b, label={material-ui}]
 import {
     List,
@@ -161,15 +174,23 @@ import {
     ListItemText
 } from '@material-ui/core';
 import {
-	Home
+	ExitToApp
 } from '@material-ui/icons';
 ...
 <List>
-    <ListItem button component={Link} to="/" key="Home" name="home">
-        <ListItemText primary="Home" />
+    <ListItem button component={Link} to="/login" key="LoginCircle" name="login">
+        <ListItemText primary="Login" />
         <ListItemIcon>
-            <Home fontSize="large" />
+            <ExitToApp fontSize="large" />
         </ListItemIcon>
     </ListItem>
 ...
 \end{lstlisting}
+
+
+\begin{figure}[H]
+    \includegraphics[width=\linewidth]{figures/header.png}
+    \caption{The header for the application}
+    \label{fig:header}
+\end{figure}
+  
