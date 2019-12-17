@@ -99,7 +99,9 @@ A component is conceptually a JavaScript function or class, which means that the
 If a component is used in another component, we can use \texttt{props} to pass data to the child component.
 \\\\
 \subsection*{Props}
-When a component is instantiated it is possible to pass an arbitrary number of arguments to the component by passing key and value pairs. These are then accessed through the props object in the component. An example of this can be seen in the following listing.
+When a component is instantiated it is possible to pass an arbitrary number of arguments to the component by passing key and value pairs.
+These are then accessed through the props object in the component.
+An example of this can be seen in the following listing.
 
 \begin{lstlisting}[label={lst:react-props-lsting}]
 function Site(){
@@ -122,9 +124,9 @@ function TextComponent (props){
 The props of a component should be treated as read-only because any changes to the props will not be reflected in the rendering of the component.
 
 \subsection*{State}
-There two kinds of components which are stateful and stateless components.
+There two kinds of components, which are stateful and stateless components.
 In our application we will mostly implement stateful components as class components and stateless components as functional components. 
-Functional components can also be stateful, but the choice of using class components is mostly a question about preferences.
+Functional components can also be stateful, but the choice of using class components is mostly a question of preference.
 A stateful component has a state which contains all the dynamic data in the component.
 This is useful since the render method is called every time the local \textit{State} is changed.
 We can set the initial state of a component by assigning \texttt{this.state} in the constructor of the component.
@@ -140,7 +142,7 @@ Parent or child components should not care if a certain component is stateful or
 A component can however pass variables from its state through \texttt{props} to a child component, which means that information about a state can only be passed in a \textit{top-down} approach \cite{ReactJS}.
 Every time a state is changed with \texttt{this.setState()} the component that the state belongs to and all of its children are re-rendered.
 By passing callback to the props of children we can allow  the children of a component to transfer data back to its parent and even trigger re-renders by passing callback functions that set the state of the parent component.
-If a function calls \texttt{this.setState()} it has to be bound in the constructor of the component.
+If a function calls \texttt{this.setState()}, it has to be bound in the constructor of the component.
 An example of how this is done can be seen in the following listing.
 \begin{lstlisting}
 class ourComponent extends Component {
@@ -169,10 +171,9 @@ class ourComponent extends Component {
 When a component is implemented as a class that extends \texttt{Component} from the react library, it gives us access to some functions that are automatically called at different points in the lifecycle of a component.
 The function that we will mostly be using is \texttt{componentDidMount}.
 This function is called right after the component is rendered for the first time in its lifecycle.
-This is useful for when we need to do fetch data from the API that we want to save in the state of the component.
-The reason that this is not done in the constructor of the component is because, the render function should not be waiting for asynchronous operations before it is allowed to render.
-This is because we do not know how long it will take before function is done executing or if it will even succeed.
-So the rendering of the component should not be waiting for this.
-Instead it is better to first render the component before calling asynchronous functions that will trigger a re-rendering of the component.
+This is useful for when we need to fetch data from the API that we want to save in the state of the component.
+The reason that this is not done in the constructor of the component is that the render function should not be waiting for asynchronous operations before it is allowed to render.
+This is because we do not know how long it will take before the asynchronous function is done executing, or if it will even succeed.
+Instead of waiting, it is better to first render the component before calling asynchronous functions that will trigger a re-rendering of the component.
 \\\\
 Finally we will take a look at designing an API, and choosing and designing a database.
