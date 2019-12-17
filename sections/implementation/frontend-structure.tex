@@ -38,7 +38,7 @@ class EditService extends React.Component {
         this.handleClickDelete = this.handleClickDelete.bind(this);
         this.handleClickOpen = this.handleClickOpen.bind(this);
     }
-    ...
+    (*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
 \end{lstlisting}
 
 \subsection{Services}
@@ -82,7 +82,7 @@ These are most often stateless and are called presentational since all they shou
 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{figures/create-user-error.png}
-    \caption{The header for the application}
+    \caption{The header for the system}
     \label{fig:create-user-error}
 \end{figure}
 
@@ -102,29 +102,28 @@ export class CreateUser extends Component {
         this.state = {
             firstName: { firstName: '', firstNameValid: true },
             lastName: { lastName: '', lastNameValid: true },
-            ...
+            (*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleChange(){
-        ...
+        (*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
     }
     handleSubmit(){
-        ...
+        (*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
     }
     render() {
         return (
             <UserForm
                 firstName={this.state.firstName}
                 lastName={this.state.lastName}
-                ..
+                (*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
             />
         );
     }
 \end{lstlisting}
 
-\todo{erstat ... med vdots}
 \todo{overvej om det er et godt kode eksempel}
 The implementation of \texttt{UserForm} can be seen on \autoref{user-form}.
 This presentational component is stateless and uses the props that were passed to the \texttt{UserForm} component when it was instantiated in the \autoref{create-user} container.
@@ -154,10 +153,8 @@ function UserForm(props) {
                                 props.firstName.firstNameValid ? '' : t('typefirstname')
                             }
                         />
-                ...
+                        (*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
 \end{lstlisting}
-
-\todo{erstat ... med vdots}
 
 \subsection{Material-UI}
 We have chosen to use the framework \textit{Material-UI}, to ease the implementation of design, and ensure it is of a certain quality.
@@ -182,7 +179,7 @@ import {
 import {
 	ExitToApp
 } from '@material-ui/icons';
-...
+(*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
 <List>
     <ListItem button component={Link} to="/login" key="LoginCircle" name="login">
         <ListItemText primary="Login" />
@@ -190,7 +187,7 @@ import {
             <ExitToApp fontSize="large" />
         </ListItemIcon>
     </ListItem>
-...
+(*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
 \end{lstlisting}
 
 
