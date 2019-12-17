@@ -16,7 +16,6 @@ We discuss two methods of creating a recommender, \textit{content-based filterin
 
 \subsection{Content-based filtering}\label{content-based-filtering}
 Content-based recommender systems recommend an item to a user based upon a description of the item and a profile of the user's interests \cite{ContentBasedFiltering}.
-\todo{cite er fucked?}
 A common scenario for web applications is that they present a list of items to a user, and the user then selects among these to receive more details. 
 An item in such a scenario would have a representation dependent on the implementation, which could be used to analyze items of particular interest for a user.
 Items are often stored in databases, creating structured data with each entry having the same set of attributes. 
@@ -61,7 +60,6 @@ Historical data of interactions can be used to filter out already purchased item
 Creating a model of a user's preferences is then done through a form of classification learning, in which training data is divided into categories, an example being the binary categories \textit{Items the user likes} and \textit{items the user dislikes} \cite{ContentBasedFiltering}.
 These algorithms learn a function that model's a users interests, and given a new item and the user model, this function predicts whether or not the user is interested in the item through a probability or a numeric value by analyzing the item representation and user profile.
 Popular learning approaches for content-based filtering are \textit{naïve Bayes}, \textit{nearest neighbor methods} or \textit{linear classifiers}.
-\todo{cites er fucked}
 
 \subsection{Collaborative filtering}
 Collaborative filtering differs from content-based filtering in that it focuses on matching users and items through the opinions of other people.
@@ -155,7 +153,6 @@ Matrix factorization aims to characterize items and users by vectors of factors,
 
 \subsubsection{Matrix factorization}
 Matrix factorization map users and items to a latent factor space of dimensionality \textit{f} \cite{MatrixFactorization}. 
-\todo{Kilde er fucked}
 This is achieved by taking the ratings matrix and splitting it into two matrices of the following dimensions, where $N_{i}$ is the number of items, $N_{u}$ is the number of users and $f$ is the number of factors:
 \begin{equation}
     N_{i} \times f
