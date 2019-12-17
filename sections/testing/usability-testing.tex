@@ -63,7 +63,7 @@ This bug has since been fixed such that users can search for the name of a tutor
 \\\\
 One problem that all testers faced was a bug where they were unable to get to their own account if they were on another user's page.
 This is due to their own account and the user's page being rendered by the same component.
-The system then assumes that the state doe snot need to be updated, as the content of the page should be the same.
+The system then assumes that the state does not need to be updated, as the content of the page should be the same.
 This can be fixed by forcing an update whenever the account icon is pressed, to force a rerender.
 \\\\
 Heidi was a bit of an outlier when creating a service.
