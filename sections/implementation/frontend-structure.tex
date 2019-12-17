@@ -14,8 +14,8 @@ However, if another variable is needed, it can be added to the state at any time
 Variables in the state can be changed by calling the react hook \texttt{this.setState()} and this will automatically trigger a re rendering of the component and all of it's children.
 For example, it is easy to validate text fields and send an error message if the text input is invalid.  
 After the state declarations, we bind the functions to the component instance using the \texttt{.bind(this)} function.
-This has to be done if the function uses {this.setState} to change the state of the component.
-Generally it needs to be done for all functions that need to access react hooks through \texttt{this}.
+This has to be done if the function uses \texttt{this.setState} to change the state of the component.
+Generally it needs to be done for all functions that need to access React hooks through \texttt{this}.
 \begin{lstlisting}[caption={Constructor and state for edit service}, captionpos=b, label={EditService-state}]
 class EditService extends React.Component {
     constructor(props) {
@@ -83,7 +83,7 @@ The container for the create user page can be seen on \autoref{create-user}.
 The \texttt{CreateUser} class only contains the state, some functions and a \texttt{render()}.
 Within the state object of CreateUser, there is an object called firstName, which contains a firstName string and a firstNameValid boolean to indicate if firstName is valid.
 It is initialized as true, so that the error messages aren't visible when entering the page.
-When they press the submit button, the handleSubmit will be called, and this functions checks if the values are valid.
+When they press the submit button, the \texttt{handleSubmit} function will be called, which checks if the values are valid.
 If the values are invalid, the booleans in the state will be updated. 
 If these are set to false, an error message will be shown.
 The presentational component \texttt{UserForm} is rendered in the \texttt{render()} function. 
@@ -117,10 +117,10 @@ export class CreateUser extends Component {
 \end{lstlisting}
 
 The implementation of \texttt{UserForm} can be seen on \autoref{user-form}.
-This presentational component is stateless and uses the props that were passed to UserForm when it was instantiated in \autoref{create-user}.
+This presentational component is stateless and uses the props that were passed to the \texttt{UserForm} component when it was instantiated in the \autoref{create-user} container.
 Within the \texttt{TextField} it checks through props if the first name is valid. 
 If it is not valid an error will be shown, and the \texttt{helperText} will also be shown.
-Whenever the \texttt{TextField} is changed the \texttt{handleChange} is called, and as it changes the state of the parent component the page will be re rendered.
+Whenever the \texttt{TextField} is changed the \texttt{handleChange} is called, and as it changes the state of the parent component the page will be re-rendered.
 
 \begin{lstlisting}[caption={Presentational component for userform}, captionpos=b, label={user-form}]
 function UserForm(props) {
@@ -156,10 +156,9 @@ Some of the most commonly used components in our application are \texttt{TextFie
 An example of using Material-UI in the header can be seen on \autoref{material-ui}.
 As seen in the begin of the file, we import the different components that are needed.
 From line 11 onwards we then use them to create the design.
-We create a list, add an item to it which is a link to the login page, and finally give it some text and an icon.
 The header can bee seen on \autoref{fig:header}.
 In \autoref{material-ui} implement parts of the header, more specifically the log in icon in the right side.
-If the button is pressed, then it is redirected to \texttt{"/login"}.
+If the button is pressed, the user is redirected to the login page.
 \begin{lstlisting}[caption={Use of material-ui in the header}, captionpos=b, label={material-ui}]
 import {
     List,
