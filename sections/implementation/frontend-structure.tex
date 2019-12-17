@@ -11,7 +11,7 @@ Within the constructor \texttt{super(props)} is called.
 This needs to be done to be able to use \texttt{this.props} to access the props anywhere in the component.
 Dynamic variables that will be used on the page are initialized in \texttt{this.state}. 
 However, if another variable is needed, it can be added to the state at any time as the state is dynamic.
-Variables in the state can be changed by calling the react hook \texttt{this.setState()} and this will automatically trigger a re rendering of the component and all of it's children.
+Variables in the state can be changed by calling the react hook \texttt{this.setState()} and this will automatically trigger a new rendering of the component and all of its children.
 For example, it is easy to validate text fields and send an error message if the text input is invalid.  
 After the state declarations, we bind the functions to the component instance using the \texttt{.bind(this)} function.
 This has to be done if the function uses \texttt{this.setState} to change the state of the component.
@@ -87,7 +87,7 @@ These are most often stateless and are called presentational since all they shou
 
 The container for the create user page can be seen on \autoref{create-user}.
 The \texttt{CreateUser} class only contains the state, some functions and a \texttt{render()}.
-Within the state object of CreateUser, there is an object called \texttt{firstName}, which contains a \texttt{firstName} string and a \texttt{firstNameValid} boolean to indicate if \texttt{firstName} is valid.
+Within the state object of \texttt{CreateUser}, there is an object called \texttt{firstName}, which contains a \texttt{firstName} string and a \texttt{firstNameValid} boolean to indicate if \texttt{firstName} is valid.
 It is initialized as true, so that the error messages are not visible when entering the page.
 When they press the submit button, the \texttt{handleSubmit} function will be called, which checks if the values are valid.
 If the values are invalid, the booleans in the state will be updated. 
@@ -164,7 +164,7 @@ An example of using Material-UI in the header can be seen on \autoref{material-u
 As seen in the begin of the file, we import the different components that are needed.
 From line 11 onwards we then use them to create the design.
 The header can be seen on \autoref{fig:header}.
-In \autoref{material-ui} implement parts of the header, more specifically the log in icon in the right side.
+In \autoref{material-ui} we implement parts of the header, more specifically the log in icon in the right side.
 If the button is pressed, the user is redirected to the login page.
 \begin{lstlisting}[caption={Use of material-ui in the header}, captionpos=b, label={material-ui}]
 import {
