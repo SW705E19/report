@@ -82,9 +82,9 @@ These are most often stateless and are called presentational since all they shou
 \\\\
 The container for the create user page can be seen on \autoref{create-user}.
 The \texttt{CreateUser} class only contains the state, logic for the functions and a \texttt{render()}.
-Within the state of CreateUser, there is the object firstName, which contains a first name and a boolean to see if it is valid.
-It is instantiated as being true, so that the error messages aren't showing when entering the page.
-When they press the submit button, the handleSubmit will be called, and this functions checks if the values are valid.
+Within the state of \texttt{CreateUser}, the object \texttt{firstName} is defined, which contains a first name and a boolean to see if it is valid.
+It is instantiated with the initial value as true, so that the error messages are not showing when entering the page.
+When the user presses the submit button, the \texttt{handleSubmit} function will be called, and checks if the values are valid.
 If the values are invalid, the booleans in the state will be updated. 
 If these are set to false, the error message will be shown.
 Within the \texttt{render()} is the presentational component \texttt{UserForm}. 
