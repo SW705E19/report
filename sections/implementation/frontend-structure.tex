@@ -111,20 +111,19 @@ export class CreateUser extends Component {
         ...
     }
     handleSubmit(){
-        ...
+        (*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
     }
     render() {
         return (
             <UserForm
                 firstName={this.state.firstName}
                 lastName={this.state.lastName}
-                ..
+                (*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
             />
         );
     }
 \end{lstlisting}
 
-\todo{erstat ... med vdots}
 \todo{overvej om det er et godt kode eksempel}
 The implementation of \texttt{UserForm} can be seen on \autoref{user-form}.
 This presentational component is stateless and uses the props that were passed to the \texttt{UserForm} component when it was instantiated in the \autoref{create-user} container.
@@ -154,10 +153,8 @@ function UserForm(props) {
                                 props.firstName.firstNameValid ? '' : t('typefirstname')
                             }
                         />
-                ...
+                        (*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
 \end{lstlisting}
-
-\todo{erstat ... med vdots}
 
 \subsection{Material-UI}
 We have chosen to use the framework \textit{Material-UI}, to ease the implementation of design, and ensure it is of a certain quality.

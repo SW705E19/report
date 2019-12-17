@@ -74,7 +74,6 @@ static getByEmail = async (email: string): Promise<User> => {
     return await userRepository.findOneOrFail({ where: { email } });
 };
 \end{lstlisting}
-\todo{erstat ... med vdots}
 As seen on \autoref{lst:unitTestStubbing} lines 3 to 13, we also made use of mocking for defining the request and response parameters used for requests to the controller.
 This allows us to check whether the correct status code is returned from the controller by overriding the status function.
 Normally, the function would set the headers that are returned to the client requesting the API.
