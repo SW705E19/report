@@ -3,6 +3,9 @@ The tasks for future work focuses on completing the tasks in our MoSCoW.
 There are 5 tasks that we would like to implement.
 
 \begin{itemize}
+    \item Update the select multiple button
+    \item Make tutorinfo inactive
+    \item Applying to become a tutor
     \item Upload and view material
     \item Messaging system
     \item Calendar system
@@ -11,6 +14,21 @@ There are 5 tasks that we would like to implement.
     \item Extend the recommender to have content based and collaborative approach.
 \end{itemize}
 \noindent
+\textit{Update the select multiple button}:
+During the \autoref{ref usability test} we found that our current select multiple were unintuitive. 
+They didn't seem to understand that you were able to select multiple languages, as it only highlighted the selected items with a grey color.
+These select multiple buttons should be edited, so that it becomes more intuitive.
+\\\\
+\textit{Make tutor info inactive}:
+If a tutor gets taken his tutor role away, he will still appear on the show services page. 
+This is because that we do not delete tutor information or his created services.
+This could be fixed by adding an additional attribute to the tutorinfo table in the database to see if they're active.
+If active is set to false, we should not fetch the tutorinfo or services.
+\\\\
+\textit{Applying to become a tutor}
+Currently it is not possible to apply for becoming a tutor.
+This should of course be changed, so that users have the opportunity to apply for that. 
+\\\\
 \textit{Upload and view material}:
 We would like the option for tutors to upload material for users. 
 This would make it easier for tutors to share assignments and videos that they have made. 
