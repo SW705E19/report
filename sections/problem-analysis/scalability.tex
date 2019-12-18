@@ -4,17 +4,16 @@ In this section, we will look at what scalability in software is and how to desi
 \subsection{What is scalability}
 There are different types of scalability related to software design \cite{ScalabilityDesignPrinciples}.
 \begin{itemize}
-    \item \textbf{Scalability in performance} The system should be able to maintain high performance even if there are many users. This can be facilitated by adding more capacity to the system's components to allow more parallel computing. 
+    \item \textbf{Scalability in performance:} The system should be able to maintain high performance even if there are many users. This can be facilitated by adding more capacity to the system's components to allow more parallel computing. 
     However, performance does not scale linearly as there is a limit to how much speedup that can be achieved by using multiple processors. 
-    \item \textbf{Scalability in availability} According to the \textit{CAP theorem}, consistency and availability cannot be guaranteed in a distributed system. 
+    \item \textbf{Scalability in availability:} According to the \textit{CAP theorem}, consistency and availability cannot be guaranteed in a distributed system. 
     Usually, in web applications that need to be scalable, availability is favored over consistency. 
     The system will instead make use of \textit{eventual consistency}, meaning that all the users will, at some point, be able to read the most recent updates but not at the same time. 
     This way of scalability will decrease synchronism but allows the system to be available to all users.
     This results in a situation where the users may not read the most recently updated data, but it will still be available to them during a network failure.
     As the network failure becomes resolved, consistency will be restored.
-    \item \textbf{Scalability in maintenance} The software that is written must be continuously maintained and updated even after deployment of the system to make sure that the different components of the system are up to date and will continue running. 
-    Different kinds of platforms and tools can be used to facilitate this by monitoring the system and ensuring that it is operating correctly. 
-    \item \textbf{Scalability in expenditure} This relates to managing the total cost of developing, maintaining, and operating the system. 
+    \item \textbf{Scalability in maintenance:} The software that is written must be continuously maintained and updated even after deployment of the system to make sure that the different components of the system are up to date and will continue running. 
+    \item \textbf{Scalability in expenditure:} This relates to managing the total cost of developing, maintaining, and operating the system. 
     It is crucial to not only think of the costs of developing different components versus reusing existing ones, but also look at what the costs of maintaining these components will be in the future. 
     Another thing to consider is using industry-standard technologies, as it will most likely also be it easier to hire experts on these in the future.
 \end{itemize}

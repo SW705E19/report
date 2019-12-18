@@ -2,20 +2,22 @@
 In this section we will look at the different building blocks and concepts of React.
 React will often be used with a syntax extension to JavaScript called JSX \cite{introducingJSX} which makes it possible to declare variables that resemble HTML code.
 
-\begin{center}
-    \texttt{const element = <h1>Hello, world!</h1>;}
-\end{center}
-This variable declaration can be called a React element which can then be rendered to the Document Object Model (DOM) of the web page.
+\begin{lstlisting}[caption={Variable declation in React}, captionpos=b, label={lst:variable-declaration}]
+const element = <h1>Hello, world!</h1>;
+\end{lstlisting}
+In \autoref{lst:variable-declaration} an example of a variable declaration can be seen. 
+A variable declaration can be called a React element which can then be rendered to the Document Object Model (DOM) of the web page.
+The DOM is responsible for parsing the HTML.
 With React, it is possible to render the element to the DOM by using \texttt{ReactDom.render()}.
 The element is passed to this function as well as the DOM node we would like it to be rendered to.
-In this case we are rendering the React element \texttt{element} to the DOM node \texttt{root}.
+In \autoref{lst:react-dom} we are rendering the React element \texttt{element} to the DOM node \texttt{root}.
 
-\begin{center}
-    \texttt{ReactDOM.render(element, document.getElementById('root'));}
-\end{center}
-A nice feature of JSX is that it allows you to include dynamic content in HTML, by including JavaScript variables wrapped in curly braces to indicate that they should be evaluated by the JavaScript engine upon rendering.
-
-\begin{lstlisting}
+\begin{lstlisting}[caption={ReactDOM example}, captionpos=b, label={lst:react-dom}]
+ReactDOM.render(element, document.getElementById('root'));
+\end{lstlisting}
+JSX allows dynamic content to be included in HTML, by including JavaScript variables wrapped in curly braces to indicate that they should be evaluated by the JavaScript engine upon rendering.
+An example of this can be seen in \autoref{lst:jsx-example}.
+\begin{lstlisting}[caption={JSX example}, captionpos=b, label={lst:jsx-example}]
 const name = 'Josh Perez';
 const element = <h1>Hello, {name}</h1>;
 
@@ -29,7 +31,7 @@ The variable that is embedded in the JSX can be any valid JavaScript expression 
 \subsection*{Components}
 In React components are used, which are files that hold all of the logic, HTML and styling that is needed.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={React component example}, captionpos=b, label={lst:react-component-example}]
 import React from "react";
 
 function App() {
@@ -42,35 +44,25 @@ function App() {
 
 export default App
 \end{lstlisting}
-In this example we create the component \texttt{App} and export it.
+In \autoref{lst:react-component-example} we create the component \texttt{App} and export it.
 By exporting it we can use the \texttt{App} component elsewhere and render it.
 In the function we return a JSX element which React will then compile to regular JavaScript that can be understood by the browser.
 The idea is to build the UI from components by exporting them and then importing them into other larger components to contain them.
 This means that the components act as the building blocks of the UI because they can be reused in other components.
-\begin{lstlisting}
-import React from 'react';
-
-function Button() {
-    return (
-        <div>
-            <button onClick={console.log('Hello')}>Hello React</button>
-        </div>
-    );
-}
-
-export default Button
-\end{lstlisting}
-As an example we can create a button component with an on-click event embedded into it.
+\\\\
+In \autoref{lst:on-click-example-1} we can create a button component with an \texttt{onClick} event embedded into it.
 Here we use brackets to enable us to embed a callback function in the JSX which will be called when the button is clicked.
 We can now export this button and it can be imported by other components.
 There are both class components and functional components.
 An example of this can be seen in \autoref{lst:on-click-example-1} and \autoref{lst:on-click-example-2}.
 
-\begin{lstlisting}[caption={Example of a button with a onClick event in a functional component},label={lst:on-click-example-1}]
+\begin{lstlisting}[caption={Example of a button with a onClick event in a functional component},label={lst:on-click-example-1}, captionpos=b]
 function Button(props) {
 	return (
 		<div>
-			<button onClick={console.log(props.textToPrint)}>Hello React</button>
+			<button onClick={console.log(props.textToPrint)}>
+				Hello React
+			</button>
 		</div>
 	);
 }
@@ -78,7 +70,7 @@ function Button(props) {
 
 We can convert this into a class like as seen on \autoref{lst:on-click-example-2}.
 
-\begin{lstlisting}[caption={Example of a button with a onClick event in a class component},label={lst:on-click-example-2}]
+\begin{lstlisting}[caption={Example of a button with a onClick event in a class component},label={lst:on-click-example-2}, captionpos=b]
 class Button extends React.Component {
 	constructor(props){
 		super(props);
@@ -87,13 +79,14 @@ class Button extends React.Component {
 	render() {
 		return (
 			<div>
-				<button onClick={console.log('Hello')}>Hello React</button>
+				<button onClick={console.log(this.props.textToPrint)}>
+					Hello React
+				</button>
 			</div>
 		);
 	}
 }
 \end{lstlisting}
-
 A component is conceptually a JavaScript function or class, which means that they can accept inputs called \texttt{props} which can contain data that can be used in the React elements.
 If a component is used in another component, we can use \texttt{props} to pass data to the child component.
 \subsection*{Props}
@@ -101,7 +94,7 @@ When a component is instantiated it is possible to pass an arbitrary number of a
 These are then accessed through the props object in the component.
 An example of this can be seen in \autoref{lst:react-props-lsting}.
 
-\begin{lstlisting}[caption={An example of how properties are passed to children components}, label={lst:react-props-lsting}]
+\begin{lstlisting}[caption={An example of how properties are passed to children components}, label={lst:react-props-lsting}, captionpos=b]
 function Site(){
 	const titleVariable = 'title';
 	const descriptionVariable = 'This is a component';
@@ -118,7 +111,7 @@ function TextComponent (props){
 	);
 }
 \end{lstlisting}
-
+\noindent
 The props of a component should be treated as read-only because any changes to the props will not be reflected in the rendering of the component.
 
 \subsection*{State}
@@ -127,22 +120,23 @@ In our application we will mostly implement stateful components as class compone
 Functional components can also be stateful, but the choice of using class components is mostly a question of preference.
 A stateful component has a state which contains all the dynamic data in the component.
 This is useful since the render method is called every time the local \texttt{State} is changed.
-We can set the initial state of a component by assigning \texttt{this.state} in the constructor of the component.
-\begin{center}
-    \texttt{this.state = \{textToDisplay: 'Initial text'\};}
-\end{center}
+We can set the initial state of a component, as shown in \autoref{lst:initial-state}, by assigning \texttt{this.state} in the constructor of the component.
+\begin{lstlisting}[caption={Setting the initial state}, label={lst:initial-state}, captionpos=b]
+    this.state = \{textToDisplay: 'Initial text'\};
+\end{lstlisting}
 The state can then be changed by reassigning to the \texttt{date} variable.
-This is done by using the \texttt{this.setState()} function.
-\begin{center}
-    \texttt{this.setState(\{textToDisplay: 'New text'\});}
-\end{center}
+This is done in \autoref{lst:set-state} by using the \texttt{this.setState()} function.
+\begin{lstlisting}[caption={Using setState in React}, label={lst:set-state}, captionpos=b]
+    this.setState(\{textToDisplay: 'New text'\});
+\end{lstlisting}
 Parent or child components should not care if a certain component is stateful or stateless since the state is local and not accessible by other components.
 A component can, however, pass variables from its state through \texttt{props} to a child component, which means that information about a state can only be passed in a \texttt{top-down} approach \cite{ReactJS}.
+\\\\
 Every time a state is changed with \texttt{this.setState()} the component that the state belongs to and all of its children are re-rendered.
 By passing callback to the props of children we can allow  the children of a component to transfer data back to its parent and even trigger re-renders by passing callback functions that set the state of the parent component.
 If a function calls \texttt{this.setState()}, it has to be bound in the constructor of the component.
 An example of how this is done can be seen in \autoref{callback-example}.
-\begin{lstlisting}[caption={An example of a callback function}, label={callback-example}]
+\begin{lstlisting}[caption={An example of a callback function}, label={callback-example}, captionpos=b]
 class ourComponent extends Component {
 	constructor(props){
 		super(props);
@@ -168,11 +162,13 @@ class ourComponent extends Component {
 \subsection*{Lifecycle}
 When a component is implemented as a class that extends \texttt{Component} from the React library, it gives us access to some functions that are automatically called at different points in the lifecycle of a component.
 The function that we will mostly be using is \texttt{componentDidMount}.
+\\\\
 This function is called right after the component is rendered for the first time in its lifecycle.
 This is useful for when we need to fetch data from the API that we want to save in the state of the component.
 The reason that this is not done in the constructor of the component is that the render function should not be waiting for asynchronous operations before it is allowed to render.
 This is because we do not know how long it will take before the asynchronous function is done executing, or if it will even succeed.
 Instead of waiting, it is better to first render the component before calling asynchronous functions that will trigger a re-rendering of the component.
+\\\\
 An example of \texttt{componentDidMount} can be seen on \autoref{lst:componentDidMount-example}, where we initialize the state with the data variable as null.
 We check in the render function if the value in the state is null.
 If it is null we return null, which just renders nothing, otherwise we render a component and pass the data as a prop.
@@ -181,7 +177,7 @@ After it has rendered the \texttt{componentDidMount} function is called.
 In \texttt{componentDidMount} we make an API call and then set \texttt{data} in the \texttt{state} equal to the data in the response.
 Because the state is changed the \texttt{component} re-renders and \texttt{ChildComponent} is rendered this time.
 
-\begin{lstlisting}[caption={Example with the componentDidMount function}, label={lst:componentDidMount-example}]
+\begin{lstlisting}[caption={Example with the componentDidMount function}, label={lst:componentDidMount-example}, captionpos=b]
 class OurComponent extends Component {
 	constructor(props){
 		super(props);

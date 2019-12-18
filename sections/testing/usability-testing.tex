@@ -3,14 +3,14 @@ Opposed to the previously mentioned tests, usability testing is not directly foc
 Even though the system may seem exceedingly simply to use by the developers, this is rarely the case for the actual users.
 To increase the usability of the system during the development, the development team can make use of the personas defined in \autoref{sec:personas} during the formal review.
 The reviewers can subjectively evaluate the design choices made against the personas and try to conclude whether all the personas would be able to understand the system.
-
+\\\\
 However, this does not solve the problem of the reviewers knowing how the system works, and can easily navigate through it due to their deep understanding of the system.
-
+\\\\
 Instead, it will be beneficial to conduct usability testing, where the testers try out the system under observation.
 The testers, in this case, are usually either potential users of the system, or other employees who have not been a part of developing the software, to get more reliable results \cite{SoftwareTesting}.
 \\\\
-With usability testing, it is possible to get feedback on more subjective parts of the system, such as the user interface and whether the errors displayed to the user are useful and understandable without having a degree in software engineering \cite{SoftwareTesting}.
-
+With usability testing, it is possible to get feedback on more subjective parts of the system, such as the user interface and whether the errors displayed to the user are useful and understandable \cite{SoftwareTesting}.
+\\\\
 When conducting usability tests, a set of pre-defined tasks are given to the testers one at a time.
 These tests should aim to resemble how actual users would use the system, to observe where they struggle to understand how the system works.
 
@@ -24,19 +24,19 @@ The tester called Mikkel encountered some issues with logging in.
 This was caused by some issues related to the test setup, and resulted in the time spent on the first few assignments not being indicative of the actual time it would take.
 While the time was invalid, he still completed the assignments, looking for design deficiencies.
 \begin{table}[]
-    \begin{tabular}{|l|l|l|l|l|l|}
+    \begin{tabular}{|p{.2\textwidth}|l|l|l|l|l|}
     \hline
                                             & Mikkel     & Melanie      & Martin           & Robin                  & Heidi               \\ \hline
-    Create user                             & N/A        & 1 min 31 sec & 1 min 24 sec     & 1 minute 11 seconds    & 2 minutes 30 seconds \\ \hline
-    Log in                                  & N/A        & 10 seconds   & 34 seconds       & 18 seconds             & 38 seconds \\ \hline
-    Change language                         & N/A        & 15 seconds   & 14 seconds       & 12 seconds             & 10 seconds \\ \hline
-    Find "Butterfly"                        & N/A        & 13 seconds   & 12 seconds       & 10 seconds             & 10 seconds \\ \hline
-    Find other services by "Mathias Møller" & N/A        & 12 seconds   & 1 min 31 seconds & 13 seconds             & 25 seconds \\ \hline
-    Delete user                             & N/A        & 20 seconds   & 21 seconds       & 22 seconds             & 24 seconds \\ \hline
-    Login as admin                          & N/A        & 20 seconds   & 22 seconds       & 18 seconds             & 35 seconds\\ \hline
-    Create a service                        & 21 seconds & 38 seconds   & 45 seconds       & 30 seconds             & 1 minute 43 seconds \\ \hline
-    Rate specific service                   & 10 seconds & 19 seconds   & 20 seconds       & 21 seconds             & 25 seconds \\ \hline
-    Log out                                 & 5 seconds  & 10 seconds   & 4 seconds        & 5 seconds              & 7 seconds \\ \hline
+    Create user                             & N/A        & 1 min 31 sec & 1 min 24 sec     & 1 min 11 sec    & 2 min 30 sec \\ \hline
+    Log in                                  & N/A        & 10 sec       & 34 sec       & 18 sec             & 38 sec \\ \hline
+    Change language                         & N/A        & 15 sec       & 14 sec       & 12 sec             & 10 sec \\ \hline
+    Find "Butterfly"                        & N/A        & 13 sec       & 12 sec       & 10 sec             & 10 sec \\ \hline
+    Find other services by "Mathias Møller" & N/A        & 12 sec       & 1 min 31 sec & 13 sec             & 25 sec \\ \hline
+    Delete user                             & N/A        & 20 sec       & 21 sec       & 22 sec             & 24 sec \\ \hline
+    Login as admin                          & N/A        & 20 sec       & 22 sec       & 18 sec             & 35 sec\\ \hline
+    Create a service                        & 21 sec     & 38 sec       & 45 sec       & 30 sec             & 1 min 43 sec \\ \hline
+    Rate specific service                   & 10 sec     & 19 sec       & 20 sec       & 21 sec             & 25 sec \\ \hline
+    Log out                                 & 5 sec      & 10 sec       & 4 sec        & 5 sec              & 7 sec \\ \hline
     \end{tabular}
     \caption{A comparison of the time it took to perform the different tasks}
     \label{tab:usabilitytest}
@@ -47,6 +47,7 @@ The reason for this is that when creating a user, more input is required than ma
 We discovered a bug when they had to create a user. 
 Multiple testers input a password that did not live up to the restrictions, but the users were still created. 
 This was due to us missing a check on whether or not the password was valid, and was quickly fixed the day after.
+\\\\
 Another consistent issue was the design of choosing a language when creating a user.
 The user has to choose the languages they are capable of speaking, such that, if they were to become tutors and create a service, prospective learners would know in which languages the service could be provided.
 During the test it was implemented as a dropdown in which users could select multiple languages at a time.
@@ -55,7 +56,7 @@ This led to some of them repeatedly clicking the same language multiple times, s
 A possible fix for these issues could be to close the dropdown once a language has been chosen, but this might not communicate that the user is capable of selecting multiple languages.
 \\\\
 The assignment to find other services by a certain tutor had the largest deviation in terms of time spent.
-Three of the testers spent respectively 12, 13 and 25 seconds, while the third spent a full minute and 31 seconds to complete the task.
+Three of the testers spent respectively 12, 13 and 25 seconds, while the fourth spent a full minute and 31 seconds to complete the task.
 The reason for this deviation is that the tester was confused what exactly he was supposed to do.
 Once he figured it out, he felt it was not immediately obvious where to go.
 Finally, he attempted to search for the tutor, which ended in him encountering a bug in which the search functionality did not work.
@@ -70,8 +71,10 @@ Heidi was a bit of an outlier when creating a service.
 However, she did not really encounter any problems, she just took her time when performing the task, especially when choosing categories for the service.
 She also did not realize that multiple categories could be selected at a time.
 Since other testers did not really have this issue, we expect that it is not a glaring design issue, and would be fixed with multiple uses.
+\\\\
 One of the testers commented on the icons used in the system, saying some of them might not be as intuitive as intended.
 This tester was confused with the log in button, thinking it looked like a log out button instead.
 Generally, the assignments felt easy to complete for the testers.
+\\\\
 Outside of the discussions above, the assignments were completed quickly, and the testers spent around the same amount of time on all of them.
 This, along with the lack of problems caused by the design during testing could indicate that, generally, the design of the system is fairly intuitive, while some of the icons could be a bit unintuitive. 

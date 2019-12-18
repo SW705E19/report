@@ -9,7 +9,7 @@ Since the React library is shipped with Jest \cite{ReactRunningTests}, and since
 However, after using Jest for testing the API for a while, several issues surfaced when trying to implement mock functions related to our ORM and some TypeScript functionality in general.
 These problems were related to the type security provided by TypeScript that TypeORM utilizes, meaning that TypeORM had a security feature where it would ensure that it was only called with real objects and not stubs created by Jest.
 To simplify the creation of unit testing on the API, the test driver for this was changed to Mocha, since it uses another approach to creating stub objects, which worked out of the box.
-
+\\\\
 One of the main differences between Jest and Mocha is that Jest is a complete suite that supports running the tests, asserting results, stubbing, test coverage and much more.
 Mocha, on the other hand, is just a test runner and requires additional libraries for asserting, stubbing and generating code coverage results \cite{Mocha}.
 We chose to use Chai for assertions, Sinon for stubbing and Nyc for generating code coverage.
@@ -26,10 +26,9 @@ This now leads to test cases like is the info rendered if:
     \item the user is a tutor, but the tutor information is invalid?
     \item the user is a tutor, but the tutor information is incomplete?
 \end{itemize}
-
 In addition to the conditional rendering, any business logic located on the front end should be tested to ensure both that it works as intended, but also that any future updates to the code will not break it, which is referred to as regression testing.
 This security is done by enforcing that all unit tests must run before the feature can be merged into the development branch of the system.
-
+\\\\
 For the API, some functionality like the ORM is handled by external packages.
 Since this is not code we are writing ourselves, we have chosen to assume that the developers of the packages have tested the software and thus we will not have to.
 We focus on unit testing our controllers and middleware to ensure that they work as expected, and instead do some integration testing for the external packages, to ensure that they work as expected when integrated into our system.
@@ -79,7 +78,7 @@ This allows us to check whether the correct status code is returned from the con
 Normally, the function would set the headers that are returned to the client requesting the API.
 However, for this test we are only interested in seeing which parameter the status function is called with to ensure that it matches our expectations.
 This way it is now possible to check if the \texttt{statusCode} property on the response is set to what we expect, as seen on line 17.
-
+\\\\
 Finally, the stub is restored to make sure that it only behaves in this limited way in the scope of the unit test.
 
 \subsection{Metrics of good testing}
@@ -89,11 +88,10 @@ This is split into four categories: statement coverage, branch coverage, functio
 
 \begin{figure}[H]
     \includegraphics[width=\linewidth]{/test.png}
-     \caption{The output of the code coverage reporter NYC}
+     \caption{An example of the output of the code coverage reporter NYC}
      \label{fig:testResults}
  \end{figure}
-
 We used a configuration to report files with 0-50\% coverage as red, 50-75\% as yellow and 75-100\% as green.
 While this is a good indicator of how much of the code has been tested, it does not ensure that the tests are useful and correct.
-
+\\\\
 To ensure this, we make use of formal reviews of all changes made to the code and tests.

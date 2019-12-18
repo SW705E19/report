@@ -10,7 +10,7 @@ The constructor takes a variable called props as an argument, props contains all
 Within the constructor \texttt{super(props)} is called.
 This needs to be done to be able to use \texttt{this.props} to access the props anywhere in the component.
 Dynamic variables that will be used on the page are initialized in \texttt{this.state}. 
-However, if another variable is needed, it can be added to the state at any time as the state is dynamic.
+However, if another variable is needed, it can be added to the state at any time as the state is dynamic.\\\\
 Variables in the state can be changed by calling the react hook \texttt{this.setState()} and this will automatically trigger a new rendering of the component and all of its children.
 For example, it is easy to validate text fields and send an error message if the text input is invalid.  
 After the state declarations, we bind the functions to the component instance using the \texttt{.bind(this)} function.
@@ -44,16 +44,9 @@ class EditService extends React.Component {
 \subsection{Services}
 Services are used to send or retrieve data from the API. 
 \autoref{get-by-id} shows an example or retrieving a user by their id from the database.
-The \texttt{requestOptions} used as a parameter defines the type of method you use.
-The methods that can be used are either \texttt{'GET'}, \texttt{'POST'}, \texttt{'PUT'}, \texttt{'PATCH'} or \texttt{'DELETE'}.
-\texttt{'GET'} returns what is requested if it exists.
-\texttt{'POST'} adds an additional row to the database.
-\texttt{'PUT'} and \texttt{'PATCH'} updates an element. 
-\texttt{'PUT'} should only be used if a resource is replaced, where \texttt{'PATCH'} is used if an existing resource needs to be updated.
+The \texttt{requestOptions} used as a parameter defines the type of method you use.\\
 For \texttt{'POST'} methods the \texttt{requestOptions} will contain the data to send to the API as the body of the request.
-\todo{Overvej om det skal flyttes til API}
-For many requests it is necessary for the user to be logged in, which is defined in the header of the request through the function \texttt{authHeader()}, which checks if the user is logged in.
-
+For many requests it is necessary for the user to be logged in, which is defined in the header of the request through the function \texttt{authHeader()}, which checks if the user is logged in.\\
 The fetch is then called with the URL link and the response is handled with the \texttt{handleResponse} function. 
 This is a function that checks for errors in the response, and ensures that the user requesting the response has the proper privileges to access it.
 
@@ -81,11 +74,12 @@ The second is a presentational component.
 These are most often stateless and are called presentational since all they should do is output UI elements \cite{Vumbula-react}.
 
 \begin{figure}[H]
-    \includegraphics[width=\linewidth]{figures/create-user-error.png}
-    \caption{The header for the system}
+    \centering
+    \includegraphics[scale=0.5]{figures/create-user-error.png}
+    \caption{Error message when creating a user}
     \label{fig:create-user-error}
 \end{figure}
-
+\noindent
 The container for the create user page can be seen on \autoref{create-user}.
 The \texttt{CreateUser} class only contains the state, some functions and a \texttt{render()}.
 Within the state object of \texttt{CreateUser}, there is an object called \texttt{firstName}, which contains a \texttt{firstName} string and a \texttt{firstNameValid} boolean to indicate if \texttt{firstName} is valid.
@@ -107,12 +101,7 @@ export class CreateUser extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    handleChange(){
-        (*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
-    }
-    handleSubmit(){
-        (*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
-    }
+    (*@\centerline{\raisebox{-1pt}[0pt][0pt]{$\vdots$}}@*)
     render() {
         return (
             <UserForm
@@ -123,8 +112,6 @@ export class CreateUser extends Component {
         );
     }
 \end{lstlisting}
-
-\todo{overvej om det er et godt kode eksempel}
 The implementation of \texttt{UserForm} can be seen on \autoref{user-form}.
 This presentational component is stateless and uses the props that were passed to the \texttt{UserForm} component when it was instantiated in the \autoref{create-user} container.
 Within the \texttt{TextField} it checks through props if the first name is valid. 
@@ -160,7 +147,6 @@ function UserForm(props) {
 We have chosen to use the framework \textit{Material-UI}, to ease the implementation of design, and ensure it is of a certain quality.
 Material-UI is a collection of React components that are easy to integrate into the project.
 If we had to implement everything ourselves we would have to invest a lot of more time into making a good design.
-\todo{skriv kort hvad material design er?}
 By using Material-UI for the design we also get consistently designed pages.
 Some of the most commonly used components in our application are \texttt{TextField}, \texttt{Typography}, \texttt{Grid}, \texttt{Button} or \texttt{MenuItem}.
 An example of using Material-UI in the header can be seen on \autoref{material-ui}.
@@ -196,4 +182,3 @@ import {
     \caption{The header for the application}
     \label{fig:header}
 \end{figure}
-  

@@ -1,5 +1,5 @@
 \section{Supporting multiple languages}
-To have a scalable system it is necessary to easily be able to translate the text to different languages.
+To have a scalable system it is useful to be able to easily translate the text to different languages.
 For this purpose we have used \textit{i18next}, which is an internationalization framework for JavaScript.
 Being an internationalization framework means it allows software to be adapted to several languages through localization.
 To do this, it makes use of translation files that define the different translations, known as localization files.
@@ -30,7 +30,7 @@ The translation of the the title on the register page can be seen in \autoref{wi
 The \texttt{withTranslation()} function injects the function t into the props of the \texttt{UserForm} component.
 When called, the function t will look up the passed key in the translation files to find the correct translation for \texttt{registerasauser}. 
 A screenshot of a snippet of the files can be seen on \autoref{fig:translationfiles}.
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{figures/translationexample.PNG}
     \caption{The Danish and English translation files}
