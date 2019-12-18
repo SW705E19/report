@@ -7,7 +7,7 @@ Before going into the specifics of how the API should be designed, let us have a
     text width=5em, text centered, rounded corners, minimum height=4em]
 \tikzstyle{line} = [draw, -latex']
 
-\begin{figure}
+\begin{figure}[H!]
 \centering
 \begin{tikzpicture}[node distance = 3cm, auto]
     % Place nodes
@@ -23,7 +23,6 @@ Before going into the specifics of how the API should be designed, let us have a
 \end{tikzpicture}
 \caption{Workflow of an API} \label{fig:api-workflow}
 \end{figure}
-
 The flow of using the API starts with the application or client, which will be responsible for sending a request to the API for the information it needs to finish its computations.
 This request will inform the API about what data it needs in the request.
 To simplify this, we present an example:\\
@@ -34,10 +33,10 @@ The API will now be responsible for fetching this information from the database 
 Once that has been completed, the response will be returned to the client so it can finish rendering the page with the newly received data.
 \\
 This process is illustrated on~\autoref{fig:api-workflow}.
-
 \subsection{Language}
 One of the first decisions that must be made when developing the API is which programming language to use.\\
 For this project, it was decided to use the React JavaScript library for the front end design.
 To keep the codebase as consistent as possible in terms of code structure, it was deemed suitable to use the same language for the API.\\
+However, we wanted to ensure consistency in the API, so we decided to use TypeScript, which is essentially JavaScript with types.
 In addition to keeping the codebase uniform, Node.js offers an extensive package manager, which allows for easy inclusion of existing Node.js modules by other developers.
 One of those modules is \texttt{Express}, which is a web application framework for Node.js, that includes a series of utilities related to creating web applications and APIs.

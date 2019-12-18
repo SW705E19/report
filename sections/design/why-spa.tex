@@ -5,18 +5,17 @@ In this section we will be looking into the two types of architectures and explo
 
 \subsection{SPAs}
 What a SPA allows you to do is build an application consisting of only a single page, in a way that when the content of the page is changed the necessary content is updated, rather than directing to an entirely new page.
-JavaScript is often used when developing SPAs but it is often used with some library or framework like React to make the development easier.
-There are also other frameworks such as Angular or VueJS which allow for development of dynamic web applications just as React does.
+JavaScript is often used when developing SPAs but it is often used with some library or framework like React, Vue or Angular to make the development easier.
 \\\\
-The main advantage of an SPA is the high speed that comes with the unnecessity of having to contact the server to load all elements with each new page.
+The main advantage of a SPA is the high speed that comes with the unnecessity of having to contact the server to load all elements with each new page.
 You only need to load the changed elements.
 The frameworks used also make fast development possible because of the powerful tools that are provided.
-It is also easy to create a mobile app based on the finished code of an SPA \cite{SPAvsMPAMerehead}.
+It is also easy to create a mobile app based on the finished code of a SPA \cite{SPAvsMPAMerehead}.
 SPAs also have great caching possibilities and the local data can be used offline when the user has problems with their connection.
 The pages can then still be shown to the user even with connectivity issues and the local data will be synchronized once the connection is established again \cite{SPAvsMPARuby}.
 \\\\
-A disadvantage of an SPA is the poor optimization for search engines.
-Most of the pages will not be available to crawl due to the way an SPA works.
+A disadvantage of a SPA is the poor optimization for search engines.
+Most of the pages will not be available to crawl due to the way a SPA works.
 Some users will also have JavaScript disabled in their browsers, and since the SPA is reliant on JavaScript to load new page content all the time, the pages will not be able to load correctly.
 Generally SPAs have less security but with use of the modern frameworks mentioned the security of the page is significantly improved \cite{SPAvsMPAMerehead}.
 
@@ -25,24 +24,24 @@ MPAs are different to SPAs in that they have a more standard architecture.
 When a new page is loaded it will send a request to the server and all the data will be updated even if it is just a small amount.
 A MPA will therefore spend a bit more time loading a new page because it has to update everything.
 However, actions can be taken to increase the loading speed such as using libraries like jQuery.
-
+\\\\
 Another popular thing to do to reduce load times is use filters for searching through a list of items as filters do not require a reload of the page.
 MPAs are generally used for web applications with a number of pages that have static information such as text, images and links to other pages.
 The content of an MPA will be split into many pages with many links to other pages to allow for greater performance.
 \\\\
 Advantages of MPAs are their ability to optimize their pages for search engines which will make them more accessible to others. 
-They are also easy to develop on since the larger technologies, such as the frameworks mentioned for SPAs, are typically not needed \cite{SPAvsMPAMerehead}.
+They are also easy to develop since the larger technologies, such as the frameworks mentioned for SPAs, are typically not needed \cite{SPAvsMPAMerehead}.
 MPAs have unlimited scalability since new content can be placed on new pages with no limitations whereas SPAs are more limited by the amount of content that can be placed on a single page without having it affect performance \cite{SPAvsMPARuby}.
 \\\\
 The main disadvantage of MPAs is the slower performance that comes with having to load all the content every time a page is loaded \cite{SPAvsMPARuby}.
 
-\subsection{Why SPA}
+\subsection{Choice of application type}
 For this project we have chosen to build the front end of the system using the React framework. 
 With React it is most common to build SPAs, but it is also possible to build MPAs. 
-For this project we will be building an SPA.
+For this project we will be building a SPA.
 The system will not have that many pages with a lot of static information so this is not a needed feature for the system.
-We want the UI of the system to be very responsive to the user's input and have a quick response time when updating elements of the page which is inline with the choice of an SPA.
+We want the UI of the system to be very responsive to the user's input and have a quick response time when updating elements of the page which is inline with the choice of a SPA.
 The possibility to cache data and then making use of that for cases where a user has a poor connection is also inline with some of the things discussed in \autoref{sec:scalability}.
 We also do not need our system to be optimized for search engines since most parts of the system will only be available to users that are logged in.
-Accessibility of the system from mobile devices is also desired and with an SPA it is much easier to make this available. 
-Because of these points an SPA will be a great fit for the type of system that we are building.
+Accessibility of the system from mobile devices is also desired and with a SPA it is much easier to make this available. 
+Because of these points a SPA will be a great fit for the type of system that we are building.

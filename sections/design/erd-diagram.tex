@@ -2,7 +2,7 @@
 An entity-relationship diagram (ER diagram) can express the structure of a database graphically \cite{DBConcepts}.
 It serves as a way to gain a better understanding of the requirements of the database and to ensure its design is clear.
 An ER diagram shows entity sets of the database and their relationships.
-An entity is usually an object in the real world that is distinguishable from other objects, and is described through a set of attributes that make up an entry set.
+An entity is usually an object in the real world that is distinguishable from other objects, and is described through a set of attributes that make up an entity set.
 Relationships are associations between entities.
 Cardinalities are important for these relationships, as they express the number of entities to which another entity can be associated \cite{DBConcepts}, either one or many.
 With these two cardinalities, the following mappings can be used:
@@ -14,7 +14,7 @@ With these two cardinalities, the following mappings can be used:
 A one-to-one relationship means that an entity in an entity set A is associated with at most one entity in an entity set B, and an entity in B is associated with at most one entity in A.
 A one-to-many relationship means that an entity in A is associated with any number of entities in B, and an entity in B can be associated with at most one entity in A.
 For many-to-many relationships, an entity in A is associated with any number of entities in B, and an entity in B is associated with any number of entities in A \cite{DBConcepts}.
-\autoref{fig:er-diagram} illustrates the physical design of the database for this system:
+\autoref{fig:er-diagram} illustrates the physical design of the database for this system, it is intended to give an overview of the system, and as such does not include all properties presented in the actual system.
 \begin{sidewaysfigure}[]
     \centering
     \includegraphics[width=\linewidth]{/s7erd.png}

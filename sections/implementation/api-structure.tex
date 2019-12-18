@@ -2,25 +2,27 @@
 This section will describe how we have implemented and structured the API which is used as a link to the database.
 The section will also briefly explain the frameworks that have been used as well as the theory behind some of the techniques that are utilized.
 To create the API we have used a framework called \textit{express} that is used to handle HTTP requests and responses.
-We have also used the framework \textit{TypeORM} as an object relational mapper which will be described further in this section.
+We have also used the framework \textit{TypeORM} as an object relational mapper (ORM) which will be described further in this section.
 
 \subsection{API responses}
 To understand how the API works we first have to look at how the API handles requests and responses.
-The API is the service that is responsible for communication with database. 
+The API is the service that is responsible for communication between the client and the database. 
 An API is hosted on a server so clients need a way to access the functionality the API provides.
 This is done by making HTTP requests. 
-\\\
+\\\\
 Clients are able to send HTTP requests to the endpoints defined in the API and also receive responses from the API.
 The requests are able to call the correct pieces of code by providing the endpoint for those pieces.
-\begin{center}\label{endpoint-example}
-    \texttt{http://localhost:3000/api/users/3}
-\end{center}
-\autoref{endpoint-example} shows an example of an endpoint.
-The URL is an endpoint for the user with the id 3.
+An example of an endpoint could be \texttt{http://localhost:3000/api/users/3}, which is an endpoint for the user with the id 3.
+When sending requests to the API, they can be of the following types:\\
+\texttt{'GET'} returns what is requested if it exists.\\
+\texttt{'DELETE'} deletes a given resource if it exists.\\
+\texttt{'POST'} adds an additional row to the database.\\
+\texttt{'PUT'} and \texttt{'PATCH'} updates an element. \\
+\texttt{'PUT'} should only be used if a resource is replaced, where \texttt{'PATCH'} is used if an existing resource needs to be updated.\\
 Multiple HTTP methods can be defined for the same endpoint such that one function can be called with a GET request, and a different one can be called with a POST request. 
 Both the requests and the responses can contain data, and the type of this data can be defined in a header that is stored in the request.
-In our case the data is sent in a json format.
-\begin{lstlisting}[caption={Shows how a user object looks in a json format}, captionpos=b, label={user-json}]
+In our case the data is sent in a JSON format.
+\begin{lstlisting}[caption={Shows how a user object looks in a JSON format}, captionpos=b, label={user-json}]
 {
     "id": 49,
     "phoneNumber": "23242526",
@@ -41,10 +43,10 @@ In our case the data is sent in a json format.
     ]
 }
 \end{lstlisting}
-In \autoref{user-json} we see what a user object that is returned in a response from the API looks like in a json format. 
-With json objects, they can easily be converted to javascript objects which makes them very easy to work with in the front end. 
+In \autoref{user-json} we see what a user object that is returned in a response from the API looks like in a JSON format. 
+With JSON objects, they can easily be converted to JavaScript objects which makes them easy to work with in the front end. 
 \subsection{TypeORM}
-TypeORM is an object relational mapper used to map the objects created in typescript to the entities in the database.
+TypeORM is an object relational mapper used to map the objects created in typescript to the entities in the database \cite{typeorm}.
 With TypeORM we can define entity classes which correspond to the tables we want to create in the database.
 These entities are created as classes with attributes which we can put constraints on such as not allowing an attribute to be null. 
 We can also define relationships between entities such as many-to-many and many-to-one.
@@ -76,7 +78,7 @@ We can then define attributes by using the \texttt{@Column} tag, making it a col
 Constraints can be set for the different columns such as the \texttt{@Length} tag where we set a minimum and maximum length for the string.
 With the \texttt{@ManyToMany} tag we can define a many-to-many relationship with another entity, in this case the \texttt{Service} entity. 
 \\\\
-Typeorm also provides repositories for each entity to allow for easy creation of queries to the database which is shown in \autoref{subsec:controllers}.
+TypeORM also provides repositories for each entity to allow for easy creation of queries to the database.
 
 \subsection{Controllers, middlewares, services and routes}\label{subsec:controllers}
 
@@ -87,7 +89,7 @@ To allow the requests to find the correct code to run we define routes for the d
 \begin{lstlisting}[caption={The route used for all user related endpoints}, captionpos=b, label={routes-general}]
     routes.use('/api/users', users);
 \end{lstlisting}
-In \autoref{routes-general} we see the route used for all the user related endpoints found in the \texttt{userController}.
+In \autoref{routes-general} we see the configuration for the router, which defines that all the user related endpoints are found in the \texttt{userController}.
 \begin{lstlisting}[caption={Some of the routes for the different user endpoints}, captionpos=b, label={routes-user}]
     router.get('/', [checkJwt, checkRole(['ADMIN'])], UserController.listAll);
 
@@ -102,7 +104,7 @@ On the first line in \autoref{routes-user} we specify that the HTTP method for t
 \\
 The first argument is the last part of the endpoint URL in \autoref{routes-general}. 
 \\
-With the second argument we can provide some middleware functionality such as \texttt{checkJwt} which restricts the access of the endpoint to users that are logged in.
+With the second argument we can provide some middleware functionality such as \texttt{checkJwt} which restricts the access of the endpoint to users that are logged in, by verifying their jwt token.
 \texttt{checkRole(['ADMIN'])} will rescrict access to the endpoint to only allow admin users. 
 \\
 The third argument specifies which function from which controller should be called with the endpoint.
@@ -142,7 +144,7 @@ A response is then returned with the status code 200, meaning that request has s
 \\\\
 The next function \texttt{getOneById} is an endpoint used to get a user with a specific id. 
 Here we get the user id from the \texttt{req} object. 
-The id is found in the end of the URL for the endpoint, just as shown in \autoref{endpoint-example}.
+The id is found in the end of the URL for the endpoint, as previously seen.
 If we fail to find a user with the given id, we log the error and return a response with the status code 404, meaning that the resource was not found.
 If we find the user, we return the user object in the response with status code 200, meaning that the request was successful.
 \\\\
@@ -150,21 +152,21 @@ As seen in the code examples for \texttt{userController}, we are calling functio
 For each entity we have, we have also created a service responsible for extracting and inserting data from the database.
 This is because they contain functionality that is needed in multiple endpoints, so the services are created to avoid duplicated code.
 \begin{lstlisting}[caption={Shows the function used to get get all ratings from the rating service}, captionpos=b, label={rating-service}]
-    class RatingService {
-        static getAll = async (): Promise<Rating[]> => {
-            //Get all ratings from database
-            const ratingRepository: Repository<Rating> = getRepository(Rating);
-            const ratings: Rating[] = await ratingRepository
-                .createQueryBuilder('rating')
-                .select(['rating.rating'])
-                .innerJoin('rating.user', 'user')
-                .innerJoin('rating.service', 'service')
-                .addSelect(['user.id', 'service.id'])
-                .getMany();
-    
-            return ratings;
-        };
-    }
+class RatingService {
+    static getAll = async (): Promise<Rating[]> => {
+        //Get all ratings from database
+        const ratingRepository: Repository<Rating> = getRepository(Rating);
+        const ratings: Rating[] = await ratingRepository
+            .createQueryBuilder('rating')
+            .select(['rating.rating'])
+            .innerJoin('rating.user', 'user')
+            .innerJoin('rating.service', 'service')
+            .addSelect(['user.id', 'service.id'])
+            .getMany();
+
+        return ratings;
+    };
+}
 \end{lstlisting}
 \autoref{rating-service} shows the function \texttt{getAll} from the \texttt{RatingService}.
 This function extracts all ratings stored in the database and returns them as \texttt{Rating} objects in an array.
@@ -187,11 +189,11 @@ We have chosen to use \textit{bunyan} as the framework for our error logging.
 For each controller we have also created a logger that is used to log errors related to endpoints in that specific controller.
 The created loggers are imported into the controllers and can then be called where the errors might occur, and the errors can be logged by passing them to the \texttt{logger} object.
 \begin{lstlisting}[caption={Shows how the userLogger is used to log errors}, captionpos=b, label={userLogger}]
-    const errors: ValidationError[] = await validate(user);
-    if (errors.length > 0) {
-        userLogger.error(errors);
-        return res.status(400).send(errors);
-    }
+const errors: ValidationError[] = await validate(user);
+if (errors.length > 0) {
+    userLogger.error(errors);
+    return res.status(400).send(errors);
+}
 \end{lstlisting}
 In \autoref{userLogger} the \texttt{userLogger} is used to log errors related to the validation of a user. 
 An error will be written if the \texttt{user} objects does not pass the constraints that are set on the \texttt{User} entity.
